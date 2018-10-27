@@ -18,16 +18,12 @@ if (isset($_POST["login"],$_GET["std_login"],$_GET["token"], $_POST["username"],
 
 	$pdo = \Sq\DB::pdo();
 	$st = $pdo->prepare("SELECT `password`,`username`,`name` FROM `web_admin` WHERE `username` LIKE :username LIMIT 1;");
-	$st->execute(
-		[
-			":username" => $_POST["username"]
-		]
-	);
+	$st->execute([":username" => $_POST["username"]]);
 
 	if ($st = $st->fetch(PDO::FETCH_NUM)) {
 		unset($pdo);
 		if (password_verify($_POST["password"], $st[0])) {
-			$_SESSION["login"] = 1;
+			$_SESSION["login"] = true;
 			$_SESSION["username"] = $st[1];
 			$_SESSION["name"] = $st[2];
 			header("Location: /home.php?ref=login&w=".urlencode(rstr(64)));
@@ -72,6 +68,9 @@ $_SESSION["token"] = rstr(32);
 		}
 		.ldbt {
 			margin-top: 10px;
+		}
+		button {
+			cursor: pointer;
 		}
 	</style>
 </head>
