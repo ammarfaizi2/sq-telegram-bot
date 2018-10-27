@@ -55,4 +55,12 @@ class DB
 	{
 		return self::getInstance()->pdo;
 	}
+
+	/**
+	 * Destructor.
+	 */
+	public function __destruct()
+	{
+		unset($this->pdo);
+	}
 }
