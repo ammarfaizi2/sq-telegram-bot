@@ -23,3 +23,36 @@ if (!function_exists("rstr")) {
 		return $r;
 	}
 }
+
+if (!function_exists("curld")) {
+	/**
+	 * @param string $url
+	 * @param array  $opt
+	 * @return array
+	 */
+	function curld(string $url, array $opt = []): array
+	{
+		$ch = curl_init($url);
+		$optf = [
+			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_FOLLOWLOCATION => true,
+			CURLOPT_SSL_VERIFYPEER => false,
+			CURLOPT_SSL_VERIFYHOST => false
+		];
+		foreach ($opt as $k => $v) {
+			$optf[$k] = $v;
+		}
+		curl_setopt_array($ch, $optf);
+		$out = curl_exec($ch);
+		$info = curl_getinfo($ch);
+		$err = curl_error($ch);
+		$ern = curl_errno($ch);
+		curl_close($ch);
+		return [
+			"out" => $out,
+			"info" => $info,
+			"error" => $err,
+			"errno" => $ern
+		];
+	}
+}
