@@ -72,5 +72,27 @@ if (isset($_GET["switch"])) {
 			}
 		}
 		var_dump($std);
+	} else if ($_GET["switch"] === "off") {
+		$std = curld("https://api.telegram.org/bot{$token}/deleteWebhook");
+		if ($std["errno"]) {
+			print "Error: {$std['error']}";
+			exit;
+		} else {
+			?><!DOCTYPE html>
+			<html>
+			<head>
+				<title>Success</title>
+				<script type="text/javascript">
+					alert("Success!");
+					window.location = "/home.php?ref=delete_webhook_ok&w=<?php print urlencode(rstr(64)); ?>";
+				</script>
+			</head>
+			<body>
+				<h1>Success!</h1>
+			</body>
+			</html><?php
+			exit;
+		}
+		var_dump($std);
 	}
 }
