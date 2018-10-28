@@ -36,13 +36,13 @@ class Handler extends ResponseFoundation
 			$text = $this->b->d["message"]["text"];
 			var_dump(
 				$this->b->d["message"]["reply_to_message"]["text"],
-				__ASK_EMAIL,
-				$this->b->d["message"]["reply_to_message"]["text"] === __ASK_EMAIL
+				"What is your email address?\n\nReply to this message!",
+				$this->b->d["message"]["reply_to_message"]["text"] === "What is your email address?\n\nReply to this message!"
 			);
 
-			switch (strip_tags($this->b->d["message"]["reply_to_message"]["text"])) {
-				case __ASK_EMAIL:
-				case __INVALID_EMAIL_ADDRESS:
+			switch ($this->b->d["message"]["reply_to_message"]["text"]) {
+				case "What is your email address?\n\nReply to this message!":
+				case "Invalid email address!\n\nPlease reply this message with a valid email address!":
 				var_dump(3);
 					if (filter_var($text, FILTER_VALIDATE_EMAIL)) {
 
