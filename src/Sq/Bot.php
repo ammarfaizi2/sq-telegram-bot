@@ -5,6 +5,7 @@ namespace Sq;
 use PDO;
 use Sq\Responses\Start;
 use Sq\Responses\Submit;
+use Sq\Responses\Handler;
 
 /**
  * @author Ammar Faizi <ammarfaizi2@gmail.com> https://www.facebook.com/ammarfaizi2
@@ -77,6 +78,9 @@ final class Bot
 			(new Submit($this))->submit();
 			return;
 		}
+
+
+		(new Handler($this))->handle();
 	}
 
 	/**

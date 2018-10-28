@@ -1,0 +1,85 @@
+<?php
+
+namespace Sq\Responses;
+
+use Sq\DB;
+use Sq\Exe;
+use Sq\ResponseFoundation;
+
+require_once __DIR__."/msg_definer.php";
+
+/**
+ * @author Ammar Faizi <ammarfaizi2@gmail.com> https://www.facebook.com/ammarfaizi2
+ * @license MIT
+ * @version 0.0.1
+ * @package \Sq\Responses
+ */
+class Handler extends ResponseFoundation
+{
+	/**
+	 * @return void
+	 */
+	public function handle(): void
+	{
+		if (
+			isset(
+				$this->b->d["message"]["reply_to_message"]["text"],
+				$this->b->d["message"]["reply_to_message"]["from"]["is_bot"],
+				$this->b->d["message"]["text"]
+			) &&
+			$this->b->d["message"]["reply_to_message"]["from"]["is_bot"]
+		) {
+			$text = $this->b->d["message"]["text"];
+
+			switch ($this->b->d["message"]["reply_to_message"]["text"]) {
+				case __ASK_EMAIL:
+				case __INVALID_EMAIL_ADDRESS:
+					if (filter_var($text, FILTER_VALIDATE_EMAIL)) {
+
+						$text = strtolower($text);
+
+						$pdo = DB::pdo();
+						$st = $pdo->prepare("SELECT `email` FROM `users` WHERE `user_id` = :user_id LIMIT 1;");
+						$st->execute([":user_id" => $this->b->d["message"]["from"]["id"]]);
+						$st = $st->fetch(PDO::FETCH_NUM);
+
+						if (!$st[0]) {
+							$rep = "Successfully set a new email address!\n\n<b>Your email address has been set to:</b> {$text}";
+						} else {
+							if ($st[0] === $text) {
+								$rep = "Email address could not be changed because you just sent the same email address!\n\nCurrent email address which linked to your telegram account is {$st[0]}";
+								$noUpdate = 1;
+							} else {
+								$rep = "Successfully update your email address!\nYour email {$st[0]} is now deleted from our database!\n<b>Your email address has been set to:</b> {$text}";
+							}
+						}
+
+						if (!isset($noUpdate)) {
+							$st = $pdo->prepare("UPDATE `users` SET `email`=:email LIMIT 1;");	
+							$st->execute([":email" => $text]);
+						}
+						Exe::sendMessage(
+							[
+								"text" => $rep,
+								"chat_id" => $this->b->d["message"]["from"]["id"],
+								"reply_to_message_id" => $this->b->d["message"]["message_id"]
+							]
+						);
+						
+					} else {
+						Exe::sendMessage(
+							[
+								"text" => __INVALID_EMAIL_ADDRESS,
+								"chat_id" => $this->b->d["message"]["from"]["id"],
+								"reply_to_message_id" => $this->b->d["message"]["message_id"],
+								"reply_markup" => [
+									"force_reply" => true
+								]
+							]
+						);
+					}
+				break;
+			}
+		}
+	}
+}

@@ -5,6 +5,8 @@ namespace Sq\Responses;
 use Sq\Exe;
 use Sq\ResponseFoundation;
 
+require_once __DIR__."/msg_definer.php";
+
 /**
  * @author Ammar Faizi <ammarfaizi2@gmail.com> https://www.facebook.com/ammarfaizi2
  * @license MIT
@@ -21,13 +23,12 @@ class Submit extends ResponseFoundation
 
 		switch ($this->getSubmitSession()) {
 			case 0:
-				$text = "<b>What is your email address?</b>\n\nReply to this message!";
+				$text = __ASK_EMAIL;
 				break;
 			
 			default:
 				break;
 		}
-
 
 		$d = Exe::sendMessage(
 			[
