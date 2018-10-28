@@ -19,7 +19,7 @@ DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` bigint(20) NOT NULL,
   `first_name` varchar(255) NOT NULL,
-  `last_name` int(255) DEFAULT NULL,
+  `last_name` varchar(255) DEFAULT NULL,
   `username` varchar(72) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `eth_address` varchar(255) DEFAULT NULL,
@@ -49,4 +49,4 @@ CREATE TABLE `web_admin` (
 INSERT INTO `web_admin` (`id`, `name`, `username`, `password`) VALUES
 (1, 'Admin',  'admin',  '$argon2i$v=19$m=1024,t=2,p=2$dW9XcndZTXFyaUd6Rm9jWg$3Z8ww/FZN/eHaH/AKrHsiX5JX3/zufenWAwsQQx0f9o');
 
--- 2018-10-28 13:53:00
+-- 2018-10-28 13:55:56
