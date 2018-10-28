@@ -61,7 +61,7 @@ class Handler extends ResponseFoundation
 								$rep = "Email address could not be changed because you just sent the same email address!\n\nCurrent email address which linked to your telegram account is {$st[0]}";
 								$noUpdate = 1;
 							} else {
-								$rep = "Successfully update your email address!\nYour email {$st[0]} is now deleted from our database!\n<b>Your email address has been set to:</b> {$text}";
+								$rep = "Successfully update your email address!\n\nYour email {$st[0]} is now deleted from our database!\n\n<b>Your email address has been set to:</b> {$text}";
 							}
 						}
 
