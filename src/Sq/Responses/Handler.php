@@ -73,7 +73,8 @@ class Handler extends ResponseFoundation
 							[
 								"text" => $rep,
 								"chat_id" => $this->b->d["message"]["from"]["id"],
-								"reply_to_message_id" => $this->b->d["message"]["message_id"]
+								"reply_to_message_id" => $this->b->d["message"]["message_id"],
+								"parse_mode" => "HTML"
 							]
 						);
 
@@ -83,6 +84,7 @@ class Handler extends ResponseFoundation
 								"text" => __INVALID_EMAIL_ADDRESS,
 								"chat_id" => $this->b->d["message"]["from"]["id"],
 								"reply_to_message_id" => $this->b->d["message"]["message_id"],
+								"parse_mode" => "HTML",
 								"reply_markup" => [
 									"force_reply" => true
 								]
