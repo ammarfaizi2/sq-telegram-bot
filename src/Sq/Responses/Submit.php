@@ -29,7 +29,6 @@ class Submit extends ResponseFoundation
 		}
 
 
-
 		$d = Exe::sendMessage(
 			[
 				"text" => $text,

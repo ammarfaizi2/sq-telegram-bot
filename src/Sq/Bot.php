@@ -4,6 +4,7 @@ namespace Sq;
 
 use PDO;
 use Sq\Responses\Start;
+use Sq\Responses\Submit;
 
 /**
  * @author Ammar Faizi <ammarfaizi2@gmail.com> https://www.facebook.com/ammarfaizi2
@@ -67,12 +68,12 @@ final class Bot
 
 		$text = isset($this->d["message"]["text"]) ? $this->d["message"]["text"] : null;
 
-		if (preg_match("/^\/start$/Usi", $text)) {
+		if ("/start" === $text) {
 			(new Start($this))->start();
 			return;
 		}
 
-		if (preg_match("/^\/submit$/Usi", $text)) {
+		if ("/submit" === $text) {
 			(new Submit($this))->submit();
 			return;
 		}
