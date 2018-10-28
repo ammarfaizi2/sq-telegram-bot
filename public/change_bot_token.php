@@ -44,7 +44,7 @@ if (isset($_GET["add_token_action"], $_POST["tokend"])) {
 			?><!DOCTYPE html>
 			<html>
 			<head>
-				<title>Sucess</title>
+				<title>Success</title>
 				<script type="text/javascript">
 					alert("Success!");
 					window.location = "home.php?ref=add_token_action&w=<?php print(urlencode(rstr(64))); ?>";

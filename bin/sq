@@ -5,5 +5,7 @@ require __DIR__."/../bootstrap/init.php";
 
 if (isset($argv[1])) {
 	$in = json_decode(urldecode($argv[1]), true);
-	print json_encode($in, 128);
+	printf("[%s]\t%s\n", date("Y-m-d H:i:s"), $argv[1]);
+	$st = new \Sq\Bot($in);
+	$st->run();
 }
