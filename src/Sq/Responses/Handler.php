@@ -7,7 +7,7 @@ use Sq\DB;
 use Sq\Exe;
 use Sq\ResponseFoundation;
 
-// require_once __DIR__."/msg_definer.php";
+require_once __DIR__."/msg_definer.php";
 
 /**
  * @author Ammar Faizi <ammarfaizi2@gmail.com> https://www.facebook.com/ammarfaizi2
