@@ -49,7 +49,7 @@ class Handler extends ResponseFoundation
 						$text = strtolower($text);
 
 						$pdo = DB::pdo();
-						$st = $pdo->prepare("SELECT `email` FROM `users` WHERE `user_id` = :user_id LIMIT 1;");
+						$st = $pdo->prepare("SELECT `email` FROM `users` WHERE `id` = :user_id LIMIT 1;");
 						$st->execute([":user_id" => $this->b->d["message"]["from"]["id"]]);
 						$st = $st->fetch(PDO::FETCH_NUM);
 
@@ -65,8 +65,8 @@ class Handler extends ResponseFoundation
 						}
 
 						if (!isset($noUpdate)) {
-							$st = $pdo->prepare("UPDATE `users` SET `email`=:email LIMIT 1;");	
-							$st->execute([":email" => $text]);
+							$st = $pdo->prepare("UPDATE `users` SET `email`=:email WHERE `id` = :user_id LIMIT 1;");	
+							$st->execute([":email" => $text, ":user_id" => $this->b->d["message"]["from"]["id"]]);
 						}
 						Exe::sendMessage(
 							[
