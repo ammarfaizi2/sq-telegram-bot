@@ -18,13 +18,20 @@ class Start extends ResponseFoundation
 	 */
 	public function start(): void
 	{
+
+$text = "
+Welcome to STD market. To claim free 50 STD Token, please do steps below:
+
+1️⃣ Visit the Website (https://coinsupermarket.online) and subscribe our News
+2️⃣ Join our Telegram community (link group disini), say some good things in the group
+3️⃣ Subscribe our Telegram channel (link channel disini)
+4️⃣ After that, fill your information by typing /submit";
+
 		$d = Exe::sendMessage(
 			[
-				"text" => "test",
+				"text" => $text,
 				"chat_id" => $this->b->d["message"]["from"]["id"]
 			]
 		);
-
-		var_dump($d);
 	}
 }

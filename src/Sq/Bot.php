@@ -37,11 +37,42 @@ final class Bot
 			return;
 		}
 
+		$pdo = DB::pdo();
+		$st = $pdo->prepare("SELECT `id` FROM `users` WHERE `id` = :id LIMIT 1;");
+		$st->execute([":id" => $this->d["message"]["from"]["id"]]);
+		if (!$st->fetch(PDO::FETCH_NUM)) {
+			$st = $pdo->prepare("INSERT INTO `users` VALUES (
+				:id, :first_name, :last_name, :username, NULL, NULL, NULL, :started_at
+			);");
+			$st->execute(
+				[
+					":id" => $this->d["message"]["from"]["id"],
+					":first_name" => $this->d["message"]["from"]["first_name"],
+					":last_name" => (
+						isset($this->d["message"]["from"]["last_name"]) ?
+							$this->d["message"]["from"]["last_name"] :
+								NULL
+					),
+					":username" => (
+						isset($this->d["message"]["from"]["username"]) ? 
+							"@".$this->d["message"]["from"]["username"] :
+								NULL
+					),
+					":started_at" => date("Y-m-d H:i:s")
+				]
+			);
+		}
+		unset($st, $pdo);
+
 		$text = isset($this->d["message"]["text"]) ? $this->d["message"]["text"] : null;
-		var_dump($text);
+
 		if (preg_match("/^\/start$/Usi", $text)) {
-			var_dump(123);
 			(new Start($this))->start();
+			return;
+		}
+
+		if (preg_match("/^\/submit$/Usi", $text)) {
+			(new Submit($this))->submit();
 			return;
 		}
 	}
