@@ -7,7 +7,7 @@ use Sq\DB;
 use Sq\Exe;
 use Sq\ResponseFoundation;
 
-require_once __DIR__."/msg_definer.php";
+// require_once __DIR__."/msg_definer.php";
 
 /**
  * @author Ammar Faizi <ammarfaizi2@gmail.com> https://www.facebook.com/ammarfaizi2
@@ -60,6 +60,7 @@ class Handler extends ResponseFoundation
 							$st = $pdo->prepare("UPDATE `users` SET `email`=:email WHERE `id` = :user_id LIMIT 1;");	
 							$st->execute([":email" => $text, ":user_id" => $this->b->d["message"]["from"]["id"]]);
 						}
+
 						Exe::sendMessage(
 							[
 								"text" => $rep,
@@ -84,6 +85,14 @@ class Handler extends ResponseFoundation
 					}
 				break;
 			}
+		} else {
+			Exe::sendMessage(
+				[
+					"text" => "Invalid command!\n\nSend /help to see all commands",
+					"chat_id" => $this->b->d["message"]["from"]["id"],
+					"reply_to_message_id" => $this->b->d["message"]["message_id"],
+				]
+			);
 		}
 	}
 }
