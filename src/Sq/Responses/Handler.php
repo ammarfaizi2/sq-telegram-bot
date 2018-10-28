@@ -21,8 +21,6 @@ class Handler extends ResponseFoundation
 	 */
 	public function handle(): void
 	{
-		var_dump(1);
-
 		if (
 			isset(
 				$this->b->d["message"]["reply_to_message"]["text"],
@@ -31,19 +29,12 @@ class Handler extends ResponseFoundation
 			) &&
 			$this->b->d["message"]["reply_to_message"]["from"]["is_bot"]
 		) {
-			var_dump(2);
 
 			$text = $this->b->d["message"]["text"];
-			var_dump(
-				$this->b->d["message"]["reply_to_message"]["text"],
-				__ASK_EMAIL,
-				$this->b->d["message"]["reply_to_message"]["text"] === __ASK_EMAIL
-			);
 
-			switch ($this->b->d["message"]["reply_to_message"]["text"]) {
+			switch (strip_tags($this->b->d["message"]["reply_to_message"]["text"])) {
 				case __ASK_EMAIL:
 				case __INVALID_EMAIL_ADDRESS:
-				var_dump(3);
 					if (filter_var($text, FILTER_VALIDATE_EMAIL)) {
 
 						$text = strtolower($text);
