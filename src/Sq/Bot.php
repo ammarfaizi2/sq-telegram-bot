@@ -51,6 +51,6 @@ final class Bot
 	 */
 	public function run(): void
 	{
-
+		$this->responseRoutes();
 	}
 }
