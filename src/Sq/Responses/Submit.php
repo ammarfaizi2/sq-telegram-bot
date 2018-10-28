@@ -35,9 +35,7 @@ class Submit extends ResponseFoundation
 				"text" => $text,
 				"chat_id" => $this->b->d["message"]["from"]["id"],
 				"parse_mode" => "HTML",
-				"reply_markup" => [
-					"force_reply" => true
-				]
+				"reply_markup" => json_encode(["force_reply" => true])
 			]
 		);
 	}
