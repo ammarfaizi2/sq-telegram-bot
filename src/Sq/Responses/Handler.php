@@ -34,8 +34,12 @@ class Handler extends ResponseFoundation
 			var_dump(2);
 
 			$text = $this->b->d["message"]["text"];
-			var_dump($this->b->d["message"]["reply_to_message"]["text"]);
-			
+			var_dump(
+				$this->b->d["message"]["reply_to_message"]["text"],
+				__ASK_EMAIL,
+				$this->b->d["message"]["reply_to_message"]["text"] === __ASK_EMAIL
+			);
+
 			switch ($this->b->d["message"]["reply_to_message"]["text"]) {
 				case __ASK_EMAIL:
 				case __INVALID_EMAIL_ADDRESS:
