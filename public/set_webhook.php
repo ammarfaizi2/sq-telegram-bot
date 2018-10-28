@@ -74,7 +74,6 @@ if (isset($_GET["switch"])) {
 		var_dump($std);
 	} else if ($_GET["switch"] === "off") {
 		$std = curld("https://api.telegram.org/bot{$token}/deleteWebhook");
-		$std = curld("https://api.telegram.org/bot{$token}/setWebhook?url=".urlencode("https://veno.site/index.php"));
 		if ($std["errno"]) {
 			print "Error: {$std['error']}";
 			exit;
