@@ -38,8 +38,9 @@ final class Bot
 		}
 
 		$text = isset($this->d["message"]["text"]) ? $this->d["message"]["text"] : null;
-
+		var_dump($text);
 		if (preg_match("/^\/start$/Usi", $text)) {
+			var_dump(123);
 			(new Start($this))->start();
 			return;
 		}

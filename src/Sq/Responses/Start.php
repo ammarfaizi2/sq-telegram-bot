@@ -18,11 +18,13 @@ class Start extends ResponseFoundation
 	 */
 	public function start(): void
 	{
-		Exe::sendMessage(
+		$d = Exe::sendMessage(
 			[
 				"text" => "test",
 				"chat_id" => $this->b->d["message"]["from"]["id"]
 			]
 		);
+
+		var_dump($d);
 	}
 }
