@@ -2,6 +2,7 @@
 
 namespace Sq;
 
+use PDO;
 use Sq\Responses\Start;
 
 /**
