@@ -2,8 +2,8 @@
 
 namespace Sq\Responses;
 
+use PDO;
 use Sq\DB;
-use Sq\PDO;
 use Sq\Exe;
 use Sq\ResponseFoundation;
 
