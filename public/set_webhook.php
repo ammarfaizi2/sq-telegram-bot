@@ -42,7 +42,7 @@ if ($status === "empty_token") {
 
 if (isset($_GET["switch"])) {
 	if ($_GET["switch"] === "on") {
-		$std = curld("https://api.telegram.org/bot{$token}/setWebhook?url=".urlencode(WEBHOOK_URL));
+		$std = curld("https://api.telegram.org/bot{$token}/setWebhook?url=".urlencode(WEBHOOK_URL."?hashd=".sha1($token)));
 		if ($std["errno"]) {
 			$status = "Error: {$std['error']}";
 		} else {
