@@ -123,7 +123,7 @@ final class Bot
 			return;
 		}
 
-		if ("/info" === "text") {
+		if ("/info" === $text) {
 			(new Info($this))->showInfo();
 			return;
 		}
