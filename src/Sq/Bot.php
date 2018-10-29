@@ -124,7 +124,9 @@ final class Bot
 			return;
 		}
 
+		var_dump($text." std::hd");
 		if ("/info" === $text) {
+			var_dump($text);
 			(new Info($this))->showInfo();
 			return;
 		}
