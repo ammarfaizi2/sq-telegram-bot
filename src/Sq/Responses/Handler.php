@@ -33,7 +33,42 @@ class Handler extends ResponseFoundation
 
 			$text = $this->b->d["message"]["text"];
 
-			switch ($this->b->d["message"]["reply_to_message"]["text"]) {
+			if (isset($this->b->d["message"]["reply_to_message"]["text"])) {
+				$rdt = $this->b->d["message"]["reply_to_message"]["text"];
+			} else if (isset($this->b->d["message"]["reply_to_message"]["caption"])) {
+				$rdt = trim($this->b->d["message"]["reply_to_message"]["caption"]);
+				if ($rdt === "") {
+					return;
+				}
+			} else {
+				return;
+			}
+
+			switch ($rdt) {
+				case "To continue, please send the captcha below!":
+					if (
+						@file_get_contents(BASEPATH."/storage/captcha/{$this->b->d['message']['from']['id']}.txt")
+						=== $text
+					) {
+						Exe::sendMessage(
+							[
+								"chat_id" => $this->b->d["message"]["chat"]["id"],
+								"text" => "Captcha OK",
+								"reply_to_message_id" => $this->b->d["message"]["message_id"],
+							]
+						);
+					} else {
+						Exe::sendMessage(
+							[
+								"chat_id" => $this->b->d["message"]["chat"]["id"],
+								"text" => "Invalid captcha response",
+								"reply_to_message_id" => $this->b->d["message"]["message_id"],
+							]
+						);
+					}
+				break;
+
+
 				case "What is your email address?\n\nReply to this message!":
 				case "Invalid email address!\n\nPlease reply this message with a valid email address!":
 					if (filter_var($text, FILTER_VALIDATE_EMAIL)) {
