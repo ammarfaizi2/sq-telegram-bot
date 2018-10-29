@@ -182,7 +182,7 @@ final class Bot
 		if ("/set_wallet" === $text) {
 			$pdo = DB::pdo();
 			$st = $pdo->prepare("SELECT `email` FROM `users` WHERE `id` = :user_id LIMIT 1;");
-			$st->execute([":user_id" => $this->b->d["message"]["from"]["id"]]);
+			$st->execute([":user_id" => $this->d["message"]["from"]["id"]]);
 
 			if ($st = $st->fetch(PDO::FETCH_NUM)) {
 				$state = $st[0];
