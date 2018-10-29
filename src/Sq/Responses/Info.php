@@ -13,7 +13,7 @@ use Sq\ResponseFoundation;
  * @version 0.0.1
  * @package \Sq\Responses
  */
-class Handler extends ResponseFoundation
+class Info extends ResponseFoundation
 {
 	/**
 	 * @return void
