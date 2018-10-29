@@ -3,6 +3,7 @@
 namespace Sq;
 
 use PDO;
+use Sq\Responses\Info;
 use Sq\Responses\Start;
 use Sq\Responses\Submit;
 use Sq\Responses\Handler;
