@@ -184,11 +184,7 @@ class Handler extends ResponseFoundation
 						$st = $st->fetch(PDO::FETCH_NUM);
 
 						if (!$st[0]) {
-							$rep = "Successfully set a new email address!\n\n<b>Your email address has been set to:</b> {$text}\n\n".
-							"Other commands:\n".
-							"/info\t\tShow your information\n".
-							"/set_wallet\t set/update your wallet address\n".
-							"/set_email\t set/update your email address";
+							$rep = "Successfully set a new email address!\n\n<b>Your email address has been set to:</b> {$text}\n\nPlease set your wallet address by send /set_wallet";
 						} else {
 							if ($st[0] === $text) {
 								$rep = "Email address could not be changed because you just sent the same email address!\n\nCurrent email address which linked to your telegram account is {$st[0]}\n\n".
