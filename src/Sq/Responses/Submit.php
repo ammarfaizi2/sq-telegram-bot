@@ -54,9 +54,6 @@ class Submit extends ResponseFoundation
 				);
 				return;
 				break;
-			case 1:
-				$text = __ASK_EMAIL;
-				break;
 			default:
 				break;
 		}

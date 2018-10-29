@@ -45,10 +45,21 @@ class Handler extends ResponseFoundation
 
 			switch ($rdt) {
 				case "To continue, please send the captcha below!":
-					if (
-						@file_get_contents(BASEPATH."/storage/captcha/{$this->b->d['message']['from']['id']}.txt")
-						=== $text
-					) {
+
+					if (!file_exists(BASEPATH."/storage/captcha/{$this->b->d['message']['from']['id']}.txt")) {
+						Exe::sendMessage(
+							[
+								"text" => "Invalid command!\n\nSend /help to see all commands",
+								"chat_id" => $this->b->d["message"]["from"]["id"],
+								"reply_to_message_id" => $this->b->d["message"]["message_id"],
+							]
+						);
+						return;
+					}
+
+					if (file_get_contents(BASEPATH."/storage/captcha/{$this->b->d['message']['from']['id']}.txt") === $text) {
+						
+
 						Exe::sendMessage(
 							[
 								"chat_id" => $this->b->d["message"]["chat"]["id"],
@@ -56,7 +67,33 @@ class Handler extends ResponseFoundation
 								"reply_to_message_id" => $this->b->d["message"]["message_id"],
 							]
 						);
+
+						unlink(BASEPATH."/storage/captcha/{$this->b->d['message']['from']['id']}.txt");
+
+						Exe::sendMessage(
+							[
+								"chat_id" => $this->b->d["message"]["chat"]["id"],
+								"text" => "What is your email address?\n\nReply to this message!",
+								"reply_to_message_id" => $this->b->d["message"]["message_id"],
+								"reply_markup" => json_encode(["force_reply" => true])
+							]
+						);
+
+						$pdo = DB::pdo();
+
+						$st = $pdo->prepare("UPDATE `sessions` SET `state` = '1' WHERE `user_id` = :user_id LIMIT 1;");
+						$st->execute([":user_id" => $this->b->d["message"]["from"]["id"]]);
+
+						unset($st, $pdo);
+
 					} else {
+
+						require_once __DIR__."/make_captcha.php";
+						file_put_contents(
+							BASEPATH."/storage/captcha/{$this->b->d['message']['from']['id']}.txt", 
+							makeCaptcha(BASEPATH."/public/captcha_d/{$this->b->d['message']['from']['id']}.png")
+						);
+
 						Exe::sendMessage(
 							[
 								"chat_id" => $this->b->d["message"]["chat"]["id"],
@@ -64,6 +101,18 @@ class Handler extends ResponseFoundation
 								"reply_to_message_id" => $this->b->d["message"]["message_id"],
 							]
 						);
+
+						Exe::sendPhoto(
+							[
+								"chat_id" => $this->b->d["message"]["from"]["id"],
+								"photo" => (
+									"https://veno.site/captcha_d/{$this->b->d['message']['from']['id']}.png?std=".time()."&w=".rand()
+								),
+								"caption" => "To continue, please send the captcha below!",
+								"reply_markup" => json_encode(["force_reply" => true])
+							]
+						);
+
 					}
 				break;
 
@@ -94,6 +143,8 @@ class Handler extends ResponseFoundation
 							$st = $pdo->prepare("UPDATE `users` SET `email`=:email WHERE `id` = :user_id LIMIT 1;");	
 							$st->execute([":email" => $text, ":user_id" => $this->b->d["message"]["from"]["id"]]);
 						}
+
+						unset($st, $pdo);
 
 						Exe::sendMessage(
 							[
