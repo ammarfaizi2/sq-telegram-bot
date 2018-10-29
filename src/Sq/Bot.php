@@ -41,14 +41,20 @@ final class Bot
 			$this->hdFile = BASEPATH."/storage/lock_files/{$d["message"]["from"]["id"]}.lock";
 
 			if (file_exists($this->hdFile)) {
+				$i = 0;
 				while (file_exists($this->hdFile)) {
+					$i++;
 					sleep(1);
+
+					if ($i === 10) {
+						exit(0);
+					}
 				}
 			}
 
 			$this->h = fopen($this->hdFile, "w");
 			flock($this->h, LOCK_EX);
-			fwrite($this->h, time());
+			fwrite($this->h, getmypid());
 		}
 		$this->d = $d;
 	}
@@ -114,6 +120,21 @@ final class Bot
 
 		if ("/submit" === $text) {
 			(new Submit($this))->submit();
+			return;
+		}
+
+		if ("/help" === $text) {
+			Exe::sendMessage(
+				[
+					"chat_id" => $this->d["message"]["chat"]["id"],
+					"text" => (
+						"/info\tShow your information".
+						"/set_wallet\t set/update your wallet address\n".
+						"/set_email\t set/update your email address"
+					),
+					"reply_to_message_id" => $this->d["message"]["message_id"]
+				]
+			);
 			return;
 		}
 

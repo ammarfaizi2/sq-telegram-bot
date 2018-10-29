@@ -135,7 +135,11 @@ class Handler extends ResponseFoundation
 								$rep = "Email address could not be changed because you just sent the same email address!\n\nCurrent email address which linked to your telegram account is {$st[0]}";
 								$noUpdate = 1;
 							} else {
-								$rep = "Successfully update your email address!\n\nYour email {$st[0]} is now deleted from our database!\n\n<b>Your email address has been set to:</b> {$text}";
+								$rep =
+									"Successfully update your email address!\n\nYour email {$st[0]} is now deleted from our database!\n\n<b>Your email address has been set to:</b> {$text}\n\n".
+									"Other commands:\n".
+									"/set_wallet\t set/update your wallet address\n".
+									"/set_email\t set/update your email address";
 							}
 						}
 
@@ -162,9 +166,9 @@ class Handler extends ResponseFoundation
 								"chat_id" => $this->b->d["message"]["from"]["id"],
 								"reply_to_message_id" => $this->b->d["message"]["message_id"],
 								"parse_mode" => "HTML",
-								"reply_markup" => [
+								"reply_markup" => json_encode([
 									"force_reply" => true
-								]
+								])
 							]
 						);
 					}
