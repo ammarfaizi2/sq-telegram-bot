@@ -24,7 +24,7 @@ class Handler extends ResponseFoundation
 		$st = $pdo->prepare("SELECT * FROM `users` WHERE `id` = :user_id LIMIT 1;");
 		$st->execute([":user_id" => $this->b->d["message"]["from"]["id"]]);
 		if ($st = $st->fetch(PDO::FETCH_ASSOC)) {
-
+			var_dump($st);
 			$txt = "<b>Your Profile:</b>\n\n";
 
 			$txt.= "<b>First Name:</b> ".htmlspecialchars($st['first_name'], ENT_QUOTES, "UTF-8")."\n";
@@ -56,7 +56,7 @@ class Handler extends ResponseFoundation
 			$txt.= "<b>Point:</b> {$st['point']}\n\n";
 			$txt.= "Send /help to see other commands!";
 
-			Exe::sendMessage(
+			$std = Exe::sendMessage(
 				[
 					"chat_id" => $this->b->d["message"]["chat"]["id"],
 					"text" => $txt,
@@ -64,6 +64,10 @@ class Handler extends ResponseFoundation
 					"reply_to_message_id" => $this->b->d["message"]["message_id"]
 				]
 			);
+
+			var_dump($std["out"]);
+		} else {
+			print "\nNot Found\n";
 		}
 	}
 }
