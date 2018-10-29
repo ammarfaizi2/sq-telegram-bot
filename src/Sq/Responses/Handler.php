@@ -52,6 +52,13 @@ class Handler extends ResponseFoundation
 					$st = $st->fetch(PDO::FETCH_NUM);
 
 					if (!$st[0]) {
+						$st = $pdo->prepare("UPDATE `users` SET `joined_at` = :joined_at WHERE `id` = :user_id LIMIT 1");
+						$st->execute(
+							[
+								":joined_at" => date("Y-m-d H:i:s"),
+								":user_id" => $this->b->d["message"]["from"]["id"]
+							]
+						);
 						$rep = "Successfully set a new wallet address!\n\n<b>Your wallet address has been set to:</b> {$text}\n\n".
 						"Other commands:\n".
 						"/info\t\tShow your information\n".
