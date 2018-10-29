@@ -146,6 +146,71 @@ final class Bot
 			return;
 		}
 
+		if ("/set_email" === $text) {
+			$pdo = DB::pdo();
+			$st = $pdo->prepare("SELECT `state` FROM `sessions` WHERE `user_id` = :user_id LIMIT 1;");
+			$st->execute([":user_id" => $this->b->d["message"]["from"]["id"]]);
+
+			if ($st = $st->fetch(PDO::FETCH_NUM)) {
+				$state = $st[0];
+			} else {
+				$state = NULL;
+			}
+
+			if ($state === NULL) {
+				Exe::sendMessage(
+					[
+						"chat_id" => $this->d["message"]["chat"]["id"],
+						"text" => "Send /submit to register your email!",
+						"reply_to_message_id" => $this->d["message"]["message_id"]
+					]
+				);
+				return;
+			} else {
+				Exe::sendMessage(
+					[
+						"chat_id" => $this->d["message"]["chat"]["id"],
+						"text" => "What is your email address?\n\nReply to this message!",
+						"reply_to_message_id" => $this->d["message"]["message_id"],
+						"reply_markup" => json_encode(["force_reply" => true])
+					]
+				);
+				return;
+			}
+		}
+
+		if ("/set_wallet" === $text) {
+			$pdo = DB::pdo();
+			$st = $pdo->prepare("SELECT `email` FROM `users` WHERE `id` = :user_id LIMIT 1;");
+			$st->execute([":user_id" => $this->b->d["message"]["from"]["id"]]);
+
+			if ($st = $st->fetch(PDO::FETCH_NUM)) {
+				$state = $st[0];
+			} else {
+				$state = NULL;
+			}
+
+			if ($state === NULL) {
+				Exe::sendMessage(
+					[
+						"chat_id" => $this->d["message"]["chat"]["id"],
+						"text" => "You need to set your email first!",
+						"reply_to_message_id" => $this->d["message"]["message_id"]
+					]
+				);
+				return;
+			} else {
+				Exe::sendMessage(
+					[
+						"chat_id" => $this->d["message"]["chat"]["id"],
+						"text" => "What is your wallet address?\n\nReply to this message!",
+						"reply_to_message_id" => $this->d["message"]["message_id"],
+						"reply_markup" => json_encode(["force_reply" => true])
+					]
+				);
+				return;
+			}
+		}
 
 		(new Handler($this))->handle();
 	}

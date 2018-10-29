@@ -44,6 +44,46 @@ class Handler extends ResponseFoundation
 			}
 
 			switch ($rdt) {
+
+				case "What is your wallet address?\n\nReply to this message!":
+					$pdo = DB::pdo();
+					$st = $pdo->prepare("SELECT `wallet_address` FROM `users` WHERE `id` = :user_id LIMIT 1;");
+					$st->execute([":user_id" => $this->b->d["message"]["from"]["id"]]);
+					$st = $st->fetch(PDO::FETCH_NUM);
+
+					if (!$st[0]) {
+						$rep = "Successfully set a new wallet address!\n\n<b>Your wallet address has been set to:</b> {$text}";
+					} else {
+						if ($st[0] === $text) {
+							$rep = "Wallet address could not be changed because you just sent the same wallet address!\n\nCurrent wallet address which linked to your telegram account is <code>".htmlspecialchars($st[0], ENT_QUOTES, "UTF-8")."</code>";
+							$noUpdate = 1;
+						} else {
+							$rep =
+								"Successfully update your wallet address!\n\nYour wallet address <code>".htmlspecialchars($st[0], ENT_QUOTES, "UTF-8")."</code> is now deleted from our database!\n\n<b>Your wallet address has been set to:</b> <code>".htmlspecialchars($st[0], ENT_QUOTES, "UTF-8")."</code> \n\n".
+								"Other commands:\n".
+								"/info\t\tShow your information\n".
+								"/set_wallet\t set/update your wallet address\n".
+								"/set_email\t set/update your email address";
+						}
+					}
+
+					if (!isset($noUpdate)) {
+						$st = $pdo->prepare("UPDATE `users` SET `wallet`=:wallet WHERE `id` = :user_id LIMIT 1;");	
+						$st->execute([":wallet" => $text, ":user_id" => $this->b->d["message"]["from"]["id"]]);
+					}
+
+					unset($st, $pdo);
+
+					Exe::sendMessage(
+						[
+							"text" => $rep,
+							"chat_id" => $this->b->d["message"]["from"]["id"],
+							"reply_to_message_id" => $this->b->d["message"]["message_id"],
+							"parse_mode" => "HTML"
+						]
+					);
+				break;
+
 				case "To continue, please send the captcha below!\n\nReply to this message!":
 
 					if (!file_exists(BASEPATH."/storage/captcha/{$this->b->d['message']['from']['id']}.txt")) {
@@ -138,6 +178,7 @@ class Handler extends ResponseFoundation
 								$rep =
 									"Successfully update your email address!\n\nYour email {$st[0]} is now deleted from our database!\n\n<b>Your email address has been set to:</b> {$text}\n\n".
 									"Other commands:\n".
+									"/info\t\tShow your information\n".
 									"/set_wallet\t set/update your wallet address\n".
 									"/set_email\t set/update your email address";
 							}
