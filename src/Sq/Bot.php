@@ -21,11 +21,49 @@ final class Bot
 	public $d;
 
 	/**
+	 * @var res
+	 */
+	private $h = NULL;
+
+	/**
+	 * @var string
+	 */
+	private $hdFile;
+
+	/**
 	 * Constructor.
 	 */
 	public function __construct(array $d)
 	{
+		// Anti DoS
+		if (isset($d["message"]["from"]["id"])) {
+
+			$this->hdFile = BASEPATH."/storage/lock_files/{$d["message"]["from"]["id"]}.lock";
+
+			if (file_exists($this->hdFile)) {
+				while (file_exists($this->hdFile)) {
+					sleep(1);
+				}
+			}
+
+			$this->h = fopen($this->hdFile, "w");
+			flock($this->h, LOCK_EX);
+			fwrite($this->h, time());
+		}
 		$this->d = $d;
+	}
+
+	/** 
+	 * Destructor.
+	 */
+	public function __destruct()
+	{
+		if (is_resource($this->h)) {
+			fflush($this->h);
+			flock($this->h, LOCK_UN);
+			fclose($this->h);
+			unlink($this->hdFile);
+		}
 	}
 
 	/**

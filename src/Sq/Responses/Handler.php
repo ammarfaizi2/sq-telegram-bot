@@ -44,7 +44,7 @@ class Handler extends ResponseFoundation
 			}
 
 			switch ($rdt) {
-				case "To continue, please send the captcha below!":
+				case "To continue, please send the captcha below!\n\nReply to this message!":
 
 					if (!file_exists(BASEPATH."/storage/captcha/{$this->b->d['message']['from']['id']}.txt")) {
 						Exe::sendMessage(
@@ -108,7 +108,7 @@ class Handler extends ResponseFoundation
 								"photo" => (
 									"https://veno.site/captcha_d/{$this->b->d['message']['from']['id']}.png?std=".time()."&w=".rand()
 								),
-								"caption" => "To continue, please send the captcha below!",
+								"caption" => "To continue, please send the captcha below!\n\nReply to this message!",
 								"reply_markup" => json_encode(["force_reply" => true])
 							]
 						);

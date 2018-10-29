@@ -48,7 +48,7 @@ class Submit extends ResponseFoundation
 						"photo" => (
 							"https://veno.site/captcha_d/{$this->b->d['message']['from']['id']}.png?std=".time()."&w=".rand()
 						),
-						"caption" => "To continue, please send the captcha below!",
+						"caption" => "To continue, please send the captcha below!\n\nReply to this message!",
 						"reply_markup" => json_encode(["force_reply" => true]),
 					]
 				);

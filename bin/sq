@@ -8,4 +8,5 @@ if (isset($argv[1])) {
 	printf("[%s]\t%s\n", date("Y-m-d H:i:s"), $argv[1]);
 	$st = new \Sq\Bot($in);
 	$st->run();
+	unset($st);
 }
