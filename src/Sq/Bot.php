@@ -128,7 +128,7 @@ final class Bot
 				[
 					"chat_id" => $this->d["message"]["chat"]["id"],
 					"text" => (
-						"/info\tShow your information".
+						"/info\t\tShow your information\n".
 						"/set_wallet\t set/update your wallet address\n".
 						"/set_email\t set/update your email address"
 					),
