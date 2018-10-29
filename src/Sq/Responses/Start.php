@@ -36,17 +36,19 @@ Welcome to STD market. To claim free 50 VENO Token, please do steps below:
 					[
 						"keyboard" => [
 							[
-								"text" => "Balance \xf0\x9f\x92\xb0"
-							],
-							[
-								"text" => "Support \xe2\x98\x8e\xef\xb8\x8f"
-							],
-							[
 								[
-									"text" => "Referral Link \xf0\x9f\x91\xa5",
+									"text" => "Balance \xf0\x9f\x92\xb0"
 								],
 								[
-									"text" => "Social Media"
+									"text" => "Support \xe2\x98\x8e\xef\xb8\x8f"
+								],
+								[
+									[
+										"text" => "Referral Link \xf0\x9f\x91\xa5",
+									],
+									[
+										"text" => "Social Media"
+									]
 								]
 							]
 						]
