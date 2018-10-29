@@ -89,7 +89,7 @@ final class Bot
 		$st->execute([":id" => $this->d["message"]["from"]["id"]]);
 		if (!$st->fetch(PDO::FETCH_NUM)) {
 			$st = $pdo->prepare("INSERT INTO `users` VALUES (
-				:id, :first_name, :last_name, :username, NULL, NULL, NULL, :started_at
+				:id, :first_name, :last_name, :username, NULL, NULL, 0, NULL, :started_at
 			);");
 			$st->execute(
 				[
@@ -120,6 +120,11 @@ final class Bot
 
 		if ("/submit" === $text) {
 			(new Submit($this))->submit();
+			return;
+		}
+
+		if ("/info" === "text") {
+			(new Info($this))->showInfo();
 			return;
 		}
 
