@@ -52,10 +52,18 @@ class Handler extends ResponseFoundation
 					$st = $st->fetch(PDO::FETCH_NUM);
 
 					if (!$st[0]) {
-						$rep = "Successfully set a new wallet address!\n\n<b>Your wallet address has been set to:</b> {$text}";
+						$rep = "Successfully set a new wallet address!\n\n<b>Your wallet address has been set to:</b> {$text}\n\n".
+						"Other commands:\n".
+						"/info\t\tShow your information\n".
+						"/set_wallet\t set/update your wallet address\n".
+						"/set_email\t set/update your email address";
 					} else {
 						if ($st[0] === $text) {
-							$rep = "Wallet address could not be changed because you just sent the same wallet address!\n\nCurrent wallet address which linked to your telegram account is <code>".htmlspecialchars($st[0], ENT_QUOTES, "UTF-8")."</code>";
+							$rep = "Wallet address could not be changed because you just sent the same wallet address!\n\nCurrent wallet address which linked to your telegram account is <code>".htmlspecialchars($st[0], ENT_QUOTES, "UTF-8")."</code>\n\n".
+								"Other commands:\n".
+								"/info\t\tShow your information\n".
+								"/set_wallet\t set/update your wallet address\n".
+								"/set_email\t set/update your email address";
 							$noUpdate = 1;
 						} else {
 							$rep =
@@ -169,10 +177,18 @@ class Handler extends ResponseFoundation
 						$st = $st->fetch(PDO::FETCH_NUM);
 
 						if (!$st[0]) {
-							$rep = "Successfully set a new email address!\n\n<b>Your email address has been set to:</b> {$text}";
+							$rep = "Successfully set a new email address!\n\n<b>Your email address has been set to:</b> {$text}\n\n".
+							"Other commands:\n".
+							"/info\t\tShow your information\n".
+							"/set_wallet\t set/update your wallet address\n".
+							"/set_email\t set/update your email address";
 						} else {
 							if ($st[0] === $text) {
-								$rep = "Email address could not be changed because you just sent the same email address!\n\nCurrent email address which linked to your telegram account is {$st[0]}";
+								$rep = "Email address could not be changed because you just sent the same email address!\n\nCurrent email address which linked to your telegram account is {$st[0]}\n\n".
+									"Other commands:\n".
+									"/info\t\tShow your information\n".
+									"/set_wallet\t set/update your wallet address\n".
+									"/set_email\t set/update your email address";
 								$noUpdate = 1;
 							} else {
 								$rep =

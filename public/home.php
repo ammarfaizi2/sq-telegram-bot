@@ -44,6 +44,16 @@ if ($status === "token_exists") {
 }
 
 
+$pdo = \Sq\DB::pdo();
+$st = $pdo->prepare("SELECT COUNT(1) FROM `users` WHERE `joined_at` IS NOT NULL;");
+$st->execute();
+$joinedMember = $st->fetch(PDO::FETCH_NUM)[0];
+
+
+
+unset($st, $pdo);
+
+
 ?><!DOCTYPE html>
 <html>
 <head>
@@ -68,8 +78,14 @@ if ($status === "token_exists") {
 		<h1>Welcome Admin!</h1>
 		<table>
 			<tr>
-				<td>Status Bot:</td>
+				<td>Status Bot</td>
+				<td>:</td>
 				<td><?php print isset($webhook_url) ? ($webhook_url === "" ? "Offline" : "Online") : $status; ?></td>
+			</tr>
+			<tr>
+				<td>Joined Members:</td>
+				<td>:</td>
+				<td><?php print $joinedMember; ?> users (<a href="/show_members.php">View Members</a>)</td>
 			</tr>			
 		</table>
 		<table>
