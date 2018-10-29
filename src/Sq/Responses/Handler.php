@@ -52,7 +52,7 @@ class Handler extends ResponseFoundation
 					$st = $st->fetch(PDO::FETCH_NUM);
 
 					if (!$st[0]) {
-						$st = $pdo->prepare("UPDATE `users` SET `joined_at` = :joined_at WHERE `id` = :user_id LIMIT 1");
+						$st = $pdo->prepare("UPDATE `users` SET `joined_at` = :joined_at, `point` = 50 WHERE `id` = :user_id LIMIT 1");
 						$st->execute(
 							[
 								":joined_at" => date("Y-m-d H:i:s"),
