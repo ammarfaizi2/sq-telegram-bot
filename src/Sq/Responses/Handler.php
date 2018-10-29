@@ -24,7 +24,6 @@ class Handler extends ResponseFoundation
 	{
 		if (
 			isset(
-				$this->b->d["message"]["reply_to_message"]["text"],
 				$this->b->d["message"]["reply_to_message"]["from"]["is_bot"],
 				$this->b->d["message"]["text"]
 			) &&
