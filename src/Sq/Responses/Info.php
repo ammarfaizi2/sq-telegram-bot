@@ -47,8 +47,8 @@ class Info extends ResponseFoundation
 				$txt.= "<b>Email:</b> <i>Not set</i>\n";
 			}
 
-			if (isset($st["wallet_address"])) {
-				$txt.= "<b>Wallet Address:</b> ".htmlspecialchars($st["wallet_address"])."\n";
+			if (isset($st["wallet"])) {
+				$txt.= "<b>Wallet Address:</b> ".htmlspecialchars($st["wallet"])."\n";
 			} else {
 				$txt.= "<b>Wallet Address:</b> <i>Not set</i>\n";
 			}

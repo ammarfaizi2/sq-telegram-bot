@@ -14,6 +14,8 @@ CREATE TABLE `sessions` (
   CONSTRAINT `sessions_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+INSERT INTO `sessions` (`user_id`, `state`) VALUES
+(243692601, 1);
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
@@ -22,11 +24,12 @@ CREATE TABLE `users` (
   `last_name` varchar(255) DEFAULT NULL,
   `username` varchar(72) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
-  `eth_address` varchar(255) DEFAULT NULL,
+  `wallet` varchar(255) DEFAULT NULL,
+  `point` int(11) DEFAULT '0',
   `joined_at` datetime DEFAULT NULL,
   `started_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `eth_address` (`eth_address`),
+  UNIQUE KEY `eth_address` (`wallet`),
   KEY `first_name` (`first_name`),
   KEY `last_name` (`last_name`),
   KEY `joined_at` (`joined_at`),
@@ -35,6 +38,8 @@ CREATE TABLE `users` (
   KEY `started_at` (`started_at`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `wallet`, `point`, `joined_at`, `started_at`) VALUES
+(243692601, 'Ammar',  'Faizi',  '@ammarfaizi2', 'asdasd@qwe.c', NULL, 0,  NULL, '2018-10-28 20:54:39');
 
 DROP TABLE IF EXISTS `web_admin`;
 CREATE TABLE `web_admin` (
@@ -49,4 +54,4 @@ CREATE TABLE `web_admin` (
 INSERT INTO `web_admin` (`id`, `name`, `username`, `password`) VALUES
 (1, 'Admin',  'admin',  '$argon2i$v=19$m=1024,t=2,p=2$dW9XcndZTXFyaUd6Rm9jWg$3Z8ww/FZN/eHaH/AKrHsiX5JX3/zufenWAwsQQx0f9o');
 
--- 2018-10-28 13:55:56
+-- 2018-10-29 08:29:22

@@ -47,7 +47,7 @@ class Handler extends ResponseFoundation
 
 				case "What is your wallet address?\n\nReply to this message!":
 					$pdo = DB::pdo();
-					$st = $pdo->prepare("SELECT `wallet_address` FROM `users` WHERE `id` = :user_id LIMIT 1;");
+					$st = $pdo->prepare("SELECT `wallet` FROM `users` WHERE `id` = :user_id LIMIT 1;");
 					$st->execute([":user_id" => $this->b->d["message"]["from"]["id"]]);
 					$st = $st->fetch(PDO::FETCH_NUM);
 
