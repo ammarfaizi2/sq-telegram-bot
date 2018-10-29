@@ -20,7 +20,7 @@ class Start extends ResponseFoundation
 	{
 
 $text = "
-Welcome to STD market. To claim free 50 STD Token, please do steps below:
+Welcome to STD market. To claim free 50 VENO Token, please do steps below:
 
 1️⃣ Visit the Website (link website disini) and subscribe our News
 2️⃣ Join our Telegram community (link group disini), say some good things in the group
@@ -30,7 +30,30 @@ Welcome to STD market. To claim free 50 STD Token, please do steps below:
 		$d = Exe::sendMessage(
 			[
 				"text" => $text,
-				"chat_id" => $this->b->d["message"]["from"]["id"]
+				"chat_id" => $this->b->d["message"]["from"]["id"],
+				"reply_to_message_id" => $this->b->d["message"]["message_id"],
+				"reply_markup" => json_encode(
+					[
+						"keyboard" => [
+							[
+								[
+									"text" => "Balance \xf0\x9f\x92\xb0"
+								],
+								[
+									"text" => "Support \xe2\x98\x8e\xef\xb8\x8f"
+								],
+								[
+									[
+										"text" => "Referral Link \xf0\x9f\x91\xa5",
+									],
+									[
+										"text" => "Social Media"
+									]
+								]
+							]
+						]
+					]
+				)
 			]
 		);
 	}

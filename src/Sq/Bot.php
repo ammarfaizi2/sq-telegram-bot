@@ -57,6 +57,7 @@ final class Bot
 		// 	flock($this->h, LOCK_EX);
 		// 	fwrite($this->h, getmypid());
 		// }
+
 		$this->d = $d;
 	}
 
@@ -90,17 +91,16 @@ final class Bot
 		$st->execute([":id" => $this->d["message"]["from"]["id"]]);
 		if (!$st->fetch(PDO::FETCH_NUM)) {
 			$st = $pdo->prepare("INSERT INTO `users` VALUES (
-				:id, :first_name, :last_name, :username, NULL, NULL, 0, NULL, :started_at
+				:id, :name, :username, NULL, NULL, 0, NULL, :started_at
 			);");
 			$st->execute(
 				[
 					":id" => $this->d["message"]["from"]["id"],
-					":first_name" => $this->d["message"]["from"]["first_name"],
-					":last_name" => (
+					":name" => ($this->d["message"]["from"]["first_name"].(
 						isset($this->d["message"]["from"]["last_name"]) ?
-							$this->d["message"]["from"]["last_name"] :
-								NULL
-					),
+							" ".$this->d["message"]["from"]["last_name"] :
+								""
+					)),
 					":username" => (
 						isset($this->d["message"]["from"]["username"]) ? 
 							"@".$this->d["message"]["from"]["username"] :
@@ -124,7 +124,6 @@ final class Bot
 			return;
 		}
 
-		var_dump($text." std::hd");
 		if ("/info" === $text) {
 			var_dump($text);
 			(new Info($this))->showInfo();

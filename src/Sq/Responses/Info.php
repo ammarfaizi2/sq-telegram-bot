@@ -27,13 +27,7 @@ class Info extends ResponseFoundation
 			var_dump($st);
 			$txt = "<b>Your Profile:</b>\n\n";
 
-			$txt.= "<b>First Name:</b> ".htmlspecialchars($st['first_name'], ENT_QUOTES, "UTF-8")."\n";
-
-			if (isset($st["last_name"])) {
-				$txt.= "<b>Last Name:</b> ".htmlspecialchars($st['last_name'], ENT_QUOTES, "UTF-8")."\n";
-			} else {
-				$txt.= "<b>Last Name:</b> <i>Not set</i>\n";
-			}
+			$txt.= "<b>Name:</b> ".htmlspecialchars($st["name"], ENT_QUOTES, "UTF-8")."\n";
 
 			if (isset($st["username"])) {
 				$txt.= "<b>Telegram Username:</b> ".htmlspecialchars($st["username"])."\n";
@@ -53,7 +47,7 @@ class Info extends ResponseFoundation
 				$txt.= "<b>Wallet Address:</b> <i>Not set</i>\n";
 			}
 
-			$txt.= "<b>Point:</b> {$st['point']}\n\n";
+			$txt.= "<b>VENO Balance:</b> {$st['point']}\n\n";
 			$txt.= "Send /help to see other commands!";
 
 			$std = Exe::sendMessage(
