@@ -36,27 +36,27 @@ final class Bot
 	 */
 	public function __construct(array $d)
 	{
-		// Anti DoS
-		if (isset($d["message"]["from"]["id"])) {
+		// // Anti DoS
+		// if (isset($d["message"]["from"]["id"])) {
 
-			$this->hdFile = BASEPATH."/storage/lock_files/{$d["message"]["from"]["id"]}.lock";
+		// 	$this->hdFile = BASEPATH."/storage/lock_files/{$d["message"]["from"]["id"]}.lock";
 
-			if (file_exists($this->hdFile)) {
-				$i = 0;
-				while (file_exists($this->hdFile)) {
-					$i++;
-					sleep(1);
+		// 	if (file_exists($this->hdFile)) {
+		// 		$i = 0;
+		// 		while (file_exists($this->hdFile)) {
+		// 			$i++;
+		// 			sleep(1);
 
-					if ($i === 10) {
-						exit(0);
-					}
-				}
-			}
+		// 			if ($i === 10) {
+		// 				exit(0);
+		// 			}
+		// 		}
+		// 	}
 
-			$this->h = fopen($this->hdFile, "w");
-			flock($this->h, LOCK_EX);
-			fwrite($this->h, getmypid());
-		}
+		// 	$this->h = fopen($this->hdFile, "w");
+		// 	flock($this->h, LOCK_EX);
+		// 	fwrite($this->h, getmypid());
+		// }
 		$this->d = $d;
 	}
 
