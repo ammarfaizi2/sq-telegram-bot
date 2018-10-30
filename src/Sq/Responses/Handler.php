@@ -75,6 +75,11 @@ class Handler extends ResponseFoundation
 									],
 									[
 										[
+											"text" => "Tasks \xe2\x9a\x94\xef\xb8\x8f"
+										]
+									],
+									[
+										[
 											"text" => "Referral Link \xf0\x9f\x91\xa5",
 										],
 										[

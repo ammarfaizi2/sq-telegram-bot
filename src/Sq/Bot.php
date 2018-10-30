@@ -114,6 +114,46 @@ final class Bot
 
 		$text = isset($this->d["message"]["text"]) ? $this->d["message"]["text"] : null;
 
+		if ("Balance \xf0\x9f\x92\xb0" === $text) {
+
+
+			$pdo = DB::pdo();
+			$st = $pdo->prepare("SELECT `balance` FROM `users` WHERE `id` = :user_id LIMIT 1;");
+			$st->execute([":user_id" => $this->d["message"]["from"]["id"]]);
+			if ($st = $st->fetch(PDO::FETCH_NUM)) {
+				$r = "<b>Your VENO balance is:</b> {$st[0]}";
+			} else {
+				$r = "An error occured!";
+			}
+
+			Exe::sendMessage(
+				[
+					"chat_id" => $this->d["message"]["chat"]["id"],
+					"text" => $r,
+					"reply_to_message_id" => $this->d["message"]["message_id"],
+					"parse_mode" => "HTML"
+				]
+			);
+
+			unset($st, $pdo);
+
+			return;
+		}
+
+		if ("Support \xe2\x98\x8e\xef\xb8\x8f" === $text) {
+
+			Exe::sendMessage(
+				[
+					"chat_id" => $this->d["message"]["chat"]["id"],
+					"text" => "Email: venotoken-blablabla@gmail.com\nPhone: +62123123123123",
+					"reply_to_message_id" => $this->d["message"]["message_id"],
+					"parse_mode" => "HTML"
+				]
+			);
+
+			return;
+		}
+
 		if ("/start" === $text) {
 			(new Start($this))->start();
 			return;
