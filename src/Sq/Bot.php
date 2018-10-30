@@ -154,6 +154,31 @@ final class Bot
 			return;
 		}
 
+		if ("Tasks \xe2\x9a\x94\xef\xb8\x8f" === $text) {
+			$task = "1. Task1 (10 VENO)\n2. Task1 (20 VENO)\n3. Task1 (15 VENO)";
+			Exe::sendMessage(
+				[
+					"chat_id" => $this->d["message"]["chat"]["id"],
+					"text" => $task,
+					"reply_to_message_id" => $this->d["message"]["message_id"],
+					"parse_mode" => "HTML"
+				]
+			);
+			return;
+		}
+
+		if ("Referral Link \xf0\x9f\x91\xa5" === $text) {
+			Exe::sendMessage(
+				[
+					"chat_id" => $this->d["message"]["chat"]["id"],
+					"text" => "<b>Your referral link is:</b> https://t.me/stdmdbot?id={$this->d["message"]["from"]["id"]}",
+					"reply_to_message_id" => $this->d["message"]["message_id"],
+					"parse_mode" => "HTML"
+				]
+			);
+			return;
+		}
+
 		if ("/start" === $text) {
 			(new Start($this))->start();
 			return;
