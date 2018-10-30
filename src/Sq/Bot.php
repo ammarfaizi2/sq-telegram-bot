@@ -155,7 +155,7 @@ final class Bot
 		}
 
 		if ("Tasks \xe2\x9a\x94\xef\xb8\x8f" === $text) {
-			$task = "1. Task1 (10 VENO)\n2. Task1 (20 VENO)\n3. Task1 (15 VENO)";
+			$task = "1. Task1 (10 VENO)\n2. Task2 (20 VENO)\n3. Task3 (15 VENO)";
 			Exe::sendMessage(
 				[
 					"chat_id" => $this->d["message"]["chat"]["id"],
