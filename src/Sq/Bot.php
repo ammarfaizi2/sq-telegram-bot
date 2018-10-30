@@ -179,6 +179,18 @@ final class Bot
 			return;
 		}
 
+		if ("Social Media" === $text) {
+			Exe::sendMessage(
+				[
+					"chat_id" => $this->d["message"]["chat"]["id"],
+					"text" => "... link sosmed ...",
+					"reply_to_message_id" => $this->d["message"]["message_id"],
+					"parse_mode" => "HTML"
+				]
+			);
+			return;
+		}
+
 		if ("/start" === $text) {
 			(new Start($this))->start();
 			return;
