@@ -31,32 +31,7 @@ Welcome to STD market. To claim free 50 VENO Token, please do steps below:
 			[
 				"text" => $text,
 				"chat_id" => $this->b->d["message"]["from"]["id"],
-				"reply_to_message_id" => $this->b->d["message"]["message_id"],
-				"reply_markup" => json_encode(
-					[
-						"keyboard" => [
-							[
-								[
-									"text" => "Balance \xf0\x9f\x92\xb0",
-								],
-							],
-							[	
-
-								[
-									"text" => "Support \xe2\x98\x8e\xef\xb8\x8f"
-								]
-							],
-							[
-								[
-									"text" => "Referral Link \xf0\x9f\x91\xa5",
-								],
-								[
-									"text" => "Social Media"
-								]
-							]
-						]
-					]
-				)
+				"reply_to_message_id" => $this->b->d["message"]["message_id"]
 			]
 		);
 

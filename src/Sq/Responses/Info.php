@@ -24,9 +24,9 @@ class Info extends ResponseFoundation
 		$st = $pdo->prepare("SELECT * FROM `users` WHERE `id` = :user_id LIMIT 1;");
 		$st->execute([":user_id" => $this->b->d["message"]["from"]["id"]]);
 		if ($st = $st->fetch(PDO::FETCH_ASSOC)) {
-			var_dump($st);
-			$txt = "<b>Your Profile:</b>\n\n";
+			
 
+			$txt = "<b>Your Profile:</b>\n\n";
 			$txt.= "<b>Name:</b> ".htmlspecialchars($st["name"], ENT_QUOTES, "UTF-8")."\n";
 
 			if (isset($st["username"])) {
@@ -47,7 +47,7 @@ class Info extends ResponseFoundation
 				$txt.= "<b>Wallet Address:</b> <i>Not set</i>\n";
 			}
 
-			$txt.= "<b>VENO Balance:</b> {$st['point']}\n\n";
+			$txt.= "<b>VENO Balance:</b> {$st['balance']}\n\n";
 			$txt.= "Send /help to see other commands!";
 
 			$std = Exe::sendMessage(
@@ -58,8 +58,6 @@ class Info extends ResponseFoundation
 					"reply_to_message_id" => $this->b->d["message"]["message_id"]
 				]
 			);
-
-			var_dump($std["out"]);
 		} else {
 			print "\nNot Found\n";
 		}

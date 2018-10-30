@@ -64,6 +64,33 @@ class Handler extends ResponseFoundation
 						"/info\t\tShow your information\n".
 						"/set_wallet\t set/update your wallet address\n".
 						"/set_email\t set/update your email address";
+
+						$rd = json_encode(
+							[
+								"keyboard" => [
+									[
+										[
+											"text" => "Balance \xf0\x9f\x92\xb0",
+										],
+									],
+									[	
+
+										[
+											"text" => "Support \xe2\x98\x8e\xef\xb8\x8f"
+										]
+									],
+									[
+										[
+											"text" => "Referral Link \xf0\x9f\x91\xa5",
+										],
+										[
+											"text" => "Social Media"
+										]
+									]
+								]
+							]
+						);
+						
 					} else {
 						if ($st[0] === $text) {
 							$rep = "Wallet address could not be changed because you just sent the same wallet address!\n\nCurrent wallet address which linked to your telegram account is <code>".htmlspecialchars($st[0], ENT_QUOTES, "UTF-8")."</code>\n\n".
