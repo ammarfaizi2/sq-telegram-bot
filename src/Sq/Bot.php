@@ -125,7 +125,6 @@ final class Bot
 		}
 
 		if ("/info" === $text) {
-			var_dump($text);
 			(new Info($this))->showInfo();
 			return;
 		}

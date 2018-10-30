@@ -20,7 +20,7 @@ class Start extends ResponseFoundation
 	{
 
 $text = "
-Welcome to STD market. To claim free 50 VENO Token, please do steps below:
+Welcome to VENO market. To claim free 50 VENO Token, please do steps below:
 
 1️⃣ Visit the Website (link website disini) and subscribe our News
 2️⃣ Join our Telegram community (link group disini), say some good things in the group

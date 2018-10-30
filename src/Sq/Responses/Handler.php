@@ -52,7 +52,7 @@ class Handler extends ResponseFoundation
 					$st = $st->fetch(PDO::FETCH_NUM);
 
 					if (!$st[0]) {
-						
+
 						$rep = "Successfully set a new wallet address!\n\n<b>Your wallet address has been set to:</b> {$text}\n\n".
 						"Other commands:\n".
 						"/info\t\tShow your information\n".
@@ -110,14 +110,19 @@ class Handler extends ResponseFoundation
 
 					unset($st, $pdo);
 
-					Exe::sendMessage(
-						[
+					$d = [
 							"text" => $rep,
 							"chat_id" => $this->b->d["message"]["from"]["id"],
 							"reply_to_message_id" => $this->b->d["message"]["message_id"],
 							"parse_mode" => "HTML"
-						]
-					);
+						];
+
+					if (isset($rd)) {
+						$d["reply_markup"] = $rd;
+						unset($rd);
+					}
+
+					Exe::sendMessage($d);
 				break;
 
 				case "To continue, please send the captcha below!\n\nReply to this message!":
