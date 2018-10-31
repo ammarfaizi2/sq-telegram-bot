@@ -45,7 +45,8 @@ if (isset($_GET["id"], $_GET["to"])) {
 			print "\$task is not defined!";
 			exit(0);
 		}
-		addPoint($task, $_GET["id"]);
+		$d = addPoint($task, $_GET["id"]);
+		var_dump($d);die;
 		header("Location: {$fp}");
 	} else {
 		header("Content-Type: text/plain");
