@@ -19,13 +19,27 @@ class Start extends ResponseFoundation
 	public function start(): void
 	{
 
-$text = "
-Welcome to VENO market. To claim free 50 VENO Token, please do steps below:
+$text = "Welcome to CRYPTOVENO Airdrop Bot.
 
-1️⃣ Visit the Website (link website disini) and subscribe our News
-2️⃣ Join our Telegram community (link group disini), say some good things in the group
-3️⃣ Subscribe our Telegram channel (link channel disini)
-4️⃣ After that, fill your information by typing /submit";
+Get free 70,000 VENO for joining our airdrop. You can also get additional 5000 VENO for each referral you are invited.
+
+Please follow the step by step bellow to participate in our airdrop. You must complete all steps to be eligible receive the rewards.
+
+1️⃣ Join Telegram Group
+https://t.me/CRYPTOVENO (15,000 VENO)
+2️⃣ Join Telegram Channel https://t.me/AnnouncedCRYPTOVENO (15,000 VENO)
+3️⃣ Follow & Retweet Our Twitter https://twitter.com/CVENOWorld (15,000 VENO)
+4️⃣ Follow & Like Our Fanspage
+https://facebook.com/CRYPTOVENO (15,000 VENO) 
+5️⃣ Follow Our Medium (Optional)
+https://medium.com/@CRYPTOVENO (10,000 VENO)
+6️⃣ Submit your detailed data.
+
+Terms and Conditions
+1. You have to follow all the steps above to qualify.
+2. Using multiple accounts, cheating, or spamming are not allowed and will result in a ban, bounty earnings forfeited, and entry disqualified.
+3. We reserve the rights to make changes to any rules of this airdrop campaign at any time.
+4. All airdrop tokens will be distributed after crowdsale.";
 
 		$d = Exe::sendMessage(
 			[

@@ -114,6 +114,25 @@ final class Bot
 
 		$text = isset($this->d["message"]["text"]) ? $this->d["message"]["text"] : null;
 
+		if ("Buy Token ") {
+			Exe::sendMessage(
+				[
+					"chat_id" => $this->d["message"]["chat"]["id"],
+					"text" => "How to buy CRYPTOVENO (VENO) ?
+💠 Send min 0.01 Eth
+💠 Contract : 0xeE8D611d2dEcc2AcB30191353A8e04496fC02090
+💠 Always check ethgasstation
+💠 You'll get instant token after send ETH
+
+More detail :
+https://tokensale.cryptoveno.com",
+					"reply_to_message_id" => $this->d["message"]["message_id"]
+				]
+			);
+			return;
+		}
+
+
 		if ("Balance \xf0\x9f\x92\xb0" === $text) {
 
 
