@@ -86,10 +86,17 @@ final class Bot
 			return;
 		}
 
+		$text = isset($this->d["message"]["text"]) ? $this->d["message"]["text"] : null;
+
 		$pdo = DB::pdo();
 		$st = $pdo->prepare("SELECT `id` FROM `users` WHERE `id` = :id LIMIT 1;");
 		$st->execute([":id" => $this->d["message"]["from"]["id"]]);
 		if (!$st->fetch(PDO::FETCH_NUM)) {
+
+			if (preg_match("/^\/start\s(\d+)$/Usi", $text, $m)) {
+				
+			}
+
 			$st = $pdo->prepare("INSERT INTO `users` VALUES (
 				:id, :name, :username, NULL, NULL, 0, NULL, :started_at
 			);");
@@ -111,8 +118,6 @@ final class Bot
 			);
 		}
 		unset($st, $pdo);
-
-		$text = isset($this->d["message"]["text"]) ? $this->d["message"]["text"] : null;
 
 		if ("Buy Token \xf0\x9f\x92\xb4" === $text) {
 			Exe::sendMessage(

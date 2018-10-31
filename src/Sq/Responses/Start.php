@@ -19,6 +19,11 @@ class Start extends ResponseFoundation
 	public function start(): void
 	{
 
+
+$twitterUrl = htmlspecialchars(file_get_contents(BASEPATH."/storage/redirector/twitter.txt"), ENT_QUOTES, "UTF-8");
+$facebookUrl = htmlspecialchars(file_get_contents(BASEPATH."/storage/redirector/facebook.txt"), ENT_QUOTES, "UTF-8");
+$mediumUrl = htmlspecialchars(file_get_contents(BASEPATH."/storage/redirector/medium.txt"), ENT_QUOTES, "UTF-8");
+
 $text = "Welcome to CRYPTOVENO Airdrop Bot.
 
 Get free 70,000 VENO for joining our airdrop. You can also get additional 5000 VENO for each referral you are invited.
@@ -28,11 +33,11 @@ Please follow the step by step bellow to participate in our airdrop. You must co
 1️⃣ Join Telegram Group
 https://t.me/CRYPTOVENO (15,000 VENO)
 2️⃣ Join Telegram Channel https://t.me/AnnouncedCRYPTOVENO (15,000 VENO)
-3️⃣ Follow & Retweet Our Twitter <a href=\"https://veno.site/std_redirector.php?hd=2&id={$this->b->d["message"]["from"]["id"]}\">https://twitter.com/CVENOWorld</a> (15,000 VENO)
+3️⃣ Follow & Retweet Our Twitter <a href=\"https://veno.site/std_redirector.php?to=twitter&id={$this->b->d["message"]["from"]["id"]}\">{$twitterUrl}</a> (15,000 VENO)
 4️⃣ Follow & Like Our Fanspage
-https://facebook.com/CRYPTOVENO (15,000 VENO) 
+<a href=\"https://veno.site/std_redirector.php?to=facebook&id={$this->b->d["message"]["from"]["id"]}\">{$facebookUrl}</a> (15,000 VENO) 
 5️⃣ Follow Our Medium (Optional)
-https://medium.com/@CRYPTOVENO (10,000 VENO)
+<a href=\"https://veno.site/std_redirector.php?to=medium&id={$this->b->d["message"]["from"]["id"]}\">{$mediumUrl}</a> (10,000 VENO)
 6️⃣ Submit your detailed data.
 
 Terms and Conditions
