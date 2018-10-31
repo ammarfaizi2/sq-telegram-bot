@@ -80,6 +80,11 @@ class Handler extends ResponseFoundation
 									],
 									[
 										[
+											"text" => "Buy Token \xf0\x9f\x92\xb4"
+										]
+									],
+									[
+										[
 											"text" => "Referral Link \xf0\x9f\x91\xa5",
 										],
 										[

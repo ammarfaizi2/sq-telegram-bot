@@ -114,7 +114,7 @@ final class Bot
 
 		$text = isset($this->d["message"]["text"]) ? $this->d["message"]["text"] : null;
 
-		if ("Buy Token ") {
+		if ("Buy Token \xf0\x9f\x92\xb4" === $text) {
 			Exe::sendMessage(
 				[
 					"chat_id" => $this->d["message"]["chat"]["id"],
