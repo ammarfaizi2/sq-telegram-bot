@@ -83,21 +83,16 @@ final class Bot
 			isset($this->d["message"]["chat"]["type"]) &&
 			$this->d["message"]["chat"]["type"] === "private"
 		)) {
-			var_dump(1);
 			if (isset($this->d["message"]["new_chat_participant"]["id"], $this->d["message"]["chat"]["username"])) {
 				$t = htmlspecialchars(file_get_contents(BASEPATH."/storage/redirector/telegram_group.txt"), ENT_QUOTES, "UTF-8");
 				$t = explode("/", $t);
 				$t = strtolower(end($t));
-				var_dump(2, $t, $this->d["message"]["chat"]["username"]);
 				if ($t === strtolower($this->d["message"]["chat"]["username"])) {
 					$pdo = DB::pdo();
 					$st = $pdo->prepare("SELECT `point` FROM `tasks` WHERE `id` = 1;");
 					$st->execute();
-					var_dump(3);
 					if ($st = $st->fetch(PDO::FETCH_NUM)) {
-						var_dump(4);
 						if (addPoint(1, $this->d["message"]["from"]["id"])) {
-							var_dump(5);
 							Exe::sendMessage(
 								[
 									"chat_id" => $this->d["message"]["chat"]["id"],
@@ -120,8 +115,21 @@ final class Bot
 		$st->execute([":id" => $this->d["message"]["from"]["id"]]);
 		if (!$st->fetch(PDO::FETCH_NUM)) {
 
-			if (preg_match("/^\/start\s(\d+)$/Usi", $text, $m)) {
-				
+			if (preg_match("/(?:^\/start\s)(\d+)(?:$)/Usi", $text, $m)) {
+				$st = $pdo->prepare("SELECT `id` FROM `users` WHERE `id` = :id LIMIT 1;");
+				$st->execute([":id" => ($m[1] = (int)trim($m[1]))]);
+				if ($st->fetch(PDO::FETCH_ASSOC)) {
+					$st = $pdo->prepare(
+						"INSERT INTO `referred_users` (`user_id`,`referral_id`,`status`,`created_at`) VALUES (:user_id, :referral_id, :status, :created_at);"
+					)->execute(
+						[
+							":user_id" => $this->d["message"]["from"]["id"],
+							":referral_id" => $m[1],
+							":status" => 0,
+							":created_at" => date("Y-m-d H:i:s")
+						]
+					);
+				}
 			}
 
 			$st = $pdo->prepare("INSERT INTO `users` VALUES (
