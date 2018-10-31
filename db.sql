@@ -14,32 +14,58 @@ CREATE TABLE `sessions` (
   CONSTRAINT `sessions_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO `sessions` (`user_id`, `state`) VALUES
-(243692601, 1);
+
+DROP TABLE IF EXISTS `tasks`;
+CREATE TABLE `tasks` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `point` double NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `name` (`name`),
+  KEY `point` (`point`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+INSERT INTO `tasks` (`id`, `name`, `point`) VALUES
+(1, 'Join Group', 15000),
+(2, 'Join Channel', 15000),
+(3, 'Follow and Retweet Twitter', 15000),
+(4, 'Follow and Like Facebook', 15000),
+(5, 'Follow Medium',  10000);
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` bigint(20) NOT NULL,
-  `first_name` varchar(255) NOT NULL,
-  `last_name` varchar(255) DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
   `username` varchar(72) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `wallet` varchar(255) DEFAULT NULL,
-  `point` int(11) DEFAULT '0',
+  `balance` double DEFAULT '0',
   `joined_at` datetime DEFAULT NULL,
   `started_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `eth_address` (`wallet`),
-  KEY `first_name` (`first_name`),
-  KEY `last_name` (`last_name`),
+  KEY `first_name` (`name`),
   KEY `joined_at` (`joined_at`),
   KEY `email` (`email`),
   KEY `username` (`username`),
-  KEY `started_at` (`started_at`)
+  KEY `started_at` (`started_at`),
+  KEY `balance` (`balance`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `wallet`, `point`, `joined_at`, `started_at`) VALUES
-(243692601, 'Ammar',  'Faizi',  '@ammarfaizi2', 'asdasd@qwe.c', NULL, 0,  NULL, '2018-10-28 20:54:39');
+
+DROP TABLE IF EXISTS `users_task`;
+CREATE TABLE `users_task` (
+  `user_id` bigint(20) NOT NULL,
+  `task_id` int(11) NOT NULL,
+  `taskhash` varchar(128) NOT NULL,
+  `point` double NOT NULL DEFAULT '0',
+  `created_at` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP,
+  KEY `user_id` (`user_id`),
+  KEY `task_id` (`task_id`),
+  CONSTRAINT `users_task_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `users_task_ibfk_4` FOREIGN KEY (`task_id`) REFERENCES `tasks` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 
 DROP TABLE IF EXISTS `web_admin`;
 CREATE TABLE `web_admin` (
@@ -48,10 +74,12 @@ CREATE TABLE `web_admin` (
   `username` varchar(255) NOT NULL,
   `password` varchar(128) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `username` (`username`)
+  UNIQUE KEY `username` (`username`),
+  KEY `password` (`password`),
+  KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `web_admin` (`id`, `name`, `username`, `password`) VALUES
 (1, 'Admin',  'admin',  '$argon2i$v=19$m=1024,t=2,p=2$dW9XcndZTXFyaUd6Rm9jWg$3Z8ww/FZN/eHaH/AKrHsiX5JX3/zufenWAwsQQx0f9o');
 
--- 2018-10-29 08:29:22
+-- 2018-10-31 11:09:50
