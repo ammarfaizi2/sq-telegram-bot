@@ -33,7 +33,7 @@ if (!function_exists("addPoint")) {
 					]
 				);
 				return $exe && $pdo->prepare(
-					"INSERT INTO `users_task` (`user_id`,`task_id`,`point`,`created_at`) VALUES (:user_id, :task_id, :taskhash, :_point, :created_at);"
+					"INSERT INTO `users_task` (`user_id`,`task_id`,`point`,`created_at`) VALUES (:user_id, :task_id, :_point, :created_at);"
 				)->execute(
 					[
 						":user_id" => $userId,
