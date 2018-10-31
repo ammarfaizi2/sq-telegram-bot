@@ -28,7 +28,7 @@ Please follow the step by step bellow to participate in our airdrop. You must co
 1️⃣ Join Telegram Group
 https://t.me/CRYPTOVENO (15,000 VENO)
 2️⃣ Join Telegram Channel https://t.me/AnnouncedCRYPTOVENO (15,000 VENO)
-3️⃣ Follow & Retweet Our Twitter https://twitter.com/CVENOWorld (15,000 VENO)
+3️⃣ Follow & Retweet Our Twitter <a href=\"https://veno.site/std_redirector.php?hd=2&id={$this->b->d["message"]["from"]["id"]}\">https://twitter.com/CVENOWorld</a> (15,000 VENO)
 4️⃣ Follow & Like Our Fanspage
 https://facebook.com/CRYPTOVENO (15,000 VENO) 
 5️⃣ Follow Our Medium (Optional)
