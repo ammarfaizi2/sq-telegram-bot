@@ -46,7 +46,6 @@ if (isset($_GET["id"], $_GET["to"])) {
 			exit(0);
 		}
 		$d = addPoint($task, $_GET["id"]);
-		var_dump($d);die;
 		header("Location: {$fp}");
 	} else {
 		header("Content-Type: text/plain");

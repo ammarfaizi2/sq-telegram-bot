@@ -12,8 +12,7 @@ if (!function_exists("addPoint")) {
 		$st = $pdo->prepare("SELECT COUNT(1) FROM `users_task` WHERE `user_id` = :user_id AND `task_id` = :task_id LIMIT 1;");
 		$st->execute([":user_id" => $userId, ":task_id" => $taskId]);
 		$st = $st->fetch(PDO::FETCH_NUM);
-		var_dump($st);
-		if ($st[0] === 0) {
+		if ($st[0] == 0) {
 
 			$st = $pdo->prepare("SELECT `point` FROM `tasks` WHERE `id` = :task_id LIMIT 1;");
 			$st->execute([":task_id" => $taskId]);
