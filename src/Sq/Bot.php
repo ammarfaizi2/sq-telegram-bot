@@ -83,12 +83,12 @@ final class Bot
 			isset($this->d["message"]["chat"]["type"]) &&
 			$this->d["message"]["chat"]["type"] === "private"
 		)) {
-
+			var_dump(1);
 			if (isset($this->d["message"]["new_chat_participant"]["id"], $this->d["message"]["chat"]["username"])) {
 				$t = htmlspecialchars(file_get_contents(BASEPATH."/storage/redirector/telegram_group.txt"), ENT_QUOTES, "UTF-8");
 				$t = explode("/", $t);
 				$t = strtolower(end($t));
-
+				var_dump(2, $t, $this->d["message"]["chat"]["username"]);
 				if ($t === strtolower($this->d["message"]["chat"]["username"])) {
 					$pdo = DB::pdo();
 					$st = $pdo->prepare("SELECT `point` FROM `tasks` WHERE `id` = 1;");
