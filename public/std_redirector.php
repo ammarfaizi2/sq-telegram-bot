@@ -8,7 +8,7 @@ if (isset($_GET["id"], $_GET["to"])) {
 
 	switch ($_GET["to"]) {
 		case "twitter":
-				$task = "task_3";
+				$task = 3;
 				if (file_exists($fp = $fp."/twitter.txt")) {
 					$fp = file_get_contents($fp);
 				} else {
@@ -16,7 +16,7 @@ if (isset($_GET["id"], $_GET["to"])) {
 				}
 			break;
 		case "facebook":
-				$task = "task_4";
+				$task = 4;
 				if (file_exists($fp = $fp."/facebook.txt")) {
 					$fp = file_get_contents($fp);
 				} else {
@@ -24,7 +24,7 @@ if (isset($_GET["id"], $_GET["to"])) {
 				}
 			break;
 		case "medium";
-				$task = "task_5";
+				$task = 5;
 				if (file_exists($fp = $fp."/medium.txt")) {
 					$fp = file_get_contents($fp);
 				} else {
