@@ -17,10 +17,11 @@ if (!function_exists("addPoint")) {
 			$st = $pdo->prepare("SELECT `point` FROM `tasks` WHERE `id` = :task_id LIMIT 1;");
 			$st->execute([":task_id" => $taskId]);
 			if ($st = $st->fetch(PDO::FETCH_NUM)) {
-				$st = $pdo->prepare("UPDATE `users` SET `balance` = `balance` + :_point WHERE `id` = :user_id LIMIT 1;");
-				$exe = $st->execute(
+				$exe = $pdo->prepare(
+					"UPDATE `users` SET `balance` = `balance` + :_point WHERE `id` = :user_id LIMIT 1;"
+				)->execute(
 					[
-						":_point" => $point,
+						":_point" => $st[0],
 						":user_id" => $userId,
 					]
 				);
