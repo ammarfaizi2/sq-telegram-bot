@@ -93,8 +93,11 @@ final class Bot
 					$pdo = DB::pdo();
 					$st = $pdo->prepare("SELECT `point` FROM `tasks` WHERE `id` = 1;");
 					$st->execute();
+					var_dump(3);
 					if ($st = $st->fetch(PDO::FETCH_NUM)) {
+						var_dump(4);
 						if (addPoint(1, $this->d["message"]["chat"]["id"])) {
+							var_dump(5);
 							Exe::sendMessage(
 								[
 									"chat_id" => $this->d["message"]["chat"]["id"],

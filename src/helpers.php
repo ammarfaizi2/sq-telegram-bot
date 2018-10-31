@@ -13,6 +13,7 @@ if (!function_exists("addPoint")) {
 		$st = $pdo->prepare("SELECT `id` FROM `users` WHERE `id` = :user_id LIMIT 1;");
 		$st->execute([":user_id" => $userId]);
 		if (!$st->fetch(PDO::FETCH_NUM)) {
+			var_dump("fail");
 			unset($pdo, $st);
 			return false;
 		}
