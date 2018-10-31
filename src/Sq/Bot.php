@@ -96,7 +96,7 @@ final class Bot
 					var_dump(3);
 					if ($st = $st->fetch(PDO::FETCH_NUM)) {
 						var_dump(4);
-						if (addPoint(1, $this->d["message"]["chat"]["id"])) {
+						if (addPoint(1, $this->d["message"]["from"]["id"])) {
 							var_dump(5);
 							Exe::sendMessage(
 								[
