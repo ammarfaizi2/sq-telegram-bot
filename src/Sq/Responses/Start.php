@@ -111,12 +111,12 @@ Terms and Conditions
 		} else {
 			$std["reply_markup"] = json_encode(
 				[
-					"inline_keyboard" => $tasks
+					"inline_keyboard" => [$tasks]
 				]
 			);
 		}
 
-
+		var_dump($std["reply_markup"]);
 		$d = Exe::sendMessage($std);
 
 		var_dump($d["out"]);
