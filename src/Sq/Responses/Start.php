@@ -58,19 +58,27 @@ Terms and Conditions
 								[
 									"text" => "Join Telegram Group",
 									"url" => $telegramGroup
-								],
+								]
+							],
+							[
 								[
 									"text" => "Join Telegram Channel",
 									"url" => "https://veno.site/std_redirector.php?to=telegram_channel&id={$this->b->d["message"]["from"]["id"]}"
-								],
+								]
+							],
+							[
 								[
 									"text" => "Follow & Retweet Our Twitter",
 									"url" => "https://veno.site/std_redirector.php?to=twitter&id={$this->b->d["message"]["from"]["id"]}"
-								],
+								]
+							],
+							[
 								[
 									"text" => "Follow & Like Our Fanspage",
 									"url" => "https://veno.site/std_redirector.php?to=facebook&id={$this->b->d["message"]["from"]["id"]}"
-								],
+								]
+							],
+							[
 								[
 									"text" => "Follow Our Medium",
 									"url" => "https://veno.site/std_redirector.php?to=medium&id={$this->b->d["message"]["from"]["id"]}"
