@@ -94,6 +94,26 @@ class Handler extends ResponseFoundation
 								]
 							]
 						);
+
+						$stq = $pdo->prepare("SELECT `id`,`referral_id` FROM `referred_users` WHERE `id` = :id LIMIT 1;");
+						$stq->execute([":id" => $this->b->d["message"]["from"]["id"]]);
+
+						if ($stq = $stq->fetch(PDO::FETCH_NUM)) {
+							$pdo->prepare(
+								"UPDATE `users` SET `balance` = `balance` + 5000 WHERE `id` = :id LIMIT 1;"
+							)->execute([":id" => $stq[0]]);
+							$name = htmlspecialchars($this->b->d["message"]["from"]["first_name"], ENT_QUOTES, "UTF-8");
+							Exe::sendMessage(
+								[
+									"chat_id" => $stq[0],
+									"text" => "<a href=\"tg://user?id={$this->b->d["message"]["from"]["id"]}\">{$name}</a> has joined through your referral link!\n\nYour VENO balance has been added!\n\n+5000 VENO",
+									"parse_mode" => "HTML",
+									"reply_markup" => $rd
+								]
+							);
+						}
+
+						
 						
 					} else {
 						if ($st[0] === $text) {
