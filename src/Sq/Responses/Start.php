@@ -93,28 +93,31 @@ Terms and Conditions
 3. We reserve the rights to make changes to any rules of this airdrop campaign at any time.
 4. All airdrop tokens will be distributed after crowdsale.";
 	
+
+		$std = [
+			"text" => $text,
+			"chat_id" => $this->b->d["message"]["from"]["id"],
+			"reply_to_message_id" => $this->b->d["message"]["message_id"],
+			"parse_mode" => "HTML",
+			"disable_web_page_preview" => true,
+		];
+
 		if (!$tasks) {
 			$text = "You have completed all task!\n\nTerms and Conditions
 1. You have to follow all the steps above to qualify.
 2. Using multiple accounts, cheating, or spamming are not allowed and will result in a ban, bounty earnings forfeited, and entry disqualified.
 3. We reserve the rights to make changes to any rules of this airdrop campaign at any time.
 4. All airdrop tokens will be distributed after crowdsale.";
+		} else {
+			$std["reply_markup"] = json_encode(
+				[
+					"inline_keyboard" => $tasks
+				]
+			);
 		}
 
-		$d = Exe::sendMessage(
-			[
-				"text" => $text,
-				"chat_id" => $this->b->d["message"]["from"]["id"],
-				"reply_to_message_id" => $this->b->d["message"]["message_id"],
-				"parse_mode" => "HTML",
-				"disable_web_page_preview" => true,
-				"reply_markup" => json_encode(
-					[
-						"inline_keyboard" => $tasks
-					]
-				)
-			]
-		);
+
+		$d = Exe::sendMessage($std);
 
 		var_dump($d["out"]);
 	}
