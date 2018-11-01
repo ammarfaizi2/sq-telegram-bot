@@ -21,6 +21,19 @@ class Start extends ResponseFoundation
 	public function start(): void
 	{
 
+		// $telegramGroup = htmlspecialchars(file_get_contents(BASEPATH."/storage/redirector/telegram_group.txt"), ENT_QUOTES, "UTF-8"); 
+		// $telegramChannel = htmlspecialchars(file_get_contents(BASEPATH."/storage/redirector/telegram_channel.txt"), ENT_QUOTES, "UTF-8"); 
+		// $twitterUrl = htmlspecialchars(file_get_contents(BASEPATH."/storage/redirector/twitter.txt"), ENT_QUOTES, "UTF-8");
+		// $facebookUrl = htmlspecialchars(file_get_contents(BASEPATH."/storage/redirector/facebook.txt"), ENT_QUOTES, "UTF-8");
+		// $mediumUrl = htmlspecialchars(file_get_contents(BASEPATH."/storage/redirector/medium.txt"), ENT_QUOTES, "UTF-8");
+
+		$telegramGroup = /*htmlspecialchars*/(file_get_contents(BASEPATH."/storage/redirector/telegram_group.txt")/*, ENT_QUOTES, "UTF-8"*/); 
+		$telegramChannel = /*htmlspecialchars*/(file_get_contents(BASEPATH."/storage/redirector/telegram_channel.txt")/*, ENT_QUOTES, "UTF-8"*/); 
+		$twitterUrl = /*htmlspecialchars*/(file_get_contents(BASEPATH."/storage/redirector/twitter.txt")/*, ENT_QUOTES, "UTF-8"*/);
+		$facebookUrl = /*htmlspecialchars*/(file_get_contents(BASEPATH."/storage/redirector/facebook.txt")/*, ENT_QUOTES, "UTF-8"*/);
+		$mediumUrl = /*htmlspecialchars*/(file_get_contents(BASEPATH."/storage/redirector/medium.txt")/*, ENT_QUOTES, "UTF-8"*/);
+
+
 		$tasks = [
 			[
 				[
@@ -60,12 +73,6 @@ class Start extends ResponseFoundation
 		while ($r = $st->fetch(PDO::FETCH_NUM)) {
 			unset($tasks[$r[0] - 1]);
 		}
-
-		$telegramGroup = htmlspecialchars(file_get_contents(BASEPATH."/storage/redirector/telegram_group.txt"), ENT_QUOTES, "UTF-8"); 
-		$telegramChannel = htmlspecialchars(file_get_contents(BASEPATH."/storage/redirector/telegram_channel.txt"), ENT_QUOTES, "UTF-8"); 
-		$twitterUrl = htmlspecialchars(file_get_contents(BASEPATH."/storage/redirector/twitter.txt"), ENT_QUOTES, "UTF-8");
-		$facebookUrl = htmlspecialchars(file_get_contents(BASEPATH."/storage/redirector/facebook.txt"), ENT_QUOTES, "UTF-8");
-		$mediumUrl = htmlspecialchars(file_get_contents(BASEPATH."/storage/redirector/medium.txt"), ENT_QUOTES, "UTF-8");
 
 		$text = "Welcome to CRYPTOVENO Airdrop Bot.
 
@@ -108,6 +115,8 @@ Terms and Conditions
 				)
 			]
 		);
+
+		var_dump($d["out"]);
 	}
 }
 
