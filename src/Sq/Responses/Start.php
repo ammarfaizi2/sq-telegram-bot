@@ -31,14 +31,12 @@ Get free 70,000 VENO for joining our airdrop. You can also get additional 5000 V
 
 Please follow the step by step bellow to participate in our airdrop. You must complete all steps to be eligible receive the rewards.
 
-1️⃣ Join Telegram Group {$telegramGroup} (15,000 VENO)
-2️⃣ Join Telegram Channel <a href=\"https://veno.site/std_redirector.php?to=telegram_channel&id={$this->b->d["message"]["from"]["id"]}\">{$telegramChannel}</a> (15,000 VENO)
-3️⃣ Follow & Retweet Our Twitter <a href=\"https://veno.site/std_redirector.php?to=twitter&id={$this->b->d["message"]["from"]["id"]}\">{$twitterUrl}</a> (15,000 VENO)
-4️⃣ Follow & Like Our Fanspage
-<a href=\"https://veno.site/std_redirector.php?to=facebook&id={$this->b->d["message"]["from"]["id"]}\">{$facebookUrl}</a> (15,000 VENO) 
-5️⃣ Follow Our Medium (Optional)
-<a href=\"https://veno.site/std_redirector.php?to=medium&id={$this->b->d["message"]["from"]["id"]}\">{$mediumUrl}</a> (10,000 VENO)
-6️⃣ Submit your detailed data.
+1️⃣ Join Telegram Group (15,000 VENO)
+2️⃣ Join Telegram Channel (15,000 VENO)
+3️⃣ Follow & Retweet Our Twitter (15,000 VENO)
+4️⃣ Follow & Like Our Fanspage (15,000 VENO) 
+5️⃣ Follow Our Medium (Optional) (10,000 VENO)
+6️⃣ Submit your detailed data by send /submit.
 
 Terms and Conditions
 1. You have to follow all the steps above to qualify.
@@ -52,7 +50,35 @@ Terms and Conditions
 				"chat_id" => $this->b->d["message"]["from"]["id"],
 				"reply_to_message_id" => $this->b->d["message"]["message_id"],
 				"parse_mode" => "HTML",
-				"disable_web_page_preview" => true
+				"disable_web_page_preview" => true,
+				"reply_markup" => json_encode(
+					[
+						"inline_keyboard" => [
+							[
+								[
+									"text" => "Join Telegram Group",
+									"url" => $telegramGroup
+								],
+								[
+									"text" => "Join Telegram Channel",
+									"url" => "https://veno.site/std_redirector.php?to=telegram_channel&id={$this->b->d["message"]["from"]["id"]}"
+								],
+								[
+									"text" => "Follow & Retweet Our Twitter",
+									"url" => "https://veno.site/std_redirector.php?to=twitter&id={$this->b->d["message"]["from"]["id"]}"
+								],
+								[
+									"text" => "Follow & Like Our Fanspage",
+									"url" => "https://veno.site/std_redirector.php?to=facebook&id={$this->b->d["message"]["from"]["id"]}"
+								],
+								[
+									"text" => "Follow Our Medium",
+									"url" => "https://veno.site/std_redirector.php?to=medium&id={$this->b->d["message"]["from"]["id"]}"
+								]
+							]
+						]
+					]
+				)
 			]
 		);
 
@@ -61,14 +87,11 @@ Terms and Conditions
 }
 
 
-// [
-// 									"text" => "Support \xe2\x98\x8e\xef\xb8\x8f"
-// 								],
-// 								[
-// 									[
-// 										"text" => "Referral Link \xf0\x9f\x91\xa5",
-// 									],
-// 									[
-// 										"text" => "Social Media"
-// 									]
-// 								]
+// 1️⃣ Join Telegram Group {$telegramGroup} (15,000 VENO)
+// 2️⃣ Join Telegram Channel <a href=\"https://veno.site/std_redirector.php?to=telegram_channel&id={$this->b->d["message"]["from"]["id"]}\">{$telegramChannel}</a> (15,000 VENO)
+// 3️⃣ Follow & Retweet Our Twitter <a href=\"https://veno.site/std_redirector.php?to=twitter&id={$this->b->d["message"]["from"]["id"]}\">{$twitterUrl}</a> (15,000 VENO)
+// 4️⃣ Follow & Like Our Fanspage
+// <a href=\"https://veno.site/std_redirector.php?to=facebook&id={$this->b->d["message"]["from"]["id"]}\">{$facebookUrl}</a> (15,000 VENO) 
+// 5️⃣ Follow Our Medium (Optional)
+// <a href=\"https://veno.site/std_redirector.php?to=medium&id={$this->b->d["message"]["from"]["id"]}\">{$mediumUrl}</a> (10,000 VENO)
+// 6️⃣ Submit your detailed data by send /submit.
