@@ -230,7 +230,7 @@ https://tokensale.cryptoveno.com",
 			Exe::sendMessage(
 				[
 					"chat_id" => $this->d["message"]["chat"]["id"],
-					"text" => "<b>Your referral link is:</b> https://t.me/stdmdbot?id={$this->d["message"]["from"]["id"]}",
+					"text" => "<b>Your referral link is:</b> https://t.me/stdmdbot?start={$this->d["message"]["from"]["id"]}",
 					"reply_to_message_id" => $this->d["message"]["message_id"],
 					"parse_mode" => "HTML"
 				]
@@ -250,7 +250,7 @@ https://tokensale.cryptoveno.com",
 			return;
 		}
 
-		if ("/start" === $text) {
+		if ("/start" === $text || "Tasks \xe2\x9a\x94\xef\xb8\x8f" === $text) {
 			(new Start($this))->start();
 			return;
 		}
