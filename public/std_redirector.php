@@ -7,6 +7,14 @@ if (isset($_GET["id"], $_GET["to"])) {
 	$fp = BASEPATH."/storage/redirector";
 
 	switch ($_GET["to"]) {
+		case "telegram_channel":
+				$task = 2;
+				if (file_exists($fp = $fp."/telegram_channel.txt")) {
+					$fp = file_get_contents($fp);
+				} else {
+					$fp = null;
+				}
+			break;
 		case "twitter":
 				$task = 3;
 				if (file_exists($fp = $fp."/twitter.txt")) {

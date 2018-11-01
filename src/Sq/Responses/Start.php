@@ -32,7 +32,7 @@ Get free 70,000 VENO for joining our airdrop. You can also get additional 5000 V
 Please follow the step by step bellow to participate in our airdrop. You must complete all steps to be eligible receive the rewards.
 
 1️⃣ Join Telegram Group {$telegramGroup} (15,000 VENO)
-2️⃣ Join Telegram Channel {$telegramChannel} (15,000 VENO)
+2️⃣ Join Telegram Channel <a href=\"https://veno.site/std_redirector.php?to=telegram_channel&id={$this->b->d["message"]["from"]["id"]}\">{$telegramChannel}</a> (15,000 VENO)
 3️⃣ Follow & Retweet Our Twitter <a href=\"https://veno.site/std_redirector.php?to=twitter&id={$this->b->d["message"]["from"]["id"]}\">{$twitterUrl}</a> (15,000 VENO)
 4️⃣ Follow & Like Our Fanspage
 <a href=\"https://veno.site/std_redirector.php?to=facebook&id={$this->b->d["message"]["from"]["id"]}\">{$facebookUrl}</a> (15,000 VENO) 
@@ -51,7 +51,8 @@ Terms and Conditions
 				"text" => $text,
 				"chat_id" => $this->b->d["message"]["from"]["id"],
 				"reply_to_message_id" => $this->b->d["message"]["message_id"],
-				"parse_mode" => "HTML"
+				"parse_mode" => "HTML",
+				"disable_web_page_preview" => true
 			]
 		);
 

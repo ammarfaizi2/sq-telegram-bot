@@ -83,7 +83,7 @@ unset($st, $pdo);
 				<td><?php print isset($webhook_url) ? ($webhook_url === "" ? "Offline" : "Online") : $status; ?></td>
 			</tr>
 			<tr>
-				<td>Joined Members:</td>
+				<td>Joined Members</td>
 				<td>:</td>
 				<td><?php print $joinedMember; ?> users (<a href="/show_members.php">View Members</a>)</td>
 			</tr>			
