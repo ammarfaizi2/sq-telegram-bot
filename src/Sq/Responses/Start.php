@@ -109,6 +109,9 @@ Terms and Conditions
 3. We reserve the rights to make changes to any rules of this airdrop campaign at any time.
 4. All airdrop tokens will be distributed after crowdsale.";
 		} else {
+
+			$tasks = array_values($tasks);
+
 			$std["reply_markup"] = json_encode(
 				[
 					"inline_keyboard" => [$tasks]
