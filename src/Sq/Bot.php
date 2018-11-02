@@ -218,7 +218,7 @@ https://tokensale.cryptoveno.com",
 			Exe::sendMessage(
 				[
 					"chat_id" => $this->d["message"]["chat"]["id"],
-					"text" => "<b>Your referral link is:</b> https://t.me/stdmdbot?start={$this->d["message"]["from"]["id"]}",
+					"text" => "<b>Your referral link is:</b> https://t.me/CryptoVenoBot?start={$this->d["message"]["from"]["id"]}",
 					"reply_to_message_id" => $this->d["message"]["message_id"],
 					"parse_mode" => "HTML"
 				]
