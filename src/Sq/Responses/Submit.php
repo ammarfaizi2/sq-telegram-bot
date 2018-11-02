@@ -5,6 +5,7 @@ namespace Sq\Responses;
 use PDO;
 use Sq\DB;
 use Sq\Exe;
+use CurlFile;
 use Sq\ResponseFoundation;
 
 require_once __DIR__."/msg_definer.php";
@@ -40,21 +41,39 @@ class Submit extends ResponseFoundation
 				require_once __DIR__."/make_captcha.php";
 				file_put_contents(
 					BASEPATH."/storage/captcha/{$this->b->d['message']['from']['id']}.txt", 
-					makeCaptcha(BASEPATH."/public/captcha_d/{$this->b->d['message']['from']['id']}.png")
+					makeCaptcha($imgFile = BASEPATH."/public/captcha_d/{$this->b->d['message']['from']['id']}.png")
 				);
 				var_dump("sending...\n");
-				$d = Exe::sendPhoto(
+				// $d = Exe::sendPhoto(
+				// 	[
+				// 		"chat_id" => $this->b->d["message"]["from"]["id"],
+				// 		"photo" => (
+				// 			"https://veno.site/captcha_d/{$this->b->d['message']['from']['id']}.png?std=".time()."&w=".rand()
+				// 		),
+				// 		"caption" => "To continue, please send the captcha below!\n\nReply to this message!",
+				// 		"reply_markup" => json_encode(["force_reply" => true]),
+				// 	]
+				// );
+				$tkn = trim(file_get_contents(BASEPATH."/config/token.cfg.tmp"));
+				$ch = curl_init("https://api.telegram.org/bot{$tkn}/sendPhoto");
+				curl_setopt_array($ch, 
 					[
-						"chat_id" => $this->b->d["message"]["from"]["id"],
-						"photo" => (
-							"https://veno.site/captcha_d/{$this->b->d['message']['from']['id']}.png?std=".time()."&w=".rand()
-						),
-						"caption" => "To continue, please send the captcha below!\n\nReply to this message!",
-						"reply_markup" => json_encode(["force_reply" => true]),
+						CURLOPT_RETURNTRANSFER => true,
+						CURLOPT_POST => true,
+						CURLOPT_POSTFIELDS => [
+							"chat_id" => $this->b->d["message"]["from"]["id"],
+							"photo" => (new CurlFile($imgFile)),
+							"caption" => "To continue, please send the captcha below!\n\nReply to this message!",
+							"reply_markup" => json_encode(["force_reply" => true]),
+						],
+						CURLOPT_SSL_VERIFYPEER => false,
+						CURLOPT_SSL_VERIFYHOST => false
 					]
 				);
+				$out = curl_exec($ch);
+				curl_close($ch);
 
-				var_dump($d);
+				var_dump($out);
 				return;
 				break;
 			default:
