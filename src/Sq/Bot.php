@@ -267,11 +267,30 @@ https://tokensale.cryptoveno.com",
 			return;
 		}
 
-		if ("Social Media" === $text) {
+		if ("Social Media \xf0\x9f\x8c\x8d" === $text) {
+			$telegramGroup = /*htmlspecialchars*/(file_get_contents(BASEPATH."/storage/redirector/telegram_group.txt")/*, ENT_QUOTES, "UTF-8"*/); 
+			$telegramChannel = /*htmlspecialchars*/(file_get_contents(BASEPATH."/storage/redirector/telegram_channel.txt")/*, ENT_QUOTES, "UTF-8"*/); 
+			$twitterUrl = /*htmlspecialchars*/(file_get_contents(BASEPATH."/storage/redirector/twitter.txt")/*, ENT_QUOTES, "UTF-8"*/);
+			$facebookUrl = /*htmlspecialchars*/(file_get_contents(BASEPATH."/storage/redirector/facebook.txt")/*, ENT_QUOTES, "UTF-8"*/);
+			$mediumUrl = /*htmlspecialchars*/(file_get_contents(BASEPATH."/storage/redirector/medium.txt")/*, ENT_QUOTES, "UTF-8"*/);
+			$text = "Telegram Group:
+{$telegram_group}
+
+Telegram Channel:
+{$telegramChannel}
+
+Twitter:
+{$twitterUrl}
+
+Facebook:
+{$facebookUrl}
+
+Medium:
+{$mediumUrl}";
 			Exe::sendMessage(
 				[
 					"chat_id" => $this->d["message"]["chat"]["id"],
-					"text" => "... link sosmed ...",
+					"text" => $text,
 					"reply_to_message_id" => $this->d["message"]["message_id"],
 					"parse_mode" => "HTML"
 				]
