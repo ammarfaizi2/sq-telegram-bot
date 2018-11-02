@@ -116,6 +116,7 @@ final class Bot
 		if (!$st->fetch(PDO::FETCH_NUM)) {
 
 			if (preg_match("/(?:^\/start\s)(\d+)(?:$)/Usi", $text, $m)) {
+				$text = "/start";
 				$st = $pdo->prepare("SELECT `id` FROM `users` WHERE `id` = :id LIMIT 1;");
 				$st->execute([":id" => ($m[1] = (int)trim($m[1]))]);
 				if ($st->fetch(PDO::FETCH_ASSOC)) {
@@ -210,19 +211,6 @@ https://tokensale.cryptoveno.com",
 				]
 			);
 
-			return;
-		}
-
-		if ("Tasks \xe2\x9a\x94\xef\xb8\x8f" === $text) {
-			$task = "1. Task1 (10 VENO)\n2. Task2 (20 VENO)\n3. Task3 (15 VENO)";
-			Exe::sendMessage(
-				[
-					"chat_id" => $this->d["message"]["chat"]["id"],
-					"text" => $task,
-					"reply_to_message_id" => $this->d["message"]["message_id"],
-					"parse_mode" => "HTML"
-				]
-			);
 			return;
 		}
 
