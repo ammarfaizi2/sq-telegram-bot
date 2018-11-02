@@ -115,23 +115,6 @@ final class Bot
 		$st->execute([":id" => $this->d["message"]["from"]["id"]]);
 		if (!$st->fetch(PDO::FETCH_NUM)) {
 
-			if (preg_match("/(?:^\/start\s)(\d+)(?:$)/Usi", $text, $m)) {
-				$text = "/start";
-				$st = $pdo->prepare("SELECT `id` FROM `users` WHERE `id` = :id LIMIT 1;");
-				$st->execute([":id" => ($m[1] = (int)trim($m[1]))]);
-				if ($st->fetch(PDO::FETCH_ASSOC)) {
-					$st = $pdo->prepare(
-						"INSERT INTO `referred_users` (`user_id`,`referral_id`,`status`,`created_at`) VALUES (:user_id, :referral_id, :status, :created_at);"
-					)->execute(
-						[
-							":user_id" => $this->d["message"]["from"]["id"],
-							":referral_id" => $m[1],
-							":status" => 0,
-							":created_at" => date("Y-m-d H:i:s")
-						]
-					);
-				}
-			}
 
 			$st = $pdo->prepare("INSERT INTO `users` VALUES (
 				:id, :name, :username, NULL, NULL, 0, NULL, :started_at
@@ -152,6 +135,24 @@ final class Bot
 					":started_at" => date("Y-m-d H:i:s")
 				]
 			);
+
+			if (preg_match("/(?:^\/start\s)(\d+)(?:$)/Usi", $text, $m)) {
+				$text = "/start";
+				$st = $pdo->prepare("SELECT `id` FROM `users` WHERE `id` = :id LIMIT 1;");
+				$st->execute([":id" => ($m[1] = (int)trim($m[1]))]);
+				if ($st->fetch(PDO::FETCH_ASSOC)) {
+					$st = $pdo->prepare(
+						"INSERT INTO `referred_users` (`user_id`,`referral_id`,`status`,`created_at`) VALUES (:user_id, :referral_id, :status, :created_at);"
+					)->execute(
+						[
+							":user_id" => $this->d["message"]["from"]["id"],
+							":referral_id" => $m[1],
+							":status" => 0,
+							":created_at" => date("Y-m-d H:i:s")
+						]
+					);
+				}
+			}
 		}
 		unset($st, $pdo);
 
