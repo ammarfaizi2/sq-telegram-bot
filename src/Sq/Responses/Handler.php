@@ -105,7 +105,7 @@ class Handler extends ResponseFoundation
 							$name = htmlspecialchars($this->b->d["message"]["from"]["first_name"], ENT_QUOTES, "UTF-8");
 							Exe::sendMessage(
 								[
-									"chat_id" => $stq[0],
+									"chat_id" => $stq[1],
 									"text" => "<a href=\"tg://user?id={$this->b->d["message"]["from"]["id"]}\">{$name}</a> has joined through your referral link!\n\nYour VENO balance has been added!\n\n+5000 VENO",
 									"parse_mode" => "HTML",
 									"reply_markup" => $rd
