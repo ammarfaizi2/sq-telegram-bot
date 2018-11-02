@@ -59,6 +59,15 @@ class Handler extends ResponseFoundation
 						"/set_wallet\t set/update your wallet address\n".
 						"/set_email\t set/update your email address";
 
+						$pdo->prepare(
+							"UPDATE `users` SET `joined_at` = :joined_at WHERE `id` = :user_id LIMIT 1;"
+						)->execute(
+							[
+								":joined_at" => date("Y-m-d H:i:s"),
+								":user_id" => $this->b->d["message"]["from"]["id"]
+							]
+						);
+
 						$rd = json_encode(
 							[
 								"keyboard" => [
