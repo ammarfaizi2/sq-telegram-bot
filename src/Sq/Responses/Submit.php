@@ -58,6 +58,8 @@ class Submit extends ResponseFoundation
 				break;
 		}
 
+		var_dump("sending...\n");
+
 		$d = Exe::sendMessage(
 			[
 				"text" => $text,
@@ -67,7 +69,7 @@ class Submit extends ResponseFoundation
 			]
 		);
 
-		var_dump($d["out"]);
+		var_dump($d);
 	}
 
 	/**
