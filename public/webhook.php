@@ -14,11 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 	if (isset($_GET["hashd"]) && sha1(BOT_TOKEN) === $_GET["hashd"]) {
 		http_response_code(200);
 		$input = escapeshellarg(urlencode(file_get_contents("php://input")));
-		$std = shell_exec("/usr/bin/env php ".BASEPATH."/bin/sq {$input} 2>&1");
-		ob_start();
-		var_dump($std);
-		file_put_contents(BASEPATH."/logs/webhook.log", ob_get_contents());
-		// $std = shell_exec("nohup /usr/bin/env php ".BASEPATH."/bin/sq {$input} >> ".BASEPATH."/logs/webhook.log 2>&1 &");
+		shell_exec("nohup /usr/bin/env php ".BASEPATH."/bin/sq {$input} >> ".BASEPATH."/logs/webhook.log 2>&1 &");
 		exit;
 	}
 
