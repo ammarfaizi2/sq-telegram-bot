@@ -23,7 +23,9 @@ if (file_exists($file)) {
 
 
 if ($status === "token_exists") {
-	$std = curld("https://api.telegram.org/bot{$token}/getWebhookInfo");
+	// $std = curld("https://api.telegram.org/bot{$token}/getWebhookInfo");
+	$std["errno"] = 0;
+	$std["out"] = '{"ok":true,"result":{"url":"https://veno.site/webhook.php?hashd=40b4d020635683fc46d652f77f5613e60ad3f19e","has_custom_certificate":false,"pending_update_count":0,"last_error_date":1541121667,"last_error_message":"Wrong response from the webhook: 403 Forbidden","max_connections":40}}';
 	if ($std["errno"]) {
 		$status = "Error: {$std['error']}";
 	} else {
@@ -94,6 +96,8 @@ unset($st, $pdo);
 					<a href="change_bot_token.php?ref=home&w=<?php print urlencode(rstr(64)); ?>"><button>Ubah Token Bot</button></a>
 				</td>
 				<td colspan="2" align="center">
+					<a href="edit_point.php"><button>Edit Point</button></a>
+					<a href="edit_social_media.php"><button>Edit Social Media</button></a>
 					<a href="set_webhook.php?switch=<?php
 						$c = isset($webhook_url) && $webhook_url === "";
 						print $c ? "on" : "off";
