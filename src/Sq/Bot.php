@@ -274,7 +274,7 @@ https://tokensale.cryptoveno.com",
 			$facebookUrl = /*htmlspecialchars*/(file_get_contents(BASEPATH."/storage/redirector/facebook.txt")/*, ENT_QUOTES, "UTF-8"*/);
 			$mediumUrl = /*htmlspecialchars*/(file_get_contents(BASEPATH."/storage/redirector/medium.txt")/*, ENT_QUOTES, "UTF-8"*/);
 			$text = "Telegram Group:
-{$telegram_group}
+{$telegramGroup}
 
 Telegram Channel:
 {$telegramChannel}
