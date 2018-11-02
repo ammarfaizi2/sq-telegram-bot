@@ -114,7 +114,7 @@ Terms and Conditions
 
 			$std["reply_markup"] = json_encode(
 				[
-					"inline_keyboard" => [$tasks]
+					"inline_keyboard" => $tasks
 				]
 			);
 		}
