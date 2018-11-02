@@ -113,7 +113,7 @@ final class Bot
 		$pdo = DB::pdo();
 		$st = $pdo->prepare("SELECT `id`,`joined_at` FROM `users` WHERE `id` = :id LIMIT 1;");
 		$st->execute([":id" => $this->d["message"]["from"]["id"]]);
-		if (!$st->fetch(PDO::FETCH_NUM)) {
+		if (!($st = $st->fetch(PDO::FETCH_NUM))) {
 
 
 			$st = $pdo->prepare("INSERT INTO `users` VALUES (
