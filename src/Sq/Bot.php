@@ -181,7 +181,9 @@ https://tokensale.cryptoveno.com",
 			$pdo = DB::pdo();
 			$st = $pdo->prepare("SELECT `balance` FROM `users` WHERE `id` = :user_id LIMIT 1;");
 			$st->execute([":user_id" => $this->d["message"]["from"]["id"]]);
-			if ($st = $st->fetch(PDO::FETCH_NUM)) {
+			$st2 = $pdo->prepare("SELECT COUNT(1) FROM `referred_users` WHERE `referral_id` = :user_id;");
+			$st2->execute([":user_id" => $this->d["message"]["from"]["id"]]);
+			if ($st = $st->fetch(PDO::FETCH_NUM) && $st2 = $st2->fetch(PDO::FETCH_NUM)) {
 				$r = "<b>Your VENO balance is:</b> {$st[0]}\nReffered Users: {$st2[0]}";
 			} else {
 				$r = "An error occured!";
