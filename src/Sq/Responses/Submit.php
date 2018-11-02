@@ -66,6 +66,8 @@ class Submit extends ResponseFoundation
 				"reply_markup" => json_encode(["force_reply" => true])
 			]
 		);
+
+		var_dump($d["out"]);
 	}
 
 	/**
