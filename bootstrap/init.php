@@ -20,7 +20,8 @@ if (!defined("SQ_INIT__")):
 
 	spl_autoload_register("sqInternalClassAutoloader");
 
+	require BASEPATH."/vendor/autoload.php";
+	
 	require BASEPATH."/src/helpers.php";
-
 	require BASEPATH."/config/database.php";
 endif;

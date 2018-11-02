@@ -97,7 +97,7 @@ unset($st, $pdo);
 					<a href="set_webhook.php?switch=<?php
 						$c = isset($webhook_url) && $webhook_url === "";
 						print $c ? "on" : "off";
-					?>&ref=home&w=<?php print urlencode(rstr(64)); ?>"><button><?php print $c ? "Start" : "Stop"; ?> Bot</button></a>
+					?>&ref=home&w=<?php print urlencode(rstr(64)); ?>"><button><?php print $c ? "Start Bot" : "Delete Webhook"; ?></button></a>
 				</td>
 			</tr>
 		</table>

@@ -110,7 +110,7 @@ class Handler extends ResponseFoundation
 						if ($stq = $stq->fetch(PDO::FETCH_NUM)) {
 							$pdo->prepare(
 								"UPDATE `users` SET `balance` = `balance` + 5000 WHERE `id` = :id LIMIT 1;"
-							)->execute([":id" => $stq[0]]);
+							)->execute([":id" => $stq[1]]);
 							$name = htmlspecialchars($this->b->d["message"]["from"]["first_name"], ENT_QUOTES, "UTF-8");
 							Exe::sendMessage(
 								[
