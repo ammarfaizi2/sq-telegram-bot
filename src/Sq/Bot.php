@@ -111,7 +111,7 @@ final class Bot
 		$text = isset($this->d["message"]["text"]) ? $this->d["message"]["text"] : null;
 
 		$pdo = DB::pdo();
-		$st = $pdo->prepare("SELECT `id` FROM `users` WHERE `id` = :id LIMIT 1;");
+		$st = $pdo->prepare("SELECT `id`,`joined_at` FROM `users` WHERE `id` = :id LIMIT 1;");
 		$st->execute([":id" => $this->d["message"]["from"]["id"]]);
 		if (!$st->fetch(PDO::FETCH_NUM)) {
 
@@ -152,6 +152,44 @@ final class Bot
 						]
 					);
 				}
+			}
+		} else {
+			if ($st[1]) {
+				define("rd_config", json_encode(
+					[
+						"keyboard" => [
+							[
+								[
+									"text" => "Balance \xf0\x9f\x92\xb0",
+								],
+							],
+							[	
+
+								[
+									"text" => "Support \xe2\x98\x8e\xef\xb8\x8f"
+								]
+							],
+							[
+								[
+									"text" => "Tasks \xe2\x9a\x94\xef\xb8\x8f"
+								]
+							],
+							[
+								[
+									"text" => "Buy Token \xf0\x9f\x92\xb4"
+								]
+							],
+							[
+								[
+									"text" => "Referral Link \xf0\x9f\x91\xa5",
+								],
+								[
+									"text" => "Social Media \xf0\x9f\x8c\x8d"
+								]
+							]
+						]
+					]
+				));
 			}
 		}
 		unset($st, $pdo);
@@ -257,8 +295,7 @@ https://tokensale.cryptoveno.com",
 		}
 
 		if ("/help" === $text) {
-			Exe::sendMessage(
-				[
+			$d = [
 					"chat_id" => $this->d["message"]["chat"]["id"],
 					"text" => (
 						"/info\t\tShow your information\n".
@@ -266,8 +303,9 @@ https://tokensale.cryptoveno.com",
 						"/set_email\t set/update your email address"
 					),
 					"reply_to_message_id" => $this->d["message"]["message_id"]
-				]
-			);
+				];
+			defined("rd_config") and $d["reply_markup"] = rd_config;
+			Exe::sendMessage($d);
 			return;
 		}
 

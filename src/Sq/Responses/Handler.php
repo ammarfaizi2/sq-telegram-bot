@@ -97,7 +97,7 @@ class Handler extends ResponseFoundation
 											"text" => "Referral Link \xf0\x9f\x91\xa5",
 										],
 										[
-											"text" => "Social Media"
+											"text" => "Social Media \xf0\x9f\x8c\x8d"
 										]
 									]
 								]

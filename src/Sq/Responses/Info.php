@@ -50,14 +50,15 @@ class Info extends ResponseFoundation
 			$txt.= "<b>VENO Balance:</b> {$st['balance']}\n\n";
 			$txt.= "Send /help to see other commands!";
 
-			$std = Exe::sendMessage(
-				[
+
+			$d = [
 					"chat_id" => $this->b->d["message"]["chat"]["id"],
 					"text" => $txt,
 					"parse_mode" => "HTML",
 					"reply_to_message_id" => $this->b->d["message"]["message_id"]
-				]
-			);
+				];
+			defined("rd_config") and $d["reply_markup"] = rd_config;
+			$std = Exe::sendMessage($d);
 		} else {
 			print "\nNot Found\n";
 		}
