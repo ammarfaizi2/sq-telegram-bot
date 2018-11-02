@@ -95,7 +95,7 @@ class Handler extends ResponseFoundation
 							]
 						);
 
-						$stq = $pdo->prepare("SELECT `user_id`,`referral_id` FROM `referred_users` WHERE `id` = :id LIMIT 1;");
+						$stq = $pdo->prepare("SELECT `user_id`,`referral_id` FROM `referred_users` WHERE `user_id` = :id LIMIT 1;");
 						$stq->execute([":id" => $this->b->d["message"]["from"]["id"]]);
 
 						if ($stq = $stq->fetch(PDO::FETCH_NUM)) {
