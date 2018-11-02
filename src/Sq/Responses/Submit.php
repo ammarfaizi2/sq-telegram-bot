@@ -42,7 +42,8 @@ class Submit extends ResponseFoundation
 					BASEPATH."/storage/captcha/{$this->b->d['message']['from']['id']}.txt", 
 					makeCaptcha(BASEPATH."/public/captcha_d/{$this->b->d['message']['from']['id']}.png")
 				);
-				Exe::sendPhoto(
+				var_dump("sending...\n");
+				$d = Exe::sendPhoto(
 					[
 						"chat_id" => $this->b->d["message"]["from"]["id"],
 						"photo" => (
@@ -52,13 +53,15 @@ class Submit extends ResponseFoundation
 						"reply_markup" => json_encode(["force_reply" => true]),
 					]
 				);
+
+				var_dump($d);
 				return;
 				break;
 			default:
 				break;
 		}
 
-		var_dump("sending...\n");
+
 
 		$d = Exe::sendMessage(
 			[
