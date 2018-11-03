@@ -95,19 +95,7 @@ class Handler extends ResponseFoundation
 							"chat_id" => $this->b->d["message"]["chat"]["id"],
 							"text" => "<b>You Medium link has been set to:</b> {$text}",
 							"reply_to_message_id" => $this->b->d["message"]["message_id"],
-							"parse_mode" => "HTML",
-							"reply_markup" => json_encode(
-								[
-									"inline_keyboard" => [
-										[
-											[
-												"text" => "Follow & Like Our Medium",
-												"callback_data" => "mdd"
-											]
-										]
-									]
-								]
-							)
+							"parse_mode" => "HTML"
 						]
 					);
 
