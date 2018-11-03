@@ -43,6 +43,11 @@ class Handler extends ResponseFoundation
 				return;
 			}
 
+			if (substr($rdt, 0, 6) === "Follow") {
+				$rdt = explode("\n", $rdt, 2);
+				$rdt = $rdt[0];
+			}
+
 			switch ($rdt) {
 
 				case "What is your wallet address?\n\nReply to this message!":

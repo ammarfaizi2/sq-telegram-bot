@@ -91,19 +91,25 @@ final class Bot
 					$twitterUrl = /*htmlspecialchars*/(file_get_contents(BASEPATH."/storage/redirector/twitter.txt")/*, ENT_QUOTES, "UTF-8"*/);
 					$r = "Follow & Retweet Our Twitter
 <a href=\"{$twitterUrl}\">Click HERE to go to our Twitter Account.</a>
-<b>Please send me your Twitter's Account link to continue!</b>";
+<b>Please send me your Twitter's Account link to continue!</b>
+
+<b>Reply to this message!</b>";
 					break;
 				case "fbd":
 					$facebookUrl = /*htmlspecialchars*/(file_get_contents(BASEPATH."/storage/redirector/facebook.txt")/*, ENT_QUOTES, "UTF-8"*/);
 					$r = "Follow & Like Our Fanspage
 <a href=\"{$facebookUrl}\">Click HERE to go to our Facebook Account.</a>
-Please send me your Facebook's Account link to continue";
+<b>Please send me your Facebook's Account link to continue</b>
+
+<b>Reply to this message!</b>";
 					break;
 				case "mdd":
 					$mediumUrl = /*htmlspecialchars*/(file_get_contents(BASEPATH."/storage/redirector/medium.txt")/*, ENT_QUOTES, "UTF-8"*/);
 					$r = "Follow our Medium
 <a href=\"{$mediumUrl}\">Click HERE to go to our Medium.</a>
-Please send me your Medium's Account link to continue";
+<b>Please send me your Medium's Account link to continue</b>
+
+<b>Reply to this message!</b>";
 				default:
 					break;
 			}
