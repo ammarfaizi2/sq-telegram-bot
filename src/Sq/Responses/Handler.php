@@ -50,10 +50,10 @@ class Handler extends ResponseFoundation
 			}
 
 			switch ($rdt) {
-				case "Follow & Like Our Fanspage":
+				case "Follow our Medium":
 					if (
 						(!filter_var($text, FILTER_VALIDATE_URL)) ||
-						(!preg_match("/^(https?\:\/\/)?((www|m|web|mobile)\.)?(facebook)\.com\/.+/", $text))
+						(!preg_match("/medium\.com/Usi", $text))
 					) {
 
 						Exe::sendMessage(
@@ -98,7 +98,67 @@ class Handler extends ResponseFoundation
 										[
 											[
 												"text" => "Follow & Like Our Medium",
-												"callback_data" => "fbd"
+												"callback_data" => "mdd"
+											]
+										]
+									]
+								]
+							)
+						]
+					);
+
+					break;
+
+
+				case "Follow & Like Our Fanspage":
+					if (
+						(!filter_var($text, FILTER_VALIDATE_URL)) ||
+						(!preg_match("/^(https?\:\/\/)?((www|m|web|mobile)\.)?(facebook)\.com\/.+/Usi", $text))
+					) {
+
+						Exe::sendMessage(
+							[
+								"chat_id" => $this->b->d["message"]["chat"]["id"],
+								"text" => "<b>Invalid facebook URL!</b>",
+								"reply_to_message_id" => $this->b->d["message"]["message_id"],
+								"parse_mode" => "HTML"
+							]
+						);
+
+						$twitterUrl = /*htmlspecialchars*/(file_get_contents(BASEPATH."/storage/redirector/twitter.txt")/*, ENT_QUOTES, "UTF-8"*/);
+
+						Exe::sendMessage(
+							[
+								"chat_id" => $this->b->d["message"]["chat"]["id"],
+								"text" => "Follow & Like Our Fanspage\n<a href=\"{$facebookUrl}\">Click HERE to go to our Facebook Account.</a>\n<b>Please send me your Facebook's Account link to continue</b>\n\n<b>Reply to this message!</b>",
+								"reply_to_message_id" => $this->b->d["message"]["message_id"],
+								"parse_mode" => "HTML",
+								"reply_markup" => json_encode(["force_reply" => true])
+							]
+						);
+						return;
+					}
+					DB::pdo()->prepare(
+						"UPDATE `users` SET `facebook_link` = :facebook_link WHERE id = :user_id LIMIT 1;"
+					)->execute(
+						[
+							":facebook_link" => $text,
+							":user_id" => $this->b->d["message"]["from"]["id"]
+						]
+					);
+					Exe::sendMessage(
+						[
+							"chat_id" => $this->b->d["message"]["chat"]["id"],
+							"text" => "<b>You Facebook link has been set to:</b> {$text}",
+							"reply_to_message_id" => $this->b->d["message"]["message_id"],
+							"parse_mode" => "HTML",
+							"reply_markup" => json_encode(
+								[
+									"inline_keyboard" => [
+										[
+											[
+												"text" => "Follow & Like Our Medium",
+												"callback_data" => "mdd"
 											]
 										]
 									]
@@ -112,7 +172,7 @@ class Handler extends ResponseFoundation
 				case "Follow & Retweet Our Twitter":
 					if (
 						(!filter_var($text, FILTER_VALIDATE_URL)) ||
-						(!preg_match("/^https?\:\/\/twitter\.com\/.+/", $text))
+						(!preg_match("/^https?\:\/\/twitter\.com\/.+/Usi", $text))
 					) {
 
 						Exe::sendMessage(
