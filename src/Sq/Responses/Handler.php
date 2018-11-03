@@ -89,6 +89,15 @@ class Handler extends ResponseFoundation
 							":user_id" => $this->b->d["message"]["from"]["id"]
 						]
 					);
+					Exe::sendMessage(
+						[
+							"chat_id" => $this->b->d["message"]["chat"]["id"],
+							"text" => "<b>You twitter link has been set to:</b> {$text}",
+							"reply_to_message_id" => $this->b->d["message"]["message_id"],
+							"parse_mode" => "HTML",
+							"reply_markup" => json_encode(["force_reply" => true])
+						]
+					);
 					break;
 
 				case "What is your wallet address?\n\nReply to this message!":
