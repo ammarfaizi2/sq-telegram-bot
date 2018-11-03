@@ -50,10 +50,66 @@ class Handler extends ResponseFoundation
 			}
 
 			switch ($rdt) {
+				case "Follow & Like Our Fanspage":
+					if (
+						(!filter_var($text, FILTER_VALIDATE_URL)) ||
+						(!preg_match("/^(https?\:\/\/)?((www|m|web|mobile)\.)?(facebook)\.com\/.+/", $text))
+					) {
 
+						Exe::sendMessage(
+							[
+								"chat_id" => $this->b->d["message"]["chat"]["id"],
+								"text" => "<b>Invalid facebook URL!</b>",
+								"reply_to_message_id" => $this->b->d["message"]["message_id"],
+								"parse_mode" => "HTML"
+							]
+						);
+
+						$twitterUrl = /*htmlspecialchars*/(file_get_contents(BASEPATH."/storage/redirector/twitter.txt")/*, ENT_QUOTES, "UTF-8"*/);
+
+						Exe::sendMessage(
+							[
+								"chat_id" => $this->b->d["message"]["chat"]["id"],
+								"text" => "Follow & Like Our Fanspage\n<a href=\"{$facebookUrl}\">Click HERE to go to our Facebook Account.</a>\n<b>Please send me your Facebook's Account link to continue</b>\n\n<b>Reply to this message!</b>",
+								"reply_to_message_id" => $this->b->d["message"]["message_id"],
+								"parse_mode" => "HTML",
+								"reply_markup" => json_encode(["force_reply" => true])
+							]
+						);
+						return;
+					}
+					DB::pdo()->prepare(
+						"UPDATE `users` SET `facebook_link` = :facebook_link WHERE id = :user_id LIMIT 1;"
+					)->execute(
+						[
+							":twitter_link" => $text,
+							":user_id" => $this->b->d["message"]["from"]["id"]
+						]
+					);
+					Exe::sendMessage(
+						[
+							"chat_id" => $this->b->d["message"]["chat"]["id"],
+							"text" => "<b>You twitter link has been set to:</b> {$text}",
+							"reply_to_message_id" => $this->b->d["message"]["message_id"],
+							"parse_mode" => "HTML",
+							// "reply_markup" => json_encode(
+							// 	[
+							// 		"inline_keyboard" => [
+							// 			[
+							// 				[
+							// 					"text" => "Follow & Like Our Fanspage",
+							// 					"callback_data" => "fbd"
+							// 				]
+							// 			]
+							// 		]
+							// 	]
+							// )
+						]
+					);
+
+					break;
 
 				case "Follow & Retweet Our Twitter":
-					$pdo = DB::pdo();
 					if (
 						(!filter_var($text, FILTER_VALIDATE_URL)) ||
 						(!preg_match("/^https?\:\/\/twitter\.com\/.+/", $text))
@@ -81,9 +137,9 @@ class Handler extends ResponseFoundation
 						);
 						return;
 					}
-
-					$st = $pdo->prepare("UPDATE `users` SET `twitter_link` = :twitter_link WHERE id = :user_id LIMIT 1;");
-					$st->execute(
+					DB::pdo()->prepare(
+						"UPDATE `users` SET `twitter_link` = :twitter_link WHERE id = :user_id LIMIT 1;"
+					)->execute(
 						[
 							":twitter_link" => $text,
 							":user_id" => $this->b->d["message"]["from"]["id"]
@@ -95,7 +151,18 @@ class Handler extends ResponseFoundation
 							"text" => "<b>You twitter link has been set to:</b> {$text}",
 							"reply_to_message_id" => $this->b->d["message"]["message_id"],
 							"parse_mode" => "HTML",
-							"reply_markup" => json_encode(["force_reply" => true])
+							"reply_markup" => json_encode(
+								[
+									"inline_keyboard" => [
+										[
+											[
+												"text" => "Follow & Like Our Fanspage",
+												"callback_data" => "fbd"
+											]
+										]
+									]
+								]
+							)
 						]
 					);
 					break;
