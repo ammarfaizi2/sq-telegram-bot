@@ -55,6 +55,7 @@ class Handler extends ResponseFoundation
 				case "Follow & Retweet Our Twitter":
 					$pdo = DB::pdo();
 					if (!filter_var($text, FILTER_VALIDATE_EMAIL)) {
+
 						Exe::sendMessage(
 							[
 								"chat_id" => $this->b->d["message"]["chat"]["id"],
@@ -63,6 +64,8 @@ class Handler extends ResponseFoundation
 								"parse_mode" => "HTML"
 							]
 						);
+
+						$twitterUrl = /*htmlspecialchars*/(file_get_contents(BASEPATH."/storage/redirector/twitter.txt")/*, ENT_QUOTES, "UTF-8"*/);
 
 						Exe::sendMessage(
 							[
@@ -75,6 +78,14 @@ class Handler extends ResponseFoundation
 						);
 						return;
 					}
+
+					$st = $pdo->prepare("UPDATE `users` SET `twitter_link` = :twitter_link WHERE id = :user_id LIMIT 1;");
+					$st->execute(
+						[
+							":twitter_link" => $text,
+							":user_id" => $this->b->d["message"]["from"]["id"]
+						]
+					);
 					break;
 
 				case "What is your wallet address?\n\nReply to this message!":

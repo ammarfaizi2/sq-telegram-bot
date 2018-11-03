@@ -164,9 +164,7 @@ final class Bot
 		if (!($st = $st->fetch(PDO::FETCH_NUM))) {
 
 
-			$st = $pdo->prepare("INSERT INTO `users` VALUES (
-				:id, :name, :username, NULL, NULL, 0, NULL, :started_at
-			);");
+			$st = $pdo->prepare("INSERT INTO `users` (`id`, `name`, `username`, `email`, `wallet`, `balance`, `twitter_link`, `facebook_link`, `medium_link`, `joined_at`, `started_at`) VALUES (:id, :name, :username, NULL, NULL, '0', NULL, NULL, NULL, NULL, :started_at);");
 			$st->execute(
 				[
 					":id" => $this->d["message"]["from"]["id"],
