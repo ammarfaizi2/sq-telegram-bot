@@ -51,6 +51,32 @@ class Handler extends ResponseFoundation
 
 			switch ($rdt) {
 
+
+				case "Follow & Retweet Our Twitter":
+					$pdo = DB::pdo();
+					if (!filter_var($text, FILTER_VALIDATE_EMAIL)) {
+						Exe::sendMessage(
+							[
+								"chat_id" => $this->b->d["message"]["chat"]["id"],
+								"text" => "<b>Invalid twitter URL!</b>",
+								"reply_to_message_id" => $this->b->d["message"]["message_id"],
+								"parse_mode" => "HTML"
+							]
+						);
+
+						Exe::sendMessage(
+							[
+								"chat_id" => $this->b->d["message"]["chat"]["id"],
+								"text" => "Follow & Retweet Our Twitter\n<a href=\"{$twitterUrl}\">Click HERE to go to our Twitter Account.</a>\n<b>Please send me your Twitter's Account link to continue!</b>\n\n<b>Reply to this message!</b>",
+								"reply_to_message_id" => $this->b->d["message"]["message_id"],
+								"parse_mode" => "HTML",
+								"reply_markup" => json_encode(["force_reply" => true])
+							]
+						);
+						return;
+					}
+					break;
+
 				case "What is your wallet address?\n\nReply to this message!":
 					$pdo = DB::pdo();
 					$st = $pdo->prepare("SELECT `wallet` FROM `users` WHERE `id` = :user_id LIMIT 1;");
