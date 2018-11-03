@@ -82,7 +82,7 @@ class Handler extends ResponseFoundation
 						"UPDATE `users` SET `facebook_link` = :facebook_link WHERE id = :user_id LIMIT 1;"
 					)->execute(
 						[
-							":twitter_link" => $text,
+							":facebook_link" => $text,
 							":user_id" => $this->b->d["message"]["from"]["id"]
 						]
 					);
