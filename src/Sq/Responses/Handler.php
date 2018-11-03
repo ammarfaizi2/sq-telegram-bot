@@ -172,7 +172,7 @@ class Handler extends ResponseFoundation
 				case "Follow & Retweet Our Twitter":
 					if (
 						(!filter_var($text, FILTER_VALIDATE_URL)) ||
-						(!preg_match("/^https?\:\/\/twitter\.com\/.+/Usi", $text))
+						(!preg_match("/^https?\:\/\/twitter\.com\/.+/", $text))
 					) {
 
 						Exe::sendMessage(
