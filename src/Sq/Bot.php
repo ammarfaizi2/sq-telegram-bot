@@ -79,6 +79,47 @@ final class Bot
 	 */
 	public function responseRoutes(): void
 	{
+
+		if (isset($this->d["callback_query"]["data"])) {
+
+			
+			
+			
+
+			switch ($this->d["callback_query"]["data"]) {
+				case "twd":
+					$twitterUrl = /*htmlspecialchars*/(file_get_contents(BASEPATH."/storage/redirector/twitter.txt")/*, ENT_QUOTES, "UTF-8"*/);
+					$r = "Follow & Retweet Our Twitter
+<a href=\"{$twitterUrl}\">Click HERE to go to our Twitter Account.</a>
+<b>Please send me your Twitter's Account link to continue!</b>";
+					break;
+				case "fbd":
+					$facebookUrl = /*htmlspecialchars*/(file_get_contents(BASEPATH."/storage/redirector/facebook.txt")/*, ENT_QUOTES, "UTF-8"*/);
+					$r = "Follow & Like Our Fanspage
+<a href=\"{$facebookUrl}\">Click HERE to go to our Facebook Account.</a>
+Please send me your Facebook's Account link to continue";
+					break;
+				case "mdd":
+					$mediumUrl = /*htmlspecialchars*/(file_get_contents(BASEPATH."/storage/redirector/medium.txt")/*, ENT_QUOTES, "UTF-8"*/);
+					$r = "Follow our Medium
+<a href=\"{$mediumUrl}\">Click HERE to go to our Medium.</a>
+Please send me your Medium's Account link to continue";
+				default:
+					break;
+			}
+
+
+			Exe::sendMessage(
+				[
+					"chat_id" => $this->d["callback_query"]["message"]["chat"]["id"],
+					"text" => $r,
+					"parse_mode" => "HTML"
+				]
+			);
+
+			return;
+		}
+
 		if (!(
 			isset($this->d["message"]["chat"]["type"]) &&
 			$this->d["message"]["chat"]["type"] === "private"
