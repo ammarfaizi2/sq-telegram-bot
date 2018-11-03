@@ -89,21 +89,21 @@ class Handler extends ResponseFoundation
 					Exe::sendMessage(
 						[
 							"chat_id" => $this->b->d["message"]["chat"]["id"],
-							"text" => "<b>You twitter link has been set to:</b> {$text}",
+							"text" => "<b>You Facebook link has been set to:</b> {$text}",
 							"reply_to_message_id" => $this->b->d["message"]["message_id"],
 							"parse_mode" => "HTML",
-							// "reply_markup" => json_encode(
-							// 	[
-							// 		"inline_keyboard" => [
-							// 			[
-							// 				[
-							// 					"text" => "Follow & Like Our Fanspage",
-							// 					"callback_data" => "fbd"
-							// 				]
-							// 			]
-							// 		]
-							// 	]
-							// )
+							"reply_markup" => json_encode(
+								[
+									"inline_keyboard" => [
+										[
+											[
+												"text" => "Follow & Like Our Medium",
+												"callback_data" => "fbd"
+											]
+										]
+									]
+								]
+							)
 						]
 					);
 
