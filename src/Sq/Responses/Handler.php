@@ -70,7 +70,11 @@ class Handler extends ResponseFoundation
 						Exe::sendMessage(
 							[
 								"chat_id" => $this->b->d["message"]["chat"]["id"],
-								"text" => "Follow & Like Our Fanspage\n<a href=\"{$facebookUrl}\">Click HERE to go to our Facebook Account.</a>\n<b>Please send me your Facebook's Account link to continue</b>\n\n<b>Reply to this message!</b>",
+								"text" => "Follow our Medium
+<a href=\"{$mediumUrl}\">Click HERE to go to our Medium.</a>
+<b>Please send me your Medium's Account link to continue</b>
+
+<b>Reply to this message!</b>",
 								"reply_to_message_id" => $this->b->d["message"]["message_id"],
 								"parse_mode" => "HTML",
 								"reply_markup" => json_encode(["force_reply" => true])
@@ -79,17 +83,17 @@ class Handler extends ResponseFoundation
 						return;
 					}
 					DB::pdo()->prepare(
-						"UPDATE `users` SET `facebook_link` = :facebook_link WHERE id = :user_id LIMIT 1;"
+						"UPDATE `users` SET `medium_link` = :medium_link WHERE id = :user_id LIMIT 1;"
 					)->execute(
 						[
-							":facebook_link" => $text,
+							":medium_link" => $text,
 							":user_id" => $this->b->d["message"]["from"]["id"]
 						]
 					);
 					Exe::sendMessage(
 						[
 							"chat_id" => $this->b->d["message"]["chat"]["id"],
-							"text" => "<b>You Facebook link has been set to:</b> {$text}",
+							"text" => "<b>You Medium link has been set to:</b> {$text}",
 							"reply_to_message_id" => $this->b->d["message"]["message_id"],
 							"parse_mode" => "HTML",
 							"reply_markup" => json_encode(
