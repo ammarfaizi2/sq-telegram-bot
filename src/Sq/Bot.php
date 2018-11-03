@@ -113,7 +113,8 @@ Please send me your Medium's Account link to continue";
 				[
 					"chat_id" => $this->d["callback_query"]["message"]["chat"]["id"],
 					"text" => $r,
-					"parse_mode" => "HTML"
+					"parse_mode" => "HTML",
+					"reply_markup" => json_encode(["force_reply" => true])
 				]
 			);
 
