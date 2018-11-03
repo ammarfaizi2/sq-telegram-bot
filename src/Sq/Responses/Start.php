@@ -50,19 +50,22 @@ class Start extends ResponseFoundation
 			[
 				[
 					"text" => "Follow & Retweet Our Twitter",
-					"url" => "https://veno.site/std_redirector.php?to=twitter&id={$this->b->d["message"]["from"]["id"]}"
+					// "url" => "https://veno.site/std_redirector.php?to=twitter&id={$this->b->d["message"]["from"]["id"]}",
+					"callback_data" => "twd"
 				]
 			],
 			[
 				[
 					"text" => "Follow & Like Our Fanspage",
-					"url" => "https://veno.site/std_redirector.php?to=facebook&id={$this->b->d["message"]["from"]["id"]}"
+					// "url" => "https://veno.site/std_redirector.php?to=facebook&id={$this->b->d["message"]["from"]["id"]}",
+					"callback_data" => "fbd"
 				]
 			],
 			[
 				[
 					"text" => "Follow Our Medium",
-					"url" => "https://veno.site/std_redirector.php?to=medium&id={$this->b->d["message"]["from"]["id"]}"
+					"callback_data" => "mdd"
+					// "url" => "https://veno.site/std_redirector.php?to=medium&id={$this->b->d["message"]["from"]["id"]}"
 				]
 			]
 		];
