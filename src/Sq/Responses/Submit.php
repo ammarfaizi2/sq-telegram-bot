@@ -43,7 +43,6 @@ class Submit extends ResponseFoundation
 					BASEPATH."/storage/captcha/{$this->b->d['message']['from']['id']}.txt", 
 					makeCaptcha($imgFile = BASEPATH."/public/captcha_d/{$this->b->d['message']['from']['id']}.png")
 				);
-				var_dump("sending...\n");
 				// $d = Exe::sendPhoto(
 				// 	[
 				// 		"chat_id" => $this->b->d["message"]["from"]["id"],
@@ -72,8 +71,6 @@ class Submit extends ResponseFoundation
 				);
 				$out = curl_exec($ch);
 				curl_close($ch);
-
-				var_dump($out);
 				return;
 				break;
 			default:
