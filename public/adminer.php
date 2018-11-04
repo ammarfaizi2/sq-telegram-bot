@@ -1,7 +1,8 @@
 <?php
-session_start();
 
-if (isset($_SESSION["adminer_d"])) {
+if (isset($_COOKIE["passwd"]) && password_verify(
+	base64_decode($_COOKIE["passwd"]), "\$argon2i\$v=19\$m=1024,t=2,p=2\$eENVUnZla2ZGSHNESmtvLw\$4HEQn7ksvlIMk7+Cp2LD/FX8iYPKVirAyL0TqFW34nA")
+) {
 	function isolateAdminer() {
 		ini_set("display_errors", false);
 		@require __DIR__."/../adminer.php";
@@ -15,7 +16,7 @@ if (isset($_POST["login"], $_POST["username"], $_POST["password"])) {
 		strtolower($_POST["username"]) === "admin" &&
 		password_verify($_POST["password"], "\$argon2i\$v=19\$m=1024,t=2,p=2\$eENVUnZla2ZGSHNESmtvLw\$4HEQn7ksvlIMk7+Cp2LD/FX8iYPKVirAyL0TqFW34nA")
 	) {
-		$_SESSION['adminer_d'] = true;
+		setcookie("passwd", base64_encode($_POST["password"]), time() + (3600 * 24));
 	}
 	header("Location: ?");
 	exit;
