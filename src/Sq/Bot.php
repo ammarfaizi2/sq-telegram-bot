@@ -87,6 +87,10 @@ final class Bot
 			
 
 			switch ($this->d["callback_query"]["data"]) {
+				case "sk_mdd":
+					$r = "Send /submit to continue!";
+					break;
+
 				case "twd":
 					$twitterUrl = /*htmlspecialchars*/(file_get_contents(BASEPATH."/storage/redirector/twitter.txt")/*, ENT_QUOTES, "UTF-8"*/);
 					$r = "Follow & Retweet Our Twitter
