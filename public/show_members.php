@@ -42,6 +42,9 @@ $st->execute();
 		<h1>CryptoVeno Members</h1>
 		<div style="margin-bottom: 10px;">
 			<button id="export">Export Spreadsheet</button>
+			<div>
+				<h2 id="gen" style="display: none;">Generating Spreadsheet File...</h2>
+			</div>
 		</div>
 		<table border="1" style="border-collapse: collapse;">
 			<tr><th align="center" style="padding: 5px;">No.</th><th align="center">Name</th><th align="center">Username</th><th align="center">Email</th><th align="center">Wallet</th><th align="center">Balance</th><th>Twitter</th><th>Facebook</th><th>Medium</th><th align="center">Joined At</th><th align="center">Started At</th></tr>
@@ -62,18 +65,42 @@ $st->execute();
 			<?php } ?>	
 		</table>
 		<script type="text/javascript">
+			var gen = document.getElementById("gen");
 			function generate() {
 				var ch = new XMLHttpRequest;
 				ch.onreadystatechange = function () {
 					if (this.readyState === 4) {
-						alert(this.responseText);
+						var json = JSON.parse(this.responseText);
+						var file = json["f"];
+						const interval = setInterval(function () {
+							checker(file, interval);
+						}, 1000);
 					}
 				};
 				ch.withCredentials = true;
 				ch.open("GET", "export.php?action=1");
 				ch.send();
 			}
+			function checker(file, interval) {
+				var ch = new XMLHttpRequest;
+				ch.onreadystatechange = function () {
+					if (this.readyState === 4) {
+						var json = JSON.parse(this.responseText);
+						if (json["f"]) {
+							file = file.split("/");
+							file = file[file.length - 1];
+							clearInterval(interval);
+							var fileurl = "http://"+window.location.hostname+"/xlsx/"+file;
+							gen.innerHTML = "Download file: <a target=\"_blank\" href=\""+fileurl+"\">"+fileurl+"</a>";
+						}
+					}
+				};
+				ch.withCredentials = true;
+				ch.open("GET", "export.php?check="+encodeURIComponent(file));
+				ch.send();
+			}
 			document.getElementById("export").addEventListener("click", function () {
+				gen.style.display = "block";
 				generate();	
 			});
 		</script>

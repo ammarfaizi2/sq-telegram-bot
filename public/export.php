@@ -70,3 +70,8 @@ if (isset($_GET["action"]) && $_GET["action"] == 1) {
 	$cmd = shell_exec($std = "nohup /usr/bin/env php ".__FILE__." {$f} >> /dev/null 2>&1 &");
 	print json_encode(["f" => $file], JSON_UNESCAPED_SLASHES);
 }
+
+
+if (isset($_GET["check"])) {
+	print json_encode(["f" => file_exists($_GET["check"])]);
+}
