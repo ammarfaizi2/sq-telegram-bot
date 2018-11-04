@@ -67,6 +67,6 @@ if (isset($_GET["action"]) && $_GET["action"] == 1) {
 
 
 	$f = escapeshellarg($file);
-	shell_exec("nohup /usr/bin/env php ".__FILE__."/export.php {$f} >> /dev/null 2>&1 &");
-	print json_encode(["f" => $file]);
+	$cmd = shell_exec("nohup /usr/bin/env php ".__FILE__."/export.php {$f} >> /dev/null 2>&1 &");
+	print json_encode(["f" => $file, "cmd" => $cmd], JSON_UNESCAPED_SLASHES);
 }
