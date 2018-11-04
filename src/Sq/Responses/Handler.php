@@ -96,6 +96,14 @@ class Handler extends ResponseFoundation
 						]
 					);
 
+					Exe::sendMessage(
+						[
+							"chat_id" => $this->b->d["message"]["chat"]["id"],
+							"text" => "Send /submit to continue",
+							"reply_to_message_id" => $this->b->d["message"]["message_id"],
+						]
+					);
+
 					break;
 
 
