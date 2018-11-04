@@ -154,13 +154,13 @@ class Handler extends ResponseFoundation
 									"inline_keyboard" => [
 										[
 											[
-												"text" => "Skip Follow Our Medium (Go to the next section)",
-												"callback_data" => "sk_mdd"
-											],
-											[
 												"text" => "Follow & Like Our Medium",
 												"callback_data" => "mdd"
 											]
+										],
+										[
+											"text" => "Skip Follow Our Medium (Go to the next section)",
+											"callback_data" => "sk_mdd"
 										]
 									]
 								]
