@@ -312,7 +312,7 @@ https://tokensale.cryptoveno.com",
 			Exe::sendMessage(
 				[
 					"chat_id" => $this->d["message"]["chat"]["id"],
-					"text" => "Email: venotoken-blablabla@gmail.com\nPhone: +62123123123123",
+					"text" => "support@cryptoveno.com",
 					"reply_to_message_id" => $this->d["message"]["message_id"],
 					"parse_mode" => "HTML"
 				]
