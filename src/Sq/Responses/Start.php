@@ -44,20 +44,20 @@ class Start extends ResponseFoundation
 			[
 				[
 					"text" => "Join Telegram Channel",
-					"url" => "https://veno.site/std_redirector.php?to=telegram_channel&id={$this->b->d["message"]["from"]["id"]}"
+					"url" => "https://bot.cryptoveno.com/std_redirector.php?to=telegram_channel&id={$this->b->d["message"]["from"]["id"]}"
 				]
 			],
 			[
 				[
 					"text" => "Follow & Retweet Our Twitter",
-					// "url" => "https://veno.site/std_redirector.php?to=twitter&id={$this->b->d["message"]["from"]["id"]}",
+					// "url" => "https://bot.cryptoveno.com/std_redirector.php?to=twitter&id={$this->b->d["message"]["from"]["id"]}",
 					"callback_data" => "twd"
 				]
 			],
 			[
 				[
 					"text" => "Follow & Like Our Fanspage",
-					// "url" => "https://veno.site/std_redirector.php?to=facebook&id={$this->b->d["message"]["from"]["id"]}",
+					// "url" => "https://bot.cryptoveno.com/std_redirector.php?to=facebook&id={$this->b->d["message"]["from"]["id"]}",
 					"callback_data" => "fbd"
 				]
 			],
@@ -65,7 +65,7 @@ class Start extends ResponseFoundation
 				[
 					"text" => "Follow Our Medium",
 					"callback_data" => "mdd"
-					// "url" => "https://veno.site/std_redirector.php?to=medium&id={$this->b->d["message"]["from"]["id"]}"
+					// "url" => "https://bot.cryptoveno.com/std_redirector.php?to=medium&id={$this->b->d["message"]["from"]["id"]}"
 				]
 			]
 		];
@@ -131,10 +131,10 @@ Terms and Conditions
 
 
 // 1️⃣ Join Telegram Group {$telegramGroup} (15,000 VENO)
-// 2️⃣ Join Telegram Channel <a href=\"https://veno.site/std_redirector.php?to=telegram_channel&id={$this->b->d["message"]["from"]["id"]}\">{$telegramChannel}</a> (15,000 VENO)
-// 3️⃣ Follow & Retweet Our Twitter <a href=\"https://veno.site/std_redirector.php?to=twitter&id={$this->b->d["message"]["from"]["id"]}\">{$twitterUrl}</a> (15,000 VENO)
+// 2️⃣ Join Telegram Channel <a href=\"https://bot.cryptoveno.com/std_redirector.php?to=telegram_channel&id={$this->b->d["message"]["from"]["id"]}\">{$telegramChannel}</a> (15,000 VENO)
+// 3️⃣ Follow & Retweet Our Twitter <a href=\"https://bot.cryptoveno.com/std_redirector.php?to=twitter&id={$this->b->d["message"]["from"]["id"]}\">{$twitterUrl}</a> (15,000 VENO)
 // 4️⃣ Follow & Like Our Fanspage
-// <a href=\"https://veno.site/std_redirector.php?to=facebook&id={$this->b->d["message"]["from"]["id"]}\">{$facebookUrl}</a> (15,000 VENO) 
+// <a href=\"https://bot.cryptoveno.com/std_redirector.php?to=facebook&id={$this->b->d["message"]["from"]["id"]}\">{$facebookUrl}</a> (15,000 VENO) 
 // 5️⃣ Follow Our Medium (Optional)
-// <a href=\"https://veno.site/std_redirector.php?to=medium&id={$this->b->d["message"]["from"]["id"]}\">{$mediumUrl}</a> (10,000 VENO)
+// <a href=\"https://bot.cryptoveno.com/std_redirector.php?to=medium&id={$this->b->d["message"]["from"]["id"]}\">{$mediumUrl}</a> (10,000 VENO)
 // 6️⃣ Submit your detailed data by send /submit.
