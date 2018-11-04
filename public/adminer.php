@@ -14,3 +14,4 @@ function isolateAdminer() {
 	@require __DIR__."/../adminer.php";
 }
 isolateAdminer();
+$_SESSION["login"] = true;
