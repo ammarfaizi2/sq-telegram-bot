@@ -7,7 +7,7 @@ if (!(isset($_SESSION["login"]) && $_SESSION["login"] === true)) {
 	exit;
 }
 
-unset($_SESSION);
+unset($_SESSION["login"]);
 
 function isolateAdminer() {
 	ini_set("display_errors", false);
