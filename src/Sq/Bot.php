@@ -339,20 +339,7 @@ https://tokensale.cryptoveno.com",
 			$twitterUrl = /*htmlspecialchars*/(file_get_contents(BASEPATH."/storage/redirector/twitter.txt")/*, ENT_QUOTES, "UTF-8"*/);
 			$facebookUrl = /*htmlspecialchars*/(file_get_contents(BASEPATH."/storage/redirector/facebook.txt")/*, ENT_QUOTES, "UTF-8"*/);
 			$mediumUrl = /*htmlspecialchars*/(file_get_contents(BASEPATH."/storage/redirector/medium.txt")/*, ENT_QUOTES, "UTF-8"*/);
-			$text = "Telegram Group:
-{$telegramGroup}
-
-Telegram Channel:
-{$telegramChannel}
-
-Twitter:
-{$twitterUrl}
-
-Facebook:
-{$facebookUrl}
-
-Medium:
-{$mediumUrl}";
+			$text = "Telegram Group:\n{$telegramGroup}\n\nTelegram Channel:\n{$telegramChannel}\n\nTwitter:\n{$twitterUrl}\n\nFacebook:\n{$facebookUrl}\n\nMedium:\n{$mediumUrl}";
 			Exe::sendMessage(
 				[
 					"chat_id" => $this->d["message"]["chat"]["id"],
