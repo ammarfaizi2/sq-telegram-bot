@@ -105,11 +105,14 @@ final class Bot
 							);
 							$r = "Follow & Like Our Fanspage\n<a href=\"{$facebookUrl}\">Click HERE to go to our Facebook Account.</a>\n<b>Please send me your Facebook's Account link to continue</b>\n\n<b>Reply to this message!</b>";
 						} else {
+							var_dump("z");
 							$r = "You need to finish twitter task first before continue to facebook task!";
 						}
 					} else {
+						var_dump("x");
 						$r = "You need to finish twitter task first before continue to facebook task!";
 					}
+					var_dump($st);
 					break;
 				case "mdd":
 					$st = DB::pdo()->prepare("SELECT `facebook_link` FROM `users` WHERE `id` = :user_id LIMIT 1;");
