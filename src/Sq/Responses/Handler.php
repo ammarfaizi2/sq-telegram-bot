@@ -99,7 +99,7 @@ class Handler extends ResponseFoundation
 					);
 
 					$st = $pdo->prepare("SELECT `email` FROM `users` WHERE `id` = :user_id LIMIT 1;");
-					$st->execute([":user_id" => $this->b->d["message"]["chat"]["id"]]);
+					$st->execute([":user_id" => $this->b->d["message"]["from"]["id"]]);
 					if ($st = $st->fetch(PDO::FETCH_NUM)) {
 						if ($st[0]) {
 							$r = "Send /help to show other commands!";
@@ -113,7 +113,7 @@ class Handler extends ResponseFoundation
 					Exe::sendMessage(
 						[
 							"chat_id" => $this->b->d["message"]["chat"]["id"],
-							"text" => "Send /submit to continue",
+							"text" => $r,
 							"reply_to_message_id" => $this->b->d["message"]["message_id"],
 						]
 					);
