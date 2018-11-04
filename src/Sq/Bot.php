@@ -81,39 +81,53 @@ final class Bot
 	{
 
 		if (isset($this->d["callback_query"]["data"])) {
-
-			
-			
-			
-
 			switch ($this->d["callback_query"]["data"]) {
 				case "sk_mdd":
 					$r = "Send /submit to continue!";
 					break;
-
 				case "twd":
-					$twitterUrl = /*htmlspecialchars*/(file_get_contents(BASEPATH."/storage/redirector/twitter.txt")/*, ENT_QUOTES, "UTF-8"*/);
-					$r = "Follow & Retweet Our Twitter
-<a href=\"{$twitterUrl}\">Click HERE to go to our Twitter Account.</a>
-<b>Please send me your Twitter's Account link to continue!</b>
-
-<b>Reply to this message!</b>";
+					$twitterUrl = htmlspecialchars(
+						file_get_contents(BASEPATH."/storage/redirector/twitter.txt"),
+						ENT_QUOTES,
+						"UTF-8"
+					);
+					$r = "Follow & Retweet Our Twitter\n<a href=\"{$twitterUrl}\">Click HERE to go to our Twitter Account.</a>\n<b>Please send me your Twitter's Account link to continue!</b>\n\n<b>Reply to this message!</b>";
 					break;
 				case "fbd":
-					$facebookUrl = /*htmlspecialchars*/(file_get_contents(BASEPATH."/storage/redirector/facebook.txt")/*, ENT_QUOTES, "UTF-8"*/);
-					$r = "Follow & Like Our Fanspage
-<a href=\"{$facebookUrl}\">Click HERE to go to our Facebook Account.</a>
-<b>Please send me your Facebook's Account link to continue</b>
-
-<b>Reply to this message!</b>";
+					$st = DB::pdo()->prepare("SELECT `twitter_link` FROM `users` WHERE `id` = :user_id LIMIT 1;");
+					$st->execute([":user_id" => $this->d["message"]["from"]["id"]]);
+					if ($st = $st->fetch(PDO::FETCH_NUM)) {
+						if ($st[0]) {
+							$facebookUrl = htmlspecialchars(
+								file_get_contents(BASEPATH."/storage/redirector/facebook.txt"),
+								ENT_QUOTES,
+								"UTF-8"
+							);
+							$r = "Follow & Like Our Fanspage\n<a href=\"{$facebookUrl}\">Click HERE to go to our Facebook Account.</a>\n<b>Please send me your Facebook's Account link to continue</b>\n\n<b>Reply to this message!</b>";
+						} else {
+							$r = "You need to finish twitter task first before continue to facebook task!";
+						}
+					} else {
+						$r = "You need to finish twitter task first before continue to facebook task!";
+					}
 					break;
 				case "mdd":
-					$mediumUrl = /*htmlspecialchars*/(file_get_contents(BASEPATH."/storage/redirector/medium.txt")/*, ENT_QUOTES, "UTF-8"*/);
-					$r = "Follow our Medium
-<a href=\"{$mediumUrl}\">Click HERE to go to our Medium.</a>
-<b>Please send me your Medium's Account link to continue</b>
-
-<b>Reply to this message!</b>";
+					$st = DB::pdo()->prepare("SELECT `facebook_link` FROM `users` WHERE `id` = :user_id LIMIT 1;");
+					$st->execute([":user_id" => $this->d["message"]["from"]["id"]]);
+					if ($st = $st->fetch(PDO::FETCH_NUM)) {
+						if ($st[0]) {
+							$mediumUrl = htmlspecialchars(
+								file_get_contents(BASEPATH."/storage/redirector/medium.txt"),
+								ENT_QUOTES,
+								"UTF-8"
+							);
+							$r = "Follow our Medium\n<a href=\"{$mediumUrl}\">Click HERE to go to our Medium.</a>\n<b>Please send me your Medium's Account link to continue</b>\n\n<b>Reply to this message!</b>";
+						} else {
+							$r = "You need to finish facebook task first before continue to medium task!";
+						}
+					} else {
+						$r = "You need to finish facebook task first before continue to medium task!";
+					}
 				default:
 					break;
 			}
