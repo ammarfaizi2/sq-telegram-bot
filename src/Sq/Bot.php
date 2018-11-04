@@ -133,14 +133,16 @@ final class Bot
 			}
 
 
-			Exe::sendMessage(
-				[
+			$d = [
 					"chat_id" => $this->d["callback_query"]["message"]["chat"]["id"],
 					"text" => $r,
 					"parse_mode" => "HTML",
-					"reply_markup" => json_encode(["force_reply" => true])
-				]
-			);
+				];
+			if (!preg_match("/^You need.+/", $r)) {
+				$d["reply_markup"] = json_encode(["force_reply" => true]);
+			}
+
+			Exe::sendMessage($d);
 
 			return;
 		}
