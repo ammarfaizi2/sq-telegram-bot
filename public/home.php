@@ -47,7 +47,7 @@ if ($status === "token_exists") {
 
 
 $pdo = \Sq\DB::pdo();
-$st = $pdo->prepare("SELECT COUNT(1) FROM `users` WHERE `joined_at` IS NOT NULL;");
+$st = $pdo->prepare("SELECT COUNT(1) FROM `users`;");
 $st->execute();
 $joinedMember = $st->fetch(PDO::FETCH_NUM)[0];
 
