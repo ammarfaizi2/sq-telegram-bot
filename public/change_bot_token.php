@@ -102,6 +102,7 @@ if (isset($_GET["add_token"])):?>
 </head>
 <body>
 	<center>
+		<a href="index.php?w=<?php print urlencode(rstr(64)); ?>"><button>Back</button></a>
 		<form action="?add_token_action=1" method="post">
 			<div class="fr">
 				<h1>Masukkan token bot</h1>
@@ -132,7 +133,7 @@ endif;
 			font-family: Arial;
 		}
 		.mcgd {
-			margin-top: 150px;
+			margin-top: 10px;
 		}
 		button {
 			cursor: pointer;
@@ -141,6 +142,7 @@ endif;
 </head>
 <body>
 	<center>
+		<a href="index.php?w=<?php print urlencode(rstr(64)); ?>"><button>Back</button></a>
 		<div class="mcgd">
 			<?php
 				if ($status === "empty_token") {

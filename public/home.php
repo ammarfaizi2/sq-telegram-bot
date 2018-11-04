@@ -9,7 +9,7 @@ if (!(isset($_SESSION["login"]) && $_SESSION["login"] === true)) {
 
 $me   = BASEPATH."/config/me.cfg.tmp";
 $file = BASEPATH."/config/token.cfg.tmp";
-
+$stop = (int)file_get_contents(BASEPATH."/storage/stop.txt");
 if (file_exists($file)) {
 	$token = trim(file_get_contents($file));
 	if (empty($token)) {
@@ -23,7 +23,7 @@ if (file_exists($file)) {
 
 
 if ($status === "token_exists") {
-	// $std = curld("https://api.telegram.org/bot{$token}/getWebhookInfo");
+	//$std = curld("https://api.telegram.org/bot{$token}/getWebhookInfo");
 	$std["errno"] = 0;
 	$std["out"] = '{"ok":true,"result":{"url":"https://veno.site/webhook.php?hashd=40b4d020635683fc46d652f77f5613e60ad3f19e","has_custom_certificate":false,"pending_update_count":0,"last_error_date":1541121667,"last_error_message":"Wrong response from the webhook: 403 Forbidden","max_connections":40}}';
 	if ($std["errno"]) {
@@ -88,12 +88,12 @@ unset($st, $pdo);
 				<td>Joined Members</td>
 				<td>:</td>
 				<td><?php print $joinedMember; ?> users (<a href="/show_members.php">View Members</a>)</td>
-			</tr>			
+			</tr>
 		</table>
 		<table>
 			<tr>
 				<td colspan="2" align="center">
-					<a href="change_bot_token.php?ref=home&w=<?php print urlencode(rstr(64)); ?>"><button>Ubah Token Bot</button></a>
+					<a href="change_bot_token.php?ref=home&w=<?php print urlencode(rstr(64)); ?>"><button>Edit Token Bot</button></a>
 				</td>
 				<td colspan="2" align="center">
 					<a href="edit_point.php"><button>Edit Point</button></a>
@@ -105,6 +105,10 @@ unset($st, $pdo);
 				</td>
 			</tr>
 		</table>
+		<div>
+			<p><b>Auto stop when the amount of members reached: </b><?php print $stop; ?> (<a href="edit_stop.php">Edit</a>)</p>
+			<a href="edit_stop_message.php"><button>Edit Auto Stop Message</button></a>
+		</div>
 	</center>
 </body>
 </html>
