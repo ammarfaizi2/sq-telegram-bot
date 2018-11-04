@@ -23,9 +23,9 @@ if (file_exists($file)) {
 
 
 if ($status === "token_exists") {
-	//$std = curld("https://api.telegram.org/bot{$token}/getWebhookInfo");
+	$std = curld("https://api.telegram.org/bot{$token}/getWebhookInfo");
 	$std["errno"] = 0;
-	$std["out"] = '{"ok":true,"result":{"url":"https://veno.site/webhook.php?hashd=40b4d020635683fc46d652f77f5613e60ad3f19e","has_custom_certificate":false,"pending_update_count":0,"last_error_date":1541121667,"last_error_message":"Wrong response from the webhook: 403 Forbidden","max_connections":40}}';
+	//$std["out"] = '{"ok":true,"result":{"url":"https://veno.site/webhook.php?hashd=40b4d020635683fc46d652f77f5613e60ad3f19e","has_custom_certificate":false,"pending_update_count":0,"last_error_date":1541121667,"last_error_message":"Wrong response from the webhook: 403 Forbidden","max_connections":40}}';
 	if ($std["errno"]) {
 		$status = "Error: {$std['error']}";
 	} else {
