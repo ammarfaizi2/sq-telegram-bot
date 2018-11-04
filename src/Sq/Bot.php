@@ -370,7 +370,24 @@ Medium:
 		}
 
 		if ("/submit" === $text) {
-			(new Submit($this))->submit();
+
+			$st = DB::pdo()->prepare("SELECT `facebook_link` FROM `users` WHERE `id` = :user_id LIMIT 1;");
+			$st->execute([":user_id" => $this->d["message"]["from"]["id"]]);
+			if ($st = $st->fetch(PDO::FETCH_NUM)) {
+				if ($st[0]) {
+					(new Submit($this))->submit();
+					return;
+				}
+			}
+
+			Exe::sendMessage(
+				[
+					"chat_id" => $this->d["message"]["chat"]["id"],
+					"text" => "You need to finish the facebook task first before submit your detailed data!",
+					"reply_to_message_id" => $this->d["message"]["message_id"]
+				]
+			);
+
 			return;
 		}
 
