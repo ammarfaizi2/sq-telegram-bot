@@ -15,30 +15,30 @@ if (isset($_GET["id"], $_GET["to"])) {
 					$fp = null;
 				}
 			break;
-		case "twitter":
-				$task = 3;
-				if (file_exists($fp = $fp."/twitter.txt")) {
-					$fp = file_get_contents($fp);
-				} else {
-					$fp = null;
-				}
-			break;
-		case "facebook":
-				$task = 4;
-				if (file_exists($fp = $fp."/facebook.txt")) {
-					$fp = file_get_contents($fp);
-				} else {
-					$fp = null;
-				}
-			break;
-		case "medium";
-				$task = 5;
-				if (file_exists($fp = $fp."/medium.txt")) {
-					$fp = file_get_contents($fp);
-				} else {
-					$fp = null;
-				}
-			break;			
+		// case "twitter":
+		// 		$task = 3;
+		// 		if (file_exists($fp = $fp."/twitter.txt")) {
+		// 			$fp = file_get_contents($fp);
+		// 		} else {
+		// 			$fp = null;
+		// 		}
+		// 	break;
+		// case "facebook":
+		// 		$task = 4;
+		// 		if (file_exists($fp = $fp."/facebook.txt")) {
+		// 			$fp = file_get_contents($fp);
+		// 		} else {
+		// 			$fp = null;
+		// 		}
+		// 	break;
+		// case "medium";
+		// 		$task = 5;
+		// 		if (file_exists($fp = $fp."/medium.txt")) {
+		// 			$fp = file_get_contents($fp);
+		// 		} else {
+		// 			$fp = null;
+		// 		}
+		// 	break;			
 		default:
 				header("Content-Type: text/plain");
 				http_response_code(403);

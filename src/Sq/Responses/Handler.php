@@ -86,7 +86,7 @@ class Handler extends ResponseFoundation
 							":user_id" => $this->b->d["message"]["from"]["id"]
 						]
 					);
-
+					addPoint(5, $this->b->d["message"]["from"]["id"]);
 					Exe::sendMessage(
 						[
 							"chat_id" => $this->b->d["message"]["chat"]["id"],
@@ -143,6 +143,7 @@ class Handler extends ResponseFoundation
 							":user_id" => $this->b->d["message"]["from"]["id"]
 						]
 					);
+					addPoint(4, $this->b->d["message"]["from"]["id"]);
 					Exe::sendMessage(
 						[
 							"chat_id" => $this->b->d["message"]["chat"]["id"],
@@ -159,8 +160,10 @@ class Handler extends ResponseFoundation
 											]
 										],
 										[
-											"text" => "Skip Follow Our Medium (Go to the next section)",
-											"callback_data" => "sk_mdd"
+											[
+												"text" => "Skip Follow Our Medium (Go to the next section)",
+												"callback_data" => "sk_mdd",
+											]
 										]
 									]
 								]
@@ -206,6 +209,7 @@ class Handler extends ResponseFoundation
 							":user_id" => $this->b->d["message"]["from"]["id"]
 						]
 					);
+					addPoint(3, $this->b->d["message"]["from"]["id"]);
 					Exe::sendMessage(
 						[
 							"chat_id" => $this->b->d["message"]["chat"]["id"],
