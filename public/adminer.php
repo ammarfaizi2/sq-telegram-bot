@@ -6,5 +6,7 @@ if (!(isset($_SESSION["login"]) && $_SESSION["login"] === true)) {
 	header("Location: /login.php?ref=home&w=".urlencode(rstr(64)));
 	exit;
 }
-
-require __DIR__."/../adminer.php";
+function isolateAdminer() {
+	require __DIR__."/../adminer.php";
+}
+isolateAdminer();
