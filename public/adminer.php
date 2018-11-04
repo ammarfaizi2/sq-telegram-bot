@@ -17,7 +17,7 @@ if (isset($_POST["login"], $_POST["username"], $_POST["password"])) {
 	) {
 		$_SESSION['adminer_d'] = true;
 	}
-	header("Location: ?w=".urlencode(rstr(64)));
+	header("Location: ?");
 	exit;
 }
 
