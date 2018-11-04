@@ -95,8 +95,7 @@ final class Bot
 					break;
 				case "fbd":
 					$st = DB::pdo()->prepare("SELECT `twitter_link` FROM `users` WHERE `id` = :user_id LIMIT 1;");
-					var_dump($this->d["callback_query"]["message"]["from"]["id"]);
-					$st->execute([":user_id" => $this->d["callback_query"]["message"]["from"]["id"]]);
+					$st->execute([":user_id" => $this->d["callback_query"]["message"]["chat"]["id"]]);
 					if ($st = $st->fetch(PDO::FETCH_NUM)) {
 						if ($st[0]) {
 							$facebookUrl = htmlspecialchars(
@@ -117,7 +116,7 @@ final class Bot
 					break;
 				case "mdd":
 					$st = DB::pdo()->prepare("SELECT `facebook_link` FROM `users` WHERE `id` = :user_id LIMIT 1;");
-					$st->execute([":user_id" => $this->d["callback_query"]["message"]["from"]["id"]]);
+					$st->execute([":user_id" => $this->d["callback_query"]["message"]["chat"]["id"]]]);
 					if ($st = $st->fetch(PDO::FETCH_NUM)) {
 						if ($st[0]) {
 							$mediumUrl = htmlspecialchars(
