@@ -503,13 +503,21 @@ class Handler extends ResponseFoundation
 				break;
 			}
 		} else {
-			Exe::sendMessage(
-				[
-					"text" => "Invalid command!\n\nSend /help to see all commands",
-					"chat_id" => $this->b->d["message"]["from"]["id"],
-					"reply_to_message_id" => $this->b->d["message"]["message_id"],
-				]
-			);
+			$st = DB::pdo()->prepare("SELECT `facebook_link` FROM `users` WHERE `id` = :user_id LIMIT 1;");
+			$st->execute([":user_id" => $this->d["message"]["from"]["id"]]);
+			if ($st = $st->fetch(PDO::FETCH_NUM)) {
+				if ($st[0]) {
+					Exe::sendMessage(
+						[
+							"text" => "Invalid command!\n\nSend /help to see all commands",
+							"chat_id" => $this->b->d["message"]["from"]["id"],
+							"reply_to_message_id" => $this->b->d["message"]["message_id"],
+						]
+					);
+					return;
+				}
+			}
+			(new Start($this->b))->start();
 		}
 	}
 }
