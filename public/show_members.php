@@ -40,6 +40,9 @@ $st->execute();
 	<center>
 		<a href="/index.php"><button>Back to Home</button></a>
 		<h1>CryptoVeno Members</h1>
+		<div style="margin-bottom: 10px;">
+			<button id="export">Export Spreadsheet</button>
+		</div>
 		<table border="1" style="border-collapse: collapse;">
 			<tr><th align="center" style="padding: 5px;">No.</th><th align="center">Name</th><th align="center">Username</th><th align="center">Email</th><th align="center">Wallet</th><th align="center">Balance</th><th>Twitter</th><th>Facebook</th><th>Medium</th><th align="center">Joined At</th><th align="center">Started At</th></tr>
 			<?php $i = 1; while ($r = $st->fetch(PDO::FETCH_ASSOC)) { ?>
@@ -58,6 +61,22 @@ $st->execute();
 				</tr>
 			<?php } ?>	
 		</table>
+		<script type="text/javascript">
+			function generate() {
+				var ch = new XMLHttpRequest;
+				ch.onreadystatechange = function () {
+					if (this.readyState === 4) {
+						alert(this.responseText);
+					}
+				};
+				ch.withCredentials = true;
+				ch.open("GET", "export.php?action=1");
+				ch.send();
+			}
+			document.getElementById("export").addEventListener("click", function () {
+				generate();	
+			});
+		</script>
 	</center>
 </body>
 </html>
