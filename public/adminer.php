@@ -7,6 +7,8 @@ if (!(isset($_SESSION["login"]) && $_SESSION["login"] === true)) {
 	exit;
 }
 
+unset($_SESSION);
+
 function isolateAdminer() {
 	ini_set("display_errors", false);
 	@require __DIR__."/../adminer.php";
