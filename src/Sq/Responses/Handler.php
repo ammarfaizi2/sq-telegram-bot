@@ -78,7 +78,9 @@ class Handler extends ResponseFoundation
 						);
 						return;
 					}
-					DB::pdo()->prepare(
+					$pdo = DB::pdo();
+
+					$pdo->prepare(
 						"UPDATE `users` SET `medium_link` = :medium_link WHERE id = :user_id LIMIT 1;"
 					)->execute(
 						[
@@ -96,6 +98,18 @@ class Handler extends ResponseFoundation
 						]
 					);
 
+					$st = $pdo->prepare("SELECT `email` FROM `users` WHERE `id` = :user_id LIMIT 1;");
+					$st->execute([":user_id" => $this->b->d["message"]["chat"]["id"]]);
+					if ($st = $st->fetch(PDO::FETCH_NUM)) {
+						if ($st[0]) {
+							$r = "Send /help to show other commands!";
+						} else {
+							$r = "Send /submit to continue";
+						}
+					} else {
+						$r = "Send /submit to continue";
+					}
+
 					Exe::sendMessage(
 						[
 							"chat_id" => $this->b->d["message"]["chat"]["id"],
@@ -103,6 +117,8 @@ class Handler extends ResponseFoundation
 							"reply_to_message_id" => $this->b->d["message"]["message_id"],
 						]
 					);
+
+					unset($pdo);
 
 					break;
 
