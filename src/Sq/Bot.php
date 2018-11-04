@@ -397,17 +397,25 @@ Medium:
 		}
 
 		if ("/help" === $text) {
-			$d = [
-					"chat_id" => $this->d["message"]["chat"]["id"],
-					"text" => (
-						"/info\t\tShow your information\n".
-						"/set_wallet\t set/update your wallet address\n".
-						"/set_email\t set/update your email address"
-					),
-					"reply_to_message_id" => $this->d["message"]["message_id"]
-				];
-			defined("rd_config") and $d["reply_markup"] = rd_config;
-			Exe::sendMessage($d);
+			$st = DB::pdo()->prepare("SELECT `facebook_link` FROM `users` WHERE `id` = :user_id LIMIT 1;");
+			$st->execute([":user_id" => $this->d["message"]["from"]["id"]]);
+			if ($st = $st->fetch(PDO::FETCH_NUM)) {
+				if ($st[0]) {
+					$d = [
+							"chat_id" => $this->d["message"]["chat"]["id"],
+							"text" => (
+								"/info\t\tShow your information\n".
+								"/set_wallet\t set/update your wallet address\n".
+								"/set_email\t set/update your email address"
+							),
+							"reply_to_message_id" => $this->d["message"]["message_id"]
+						];
+					defined("rd_config") and $d["reply_markup"] = rd_config;
+					Exe::sendMessage($d);
+					return;
+				}
+			}
+			(new Start($this->b))->start();
 			return;
 		}
 
