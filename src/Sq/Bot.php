@@ -95,6 +95,7 @@ final class Bot
 					break;
 				case "fbd":
 					$st = DB::pdo()->prepare("SELECT `twitter_link` FROM `users` WHERE `id` = :user_id LIMIT 1;");
+					var_dump($this->d["callback_query"]["message"]["from"]["id"]);
 					$st->execute([":user_id" => $this->d["callback_query"]["message"]["from"]["id"]]);
 					if ($st = $st->fetch(PDO::FETCH_NUM)) {
 						if ($st[0]) {
