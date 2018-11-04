@@ -5,6 +5,19 @@ SET time_zone = '+00:00';
 SET foreign_key_checks = 0;
 SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
+DROP TABLE IF EXISTS `referred_users`;
+CREATE TABLE `referred_users` (
+  `user_id` bigint(20) NOT NULL,
+  `referral_id` bigint(20) NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '0',
+  `created_at` datetime NOT NULL,
+  KEY `user_id` (`user_id`),
+  KEY `referral_id` (`referral_id`),
+  CONSTRAINT `referred_users_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `referred_users_ibfk_4` FOREIGN KEY (`referral_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
 DROP TABLE IF EXISTS `sessions`;
 CREATE TABLE `sessions` (
   `user_id` bigint(20) NOT NULL,
@@ -40,6 +53,9 @@ CREATE TABLE `users` (
   `email` varchar(255) DEFAULT NULL,
   `wallet` varchar(255) DEFAULT NULL,
   `balance` double DEFAULT '0',
+  `twitter_link` varchar(255) DEFAULT NULL,
+  `facebook_link` varchar(255) DEFAULT NULL,
+  `medium_link` varchar(255) DEFAULT NULL,
   `joined_at` datetime DEFAULT NULL,
   `started_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
@@ -57,7 +73,6 @@ DROP TABLE IF EXISTS `users_task`;
 CREATE TABLE `users_task` (
   `user_id` bigint(20) NOT NULL,
   `task_id` int(11) NOT NULL,
-  `taskhash` varchar(128) NOT NULL,
   `point` double NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP,
   KEY `user_id` (`user_id`),
@@ -82,4 +97,4 @@ CREATE TABLE `web_admin` (
 INSERT INTO `web_admin` (`id`, `name`, `username`, `password`) VALUES
 (1, 'Admin',  'admin',  '$argon2i$v=19$m=1024,t=2,p=2$dW9XcndZTXFyaUd6Rm9jWg$3Z8ww/FZN/eHaH/AKrHsiX5JX3/zufenWAwsQQx0f9o');
 
--- 2018-10-31 11:09:50
+-- 2018-11-04 08:06:10
