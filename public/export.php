@@ -19,15 +19,16 @@ if (PHP_SAPI === "cli") {
 
 	$sheet->setCellValue("B2", "No.");
 	$sheet->setCellValue("C2", "User ID");
-	$sheet->setCellValue("D2", "Username");
-	$sheet->setCellValue("E2", "Email");
-	$sheet->setCellValue("F2", "Wallet");
-	$sheet->setCellValue("G2", "Balance");
-	$sheet->setCellValue("H2", "Twitter");
-	$sheet->setCellValue("I2", "Facebook");
-	$sheet->setCellValue("J2", "Medium");
-	$sheet->setCellValue("K2", "Joined At");
-	$sheet->setCellValue("L2", "Started At");
+	$sheet->setCellValue("D2", "Name");
+	$sheet->setCellValue("E2", "Username");
+	$sheet->setCellValue("F2", "Email");
+	$sheet->setCellValue("G2", "Wallet");
+	$sheet->setCellValue("H2", "Balance");
+	$sheet->setCellValue("I2", "Twitter");
+	$sheet->setCellValue("J2", "Facebook");
+	$sheet->setCellValue("K2", "Medium");
+	$sheet->setCellValue("L2", "Joined At");
+	$sheet->setCellValue("M2", "Started At");
 
 	$pdo = \Sq\DB::pdo();
 	$st = $pdo->prepare("SELECT * FROM `users`;");
@@ -38,15 +39,16 @@ if (PHP_SAPI === "cli") {
 	while ($r = $st->fetch(PDO::FETCH_ASSOC)) {
 		$sheet->setCellValue("B{$pointer}", "{$no}.");
 		$sheet->setCellValue("C{$pointer}", $r["id"]);
-		$sheet->setCellValue("D{$pointer}", $r["username"]);
-		$sheet->setCellValue("E{$pointer}", $r["email"]);
-		$sheet->setCellValue("F{$pointer}", $r["wallet"]);
-		$sheet->setCellValue("G{$pointer}", $r["balance"]);
-		$sheet->setCellValue("H{$pointer}", $r["twitter_link"]);
-		$sheet->setCellValue("I{$pointer}", $r["facebook_link"]);
-		$sheet->setCellValue("J{$pointer}", $r["medium_link"]);
-		$sheet->setCellValue("K{$pointer}", $r["joined_at"]);
-		$sheet->setCellValue("L{$pointer}", $r["started_at"]);
+		$sheet->setCellValue("D{$pointer}", $r["name"]);
+		$sheet->setCellValue("E{$pointer}", $r["username"]);
+		$sheet->setCellValue("F{$pointer}", $r["email"]);
+		$sheet->setCellValue("G{$pointer}", $r["wallet"]);
+		$sheet->setCellValue("H{$pointer}", $r["balance"]);
+		$sheet->setCellValue("I{$pointer}", $r["twitter_link"]);
+		$sheet->setCellValue("J{$pointer}", $r["facebook_link"]);
+		$sheet->setCellValue("K{$pointer}", $r["medium_link"]);
+		$sheet->setCellValue("L{$pointer}", $r["joined_at"]);
+		$sheet->setCellValue("M{$pointer}", $r["started_at"]);
 		$pointer++; $no++;
 	}
 
