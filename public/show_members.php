@@ -57,7 +57,7 @@ $st->execute();
 					<td align="center"><?php print htmlspecialchars($r["wallet"], ENT_QUOTES, "UTF-8"); ?></td>
 					<td align="center"><?php print htmlspecialchars($r["balance"], ENT_QUOTES, "UTF-8"); ?></td>
 					<td align="center"><a target="_blank" href="<?php print htmlspecialchars($r["twitter_link"], ENT_QUOTES, "UTF-8") ?>"><?php print htmlspecialchars($r["twitter_link"], ENT_QUOTES, "UTF-8"); ?></a></td>
-					<td align="center"><a target="_blank" href="<?php print htmlspecialchars($r["medium_link"], ENT_QUOTES, "UTF-8"); ?>"><?php print htmlspecialchars($r["facebook_link"], ENT_QUOTES, "UTF-8"); ?></a></td>
+					<td align="center"><a target="_blank" href="<?php print htmlspecialchars($r["facebook_link"], ENT_QUOTES, "UTF-8"); ?>"><?php print htmlspecialchars($r["facebook_link"], ENT_QUOTES, "UTF-8"); ?></a></td>
 					<td align="center"><a target="_blank" href="<?php print htmlspecialchars($r["medium_link"], ENT_QUOTES, "UTF-8"); ?>"><?php print htmlspecialchars($r["medium_link"], ENT_QUOTES, "UTF-8"); ?></a></td>
 					<td align="center"><?php print htmlspecialchars($r["joined_at"], ENT_QUOTES, "UTF-8"); ?></td>
 					<td align="center"><?php print htmlspecialchars($r["started_at"], ENT_QUOTES, "UTF-8"); ?></td>
