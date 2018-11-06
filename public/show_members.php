@@ -8,7 +8,7 @@ if (!(isset($_SESSION["login"]) && $_SESSION["login"] === true)) {
 }
 
 $st = \Sq\DB::pdo()->prepare(
-	"SELECT * FROM `users` ORDER BY `started_at` ASC LIMIT 25 OFFSET 0;"
+	"SELECT * FROM `users` ORDER BY `started_at` ASC;"
 );
 $st->execute();
 ?>
