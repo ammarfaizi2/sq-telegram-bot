@@ -7,10 +7,28 @@ if (!(isset($_SESSION["login"]) && $_SESSION["login"] === true)) {
 	exit;
 }
 
-$st = \Sq\DB::pdo()->prepare(
-	"SELECT * FROM `users` ORDER BY `started_at` ASC;"
-);
+$offset = 0;
+$limit = 25;
+if (isset($_GET["page"]) && is_numeric($_GET["page"]) && $_GET["page"] > 1) {
+	$offset = $limit*($_GET["page"]-1);
+}
+var_dump($offset);
+$pdo = \Sq\DB::pdo();
+
+$st = $pdo->prepare("SELECT COUNT(1) FROM `users`;");
 $st->execute();
+$st = $st->fetch(PDO::FETCH_NUM);
+$totalPage = (int)ceil($st[0] / $limit);
+$st = $pdo->prepare("SELECT * FROM `users` ORDER BY `started_at` ASC LIMIT {$limit} OFFSET {$offset};");
+$st->execute();
+
+ob_start();
+?><div style="padding: 10px;">
+<?php for ($i=1; $i <= $totalPage; $i++) { ?><a href="?page=<?php print $i; ?>" class="dd"><?php print $i; ?></a>&nbsp;<?php } ?></div><?php
+$pg = ob_get_clean();
+
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -34,6 +52,13 @@ $st->execute();
 		button {
 			cursor: pointer;
 		}
+		.dd {
+			font-size: 32px;
+			text-decoration: none;
+		}
+		.dd:hover {
+			text-decoration: underline;
+		}
 	</style>
 </head>
 <body>
@@ -46,9 +71,10 @@ $st->execute();
 				<h2 id="gen" style="display: none;">Generating Spreadsheet File...</h2>
 			</div>
 		</div>
+		<?php print $pg; ?>
 		<table border="1" style="border-collapse: collapse;">
 			<tr><th align="center" style="padding: 5px;">No.</th><th align="center">Name</th><th align="center">Username</th><th align="center">Email</th><th align="center">Wallet</th><th align="center">Balance</th><th>Twitter</th><th>Facebook</th><th>Medium</th><th align="center">Joined At</th><th align="center">Started At</th></tr>
-			<?php $i = 1; while ($r = $st->fetch(PDO::FETCH_ASSOC)) { ?>
+			<?php $i = $offset + 1; while ($r = $st->fetch(PDO::FETCH_ASSOC)) { ?>
 				<tr>
 					<td align="center"><?php print $i++; ?>.</td>
 					<td align="center"><?php print htmlspecialchars($r["name"], ENT_QUOTES, "UTF-8"); ?></td>
@@ -62,8 +88,9 @@ $st->execute();
 					<td align="center"><?php print htmlspecialchars($r["joined_at"], ENT_QUOTES, "UTF-8"); ?></td>
 					<td align="center"><?php print htmlspecialchars($r["started_at"], ENT_QUOTES, "UTF-8"); ?></td>
 				</tr>
-			<?php } ?>	
+			<?php } ?>
 		</table>
+		<?php print $pg; ?>
 		<script type="text/javascript">
 			var gen = document.getElementById("gen");
 			function generate() {
