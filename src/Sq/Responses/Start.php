@@ -67,6 +67,12 @@ class Start extends ResponseFoundation
 					"callback_data" => "mdd"
 					// "url" => "https://bot.cryptoveno.com/std_redirector.php?to=medium&id={$this->b->d["message"]["from"]["id"]}"
 				]
+			],
+			[
+				[
+					"text" => "Join Sponsor Channel",
+					"url" => "https://t.me/AirdropDetective"
+				]
 			]
 		];
 
@@ -88,7 +94,8 @@ Please follow the step by step bellow to participate in our airdrop. You must co
 3️⃣ Follow & Retweet Our Twitter (15,000 VENO)
 4️⃣ Follow & Like Our Fanspage (15,000 VENO)
 5️⃣ Follow Our Medium (Optional) (10,000 VENO)
-6️⃣ Submit your detailed data by send /submit.
+6️⃣ Join Telegram Channel & Sponsor
+7️⃣ Submit your detailed data by send /submit.
 
 Terms and Conditions
 1. You have to follow all the steps above to qualify.
