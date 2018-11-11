@@ -67,12 +67,6 @@ class Start extends ResponseFoundation
 					"callback_data" => "mdd"
 					// "url" => "https://bot.cryptoveno.com/std_redirector.php?to=medium&id={$this->b->d["message"]["from"]["id"]}"
 				]
-			],
-			[
-				[
-					"text" => "Join Sponsor Channel",
-					"url" => "https://t.me/AirdropDetective"
-				]
 			]
 		];
 
@@ -81,6 +75,22 @@ class Start extends ResponseFoundation
 		$st->execute([":user_id" => $this->b->d["message"]["from"]["id"]]);
 		while ($r = $st->fetch(PDO::FETCH_NUM)) {
 			unset($tasks[$r[0] - 1]);
+		}
+
+		if (isset($tasks[1])) {
+			array_splice($tasks, 2, 0, 
+				[
+					[
+						[
+							"text" => "Join Sponsor Channel",
+							"url" => "https://t.me/AirdropDetective"
+						]
+					]
+				]
+			);
+			var_dump($tasks);
+		} else {
+			var_dump("dd", $tasks);
 		}
 
 		$text = "Welcome to CRYPTOVENO Airdrop Bot.
