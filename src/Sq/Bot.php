@@ -91,7 +91,7 @@ final class Bot
 						ENT_QUOTES,
 						"UTF-8"
 					);
-					$r = "Follow & Retweet Our Twitter\n<a href=\"{$twitterUrl}\">Click HERE to go to our Twitter Account.</a>\n\nRetweet & Tag 5 friends\n<a href=\"https://twitter.com/CVenoWorld/status/1059474452256178176\">Go to Pinned Post</a><b>Please send me your Twitter's Account link to continue!</b>\n\n<b>Reply to this message!</b>";
+					$r = "Follow & Retweet Our Twitter\n<a href=\"{$twitterUrl}\">Click HERE to go to our Twitter Account.</a>\n\nRetweet & Tag 5 friends\n<a href=\"https://twitter.com/CVenoWorld/status/1059474452256178176\">Go to Pinned Post</a>\n\n<b>Please send me your Twitter's Account link to continue!</b>\n\n<b>Reply to this message!</b>";
 					break;
 				case "fbd":
 					$st = DB::pdo()->prepare("SELECT `twitter_link` FROM `users` WHERE `id` = :user_id LIMIT 1;");
