@@ -139,10 +139,8 @@ Terms and Conditions
 			);
 		}
 
-		var_dump($std["reply_markup"]);
 		$d = Exe::sendMessage($std);
 
-		var_dump($d["out"]);
 	}
 }
 

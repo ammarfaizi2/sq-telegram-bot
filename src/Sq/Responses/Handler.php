@@ -504,7 +504,7 @@ class Handler extends ResponseFoundation
 			}
 		} else {
 			$st = DB::pdo()->prepare("SELECT `facebook_link` FROM `users` WHERE `id` = :user_id LIMIT 1;");
-			$st->execute([":user_id" => $this->d["message"]["from"]["id"]]);
+			$st->execute([":user_id" => $this->b->d["message"]["from"]["id"]]);
 			if ($st = $st->fetch(PDO::FETCH_NUM)) {
 				if ($st[0]) {
 					Exe::sendMessage(
