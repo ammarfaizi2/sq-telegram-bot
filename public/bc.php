@@ -18,11 +18,11 @@ if (isset($argv[1])) {
 					"chat_id" => $r[0],
 					"text"  => $argv[1],
 				]
-			)["out"];
+			)["out"]."\n";
 			exit(0);
 		}
 
-		if ($i == 10) {
+		if ($i == 32) {
 			$status = null;
 			print "\n\nWait...\n";
 			pcntl_waitpid($pid, $status, WUNTRACED);
