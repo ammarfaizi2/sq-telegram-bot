@@ -126,40 +126,45 @@ final class Bot
 					$r = "Follow & Retweet Our Twitter\n<a href=\"{$twitterUrl}\">Click HERE to go to our Twitter Account.</a>\n\nRetweet & Tag 5 friends\n<a href=\"https://twitter.com/CVenoWorld/status/1059474452256178176\">Go to Pinned Post</a>\n\n<b>Please send me your Twitter's Account link to continue!</b>\n\n<b>Reply to this message!</b>";
 					break;
 				case "fbd":
-					$st = DB::pdo()->prepare("SELECT `twitter_link` FROM `users` WHERE `id` = :user_id LIMIT 1;");
-					$st->execute([":user_id" => $this->d["callback_query"]["message"]["chat"]["id"]]);
-					if ($st = $st->fetch(PDO::FETCH_NUM)) {
-						if ($st[0]) {
-							$facebookUrl = htmlspecialchars(
-								file_get_contents(BASEPATH."/storage/redirector/facebook.txt"),
-								ENT_QUOTES,
-								"UTF-8"
-							);
-							$r = "Follow & Like Our Fanspage\n<a href=\"{$facebookUrl}\">Click HERE to go to our Facebook Account.</a>\n<b>Please send me your Facebook's Account link to continue</b>\n\n<b>Reply to this message!</b>";
-						} else {
-							$r = "You need to finish twitter task first before continue to facebook task!";
-						}
-					} else {
-						$r = "You need to finish twitter task first before continue to facebook task!";
-					}
+					// $st = DB::pdo()->prepare("SELECT `twitter_link` FROM `users` WHERE `id` = :user_id LIMIT 1;");
+					// $st->execute([":user_id" => $this->d["callback_query"]["message"]["chat"]["id"]]);
+					// if ($st = $st->fetch(PDO::FETCH_NUM)) {
+					// 	if ($st[0]) {
+					// 		$facebookUrl = htmlspecialchars(
+					// 			file_get_contents(BASEPATH."/storage/redirector/facebook.txt"),
+					// 			ENT_QUOTES,
+					// 			"UTF-8"
+					// 		);
+					// 		$r = "Follow & Like Our Fanspage\n<a href=\"{$facebookUrl}\">Click HERE to go to our Facebook Account.</a>\n<b>Please send me your Facebook's Account link to continue</b>\n\n<b>Reply to this message!</b>";
+					// 	} else {
+					// 		$r = "You need to finish twitter task first before continue to facebook task!";
+					// 	}
+					// } else {
+					// 	$r = "You need to finish twitter task first before continue to facebook task!";
+					// }
+
+					$r = "Follow & Like Our Fanspage\n<a href=\"{$facebookUrl}\">Click HERE to go to our Facebook Account.</a>\n<b>Please send me your Facebook's Account link to continue</b>\n\n<b>Reply to this message!</b>";
+
 					break;
 				case "mdd":
-					$st = DB::pdo()->prepare("SELECT `facebook_link` FROM `users` WHERE `id` = :user_id LIMIT 1;");
-					$st->execute([":user_id" => $this->d["callback_query"]["message"]["chat"]["id"]]);
-					if ($st = $st->fetch(PDO::FETCH_NUM)) {
-						if ($st[0]) {
-							$mediumUrl = htmlspecialchars(
-								file_get_contents(BASEPATH."/storage/redirector/medium.txt"),
-								ENT_QUOTES,
-								"UTF-8"
-							);
-							$r = "Follow our Medium\n<a href=\"{$mediumUrl}\">Click HERE to go to our Medium.</a>\n<b>Please send me your Medium's Account link to continue</b>\n\n<b>Reply to this message!</b>";
-						} else {
-							$r = "You need to finish facebook task first before continue to medium task!";
-						}
-					} else {
-						$r = "You need to finish facebook task first before continue to medium task!";
-					}
+					// $st = DB::pdo()->prepare("SELECT `facebook_link` FROM `users` WHERE `id` = :user_id LIMIT 1;");
+					// $st->execute([":user_id" => $this->d["callback_query"]["message"]["chat"]["id"]]);
+					// if ($st = $st->fetch(PDO::FETCH_NUM)) {
+					// 	if ($st[0]) {
+					// 		$mediumUrl = htmlspecialchars(
+					// 			file_get_contents(BASEPATH."/storage/redirector/medium.txt"),
+					// 			ENT_QUOTES,
+					// 			"UTF-8"
+					// 		);
+					// 		$r = "Follow our Medium\n<a href=\"{$mediumUrl}\">Click HERE to go to our Medium.</a>\n<b>Please send me your Medium's Account link to continue</b>\n\n<b>Reply to this message!</b>";
+					// 	} else {
+					// 		$r = "You need to finish facebook task first before continue to medium task!";
+					// 	}
+					// } else {
+					// 	$r = "You need to finish facebook task first before continue to medium task!";
+					// }
+
+					$r = "Follow our Medium\n<a href=\"{$mediumUrl}\">Click HERE to go to our Medium.</a>\n<b>Please send me your Medium's Account link to continue</b>\n\n<b>Reply to this message!</b>";
 					break;
 				default:
 					break;
