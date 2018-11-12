@@ -405,20 +405,25 @@ https://tokensale.cryptoveno.com",
 			// 	}
 			// }
 
-			$hd = true;
 			$st = DB::pdo()->prepare("SELECT `task_id` FROM `users_task` WHERE `user_id` = :user_id ORDER BY `task_id` ASC;");
 			$st->execute([":user_id" => $this->d["message"]["from"]["id"]]);
-			$rdi = 1;
-			while ($r = $st->fetch(PDO::FETCH_NUM)) {
-				$hd = $hd && $r[0] == $rdi++;
-				if (!$hd) {
-					break;
-				}
-			}
+			
+			$rdi = false;
+			$rdx = false;
 
-			if ($hd && $rdi > 1) {
-				(new Submit($this))->submit();
-		 		return;
+			while ($r = $st->fetch(PDO::FETCH_NUM)) {
+				if ($r[0] == 1) {
+					$rdi = true;
+				}
+
+				if ($r[0] == 2) {
+					$rdx = true;
+				}
+
+				if ($rdi && $rdx) {
+					(new Submit($this))->submit();
+		 			return;
+				}
 			}
 
 			Exe::sendMessage(
