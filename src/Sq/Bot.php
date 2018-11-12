@@ -406,10 +406,11 @@ https://tokensale.cryptoveno.com",
 			// }
 
 			$hd = true;
-			$st = DB::pdo()->prepare("SELECT `task_id` FROM `users_task` WHERE `user_id` = :user_id");
+			$st = DB::pdo()->prepare("SELECT `task_id` FROM `users_task` WHERE `user_id` = :user_id ORDER BY `task_id` ASC;");
 			$st->execute([":user_id" => $this->d["message"]["from"]["id"]]);
+			$rdi = 1;
 			while ($r = $st->fetch(PDO::FETCH_NUM)) {
-				$hd = $hd && ($r[0] == 1 || $r[0] == 2);
+				$hd = $hd && $r[0] == $rdi;
 				if (!$hd) {
 					break;
 				}
