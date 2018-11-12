@@ -83,9 +83,6 @@ final class Bot
 		if (isset($this->d["callback_query"]["data"])) {
 			switch ($this->d["callback_query"]["data"]) {
 				case "jnd":
-					// https://bot.cryptoveno.com/std_redirector.php?to=telegram_sponsor&id={$this->b->d["message"]["from"]["id"]}
-					// https://bot.cryptoveno.com/std_redirector.php?to=telegram_channel&id={$this->b->d["message"]["from"]["id"]}
-
 					Exe::sendMessage(
 						[
 							"text" => "<b>Join our channel and sponsor to finish this task!</b>",
