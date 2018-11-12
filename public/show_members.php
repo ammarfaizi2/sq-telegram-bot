@@ -23,7 +23,7 @@ $st = $pdo->prepare("SELECT * FROM `users` ORDER BY `started_at` ASC LIMIT {$lim
 $st->execute();
 
 ob_start();
-?><div style="padding: 10px;">
+?><div style="padding: 10px; padding: 10px;width:100%;word-wrap:break-word;">
 <?php for ($i=1; $i <= $totalPage; $i++) { ?><a href="?page=<?php print $i; ?>" class="dd"><?php print $i; ?></a>&nbsp;&nbsp;&nbsp;&nbsp;<?php } ?></div><?php
 $pg = ob_get_clean();
 
