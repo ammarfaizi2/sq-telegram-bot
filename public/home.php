@@ -112,7 +112,7 @@ unset($st, $pdo);
 		<div style="margin-top: 20px;">
 			<h2>Broadcast Mesasge to All Users</h2>
 			<form action="broadcast.php" method="post">
-				<textarea name="msgd"></textarea><br/>
+				<textarea required name="msgd"></textarea><br/>
 				<input type="submit" name="submit" value="Send"/>
 			</form>
 		</div>

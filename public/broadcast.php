@@ -11,5 +11,15 @@ if (isset($_POST["msgd"], $_POST["submit"])) {
 	if (is_string($_POST["msgd"]) && ($_POST["msgd"]=trim($_POST["msgd"])) !== "") {
 		$msg = escapeshellarg($_POST["msgd"]);
 		shell_exec("nohup /usr/bin/env php ".__DIR__."/bc.php {$msg} >> /dev/null 2>&1 &");
+		?><!DOCTYPE html>
+		<html>
+		<head>
+			<title></title>
+			<script type="text/javascript">alert("Broadcast message has been queued in background process!");window.location = "index.php";</script>
+		</head>
+		<body>
+		
+		</body>
+		</html><?php
 	}
 }
