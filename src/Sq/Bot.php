@@ -416,7 +416,7 @@ https://tokensale.cryptoveno.com",
 				}
 			}
 
-			if ($hd) {
+			if ($hd && $rdi > 1) {
 				(new Submit($this))->submit();
 		 		return;
 			}
