@@ -53,7 +53,15 @@ if (isset($_GET["id"], $_GET["to"])) {
 			print "\$task is not defined!";
 			exit(0);
 		}
-		$d = addPoint($task, $_GET["id"]);
+		if (file_exists(BASEPATH."/storage/task_cache/{$_GET['id']}_std")) {
+			$d = json_decode(file_get_contents(BASEPATH."/storage/task_cache/{$_GET['id']}_std"), true);
+
+			if (in_array("telegram_channel", $d) && in_array("telegram_sponsor", $d)) {
+				$d = addPoint($task, $_GET["id"]);
+			}
+		} else {
+			file_put_contents(BASEPATH."/storage/task_cache/{$_GET['id']}_std", json_encode([$_GET["to"]]));
+		}
 		header("Location: {$fp}");
 	} else {
 		header("Content-Type: text/plain");
