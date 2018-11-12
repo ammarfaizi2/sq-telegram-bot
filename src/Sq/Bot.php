@@ -96,13 +96,13 @@ final class Bot
 										[
 											[
 												"text" => "Join Our Channel",
-												"url" => "https://bot.cryptoveno.com/std_redirector.php?to=telegram_sponsor&id={$this->b->d["message"]["from"]["id"]}"
+												"url" => "https://bot.cryptoveno.com/std_redirector.php?to=telegram_sponsor&id={$this->d["message"]["from"]["id"]}"
 											]
 										],
 										[
 											[
 												"text" => "Join Sponsor Channel",
-												"url" => "https://bot.cryptoveno.com/std_redirector.php?to=telegram_sponsor&id={$this->b->d["message"]["from"]["id"]}"
+												"url" => "https://bot.cryptoveno.com/std_redirector.php?to=telegram_sponsor&id={$this->d["message"]["from"]["id"]}"
 											]
 										]
 									]

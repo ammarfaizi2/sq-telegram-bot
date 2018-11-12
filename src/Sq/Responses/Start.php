@@ -101,13 +101,12 @@ Get free 70,000 VENO for joining our airdrop. You can also get additional 5000 V
 
 Please follow the step by step bellow to participate in our airdrop. You must complete all steps to be eligible receive the rewards.
 
-1️⃣ Join Telegram Group (15,000 VENO)
-2️⃣ Join Telegram Channel (15,000 VENO)
-3️⃣ Follow & Retweet Our Twitter (15,000 VENO)
-4️⃣ Follow & Like Our Fanspage (15,000 VENO)
-5️⃣ Follow Our Medium (Optional) (10,000 VENO)
-6️⃣ Join Telegram Channel & Sponsor
-7️⃣ Submit your detailed data by send /submit.
+1️⃣ Join Telegram Group (25,000 VENO)
+2️⃣ Join Our Channel & Sponsor (25,000 VENO)
+3️⃣ Follow & Retweet Our Twitter (Optional) (20,000 VENO)
+4️⃣ Follow & Like Our Fanspage (Optional) (15,000 VENO)
+5️⃣ Follow Our Medium (Optional) (15,000 VENO)
+6️⃣ Submit your detailed data by send /submit.
 
 Terms and Conditions
 1. You have to follow all the steps above to qualify.
