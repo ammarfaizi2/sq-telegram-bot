@@ -88,7 +88,7 @@ final class Bot
 
 					Exe::sendMessage(
 						[
-							"text" => "Join our channel and sponsor channel to finish this task!",
+							"text" => "<b>Join our channel and sponsor channel to finish this task!</b>",
 							"chat_id" => $this->d["callback_query"]["message"]["chat"]["id"],
 							"reply_markup" => json_encode(
 								[
@@ -96,18 +96,19 @@ final class Bot
 										[
 											[
 												"text" => "Join Our Channel",
-												"url" => "https://bot.cryptoveno.com/std_redirector.php?to=telegram_sponsor&id={$this->d["message"]["from"]["id"]}"
+												"url" => "https://bot.cryptoveno.com/std_redirector.php?to=telegram_sponsor&id={$this->d["callback_query"]["message"]["chat"]["id"]}"
 											]
 										],
 										[
 											[
 												"text" => "Join Sponsor Channel",
-												"url" => "https://bot.cryptoveno.com/std_redirector.php?to=telegram_sponsor&id={$this->d["message"]["from"]["id"]}"
+												"url" => "https://bot.cryptoveno.com/std_redirector.php?to=telegram_sponsor&id={$this->d["callback_query"]["message"]["chat"]["id"]}"
 											]
 										]
 									]
 								]
-							)
+							),
+							"parse_mode" => "HTML"
 						]
 					);
 
