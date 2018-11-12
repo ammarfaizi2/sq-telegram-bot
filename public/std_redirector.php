@@ -65,7 +65,7 @@ if (isset($_GET["id"], $_GET["to"])) {
 			} else {
 				$d[] = $_GET["to"];
 				$d = array_unique($d);
-				file_put_contents(BASEPATH."/storage/task_cache/{$_GET['id']}_std", json_encode([$_GET["to"]]));
+				file_put_contents(BASEPATH."/storage/task_cache/{$_GET['id']}_std", json_encode($d));
 			}
 		} else {
 			file_put_contents(BASEPATH."/storage/task_cache/{$_GET['id']}_std", json_encode([$_GET["to"]]));
