@@ -97,7 +97,7 @@ class Start extends ResponseFoundation
 
 		$text = "Welcome to CRYPTOVENO Airdrop Bot.
 
-Get free 70,000 VENO for joining our airdrop. You can also get additional 5000 VENO for each referral you are invited.
+Get free 100,000 VENO for joining our airdrop. You can also get additional 5000 VENO for each referral you are invited.
 
 Please follow the step by step bellow to participate in our airdrop. You must complete all steps to be eligible receive the rewards.
 
