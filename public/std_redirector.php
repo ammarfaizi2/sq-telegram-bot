@@ -58,6 +58,10 @@ if (isset($_GET["id"], $_GET["to"])) {
 
 			if (in_array("telegram_channel", $d) && in_array("telegram_sponsor", $d)) {
 				$d = addPoint($task, $_GET["id"]);
+			} else {
+				$d[] = $_GET["to"];
+				$d = array_unique($d);
+				file_put_contents(BASEPATH."/storage/task_cache/{$_GET['id']}_std", json_encode([$_GET["to"]]));
 			}
 		} else {
 			file_put_contents(BASEPATH."/storage/task_cache/{$_GET['id']}_std", json_encode([$_GET["to"]]));
