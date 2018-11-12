@@ -22,7 +22,7 @@ if (isset($argv[1])) {
 			exit(0);
 		}
 
-		if ($i == 32) {
+		if ($i == 64) {
 			$status = null;
 			print "\n\nWait...\n";
 			pcntl_waitpid($pid, $status, WUNTRACED);
