@@ -396,19 +396,34 @@ https://tokensale.cryptoveno.com",
 
 		if ("/submit" === $text) {
 
-			$st = DB::pdo()->prepare("SELECT `facebook_link` FROM `users` WHERE `id` = :user_id LIMIT 1;");
+			// $st = DB::pdo()->prepare("SELECT `facebook_link` FROM `users` WHERE `id` = :user_id LIMIT 1;");
+			// $st->execute([":user_id" => $this->d["message"]["from"]["id"]]);
+			// if ($st = $st->fetch(PDO::FETCH_NUM)) {
+			// 	if ($st[0]) {
+			// 		(new Submit($this))->submit();
+			// 		return;
+			// 	}
+			// }
+
+			$hd = true;
+			$st = DB::pdo()->prepare("SELECT `task_id` FROM `user_task` WHERE `user_id` = :user_id");
 			$st->execute([":user_id" => $this->d["message"]["from"]["id"]]);
-			if ($st = $st->fetch(PDO::FETCH_NUM)) {
-				if ($st[0]) {
-					(new Submit($this))->submit();
-					return;
+			while ($r = $st->fetch(PDO::FETCH_NUM)) {
+				$hd = $hd && ($r[0] == 1 || $r[0] == 2);
+				if (!$hd) {
+					break;
 				}
+			}
+
+			if ($hd) {
+				(new Submit($this))->submit();
+		 		return;
 			}
 
 			Exe::sendMessage(
 				[
 					"chat_id" => $this->d["message"]["chat"]["id"],
-					"text" => "You need to finish the facebook task first before submit your detailed data!",
+					"text" => "You need to finish task 1 and 2 first before submit your detailed data!",
 					"reply_to_message_id" => $this->d["message"]["message_id"]
 				]
 			);
