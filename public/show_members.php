@@ -24,7 +24,7 @@ $st->execute();
 
 ob_start();
 ?><div style="padding: 10px;">
-<?php for ($i=1; $i <= $totalPage; $i++) { ?><a href="?page=<?php print $i; ?>" class="dd"><?php print $i; ?></a>&nbsp;<?php } ?></div><?php
+<?php for ($i=1; $i <= $totalPage; $i++) { ?><a href="?page=<?php print $i; ?>" class="dd"><?php print $i; ?></a>&nbsp;&nbsp;&nbsp;&nbsp;<?php } ?></div><?php
 $pg = ob_get_clean();
 
 
