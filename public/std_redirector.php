@@ -16,6 +16,7 @@ if (isset($_GET["id"], $_GET["to"])) {
 				}
 			break;
 		case "telegram_sponsor":
+				$task = 2;
 				$fp = "https://t.me/AirdropDetective";
 			break;
 		// case "twitter":
