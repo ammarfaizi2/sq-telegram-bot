@@ -12,7 +12,7 @@ $limit = 25;
 if (isset($_GET["page"]) && is_numeric($_GET["page"]) && $_GET["page"] > 1) {
 	$offset = $limit*($_GET["page"]-1);
 }
-var_dump($offset);
+
 $pdo = \Sq\DB::pdo();
 
 $st = $pdo->prepare("SELECT COUNT(1) FROM `users`;");
