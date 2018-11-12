@@ -410,7 +410,7 @@ https://tokensale.cryptoveno.com",
 			$st->execute([":user_id" => $this->d["message"]["from"]["id"]]);
 			$rdi = 1;
 			while ($r = $st->fetch(PDO::FETCH_NUM)) {
-				$hd = $hd && $r[0] == $rdi;
+				$hd = $hd && $r[0] == $rdi++;
 				if (!$hd) {
 					break;
 				}
