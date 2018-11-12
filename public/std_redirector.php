@@ -15,6 +15,9 @@ if (isset($_GET["id"], $_GET["to"])) {
 					$fp = null;
 				}
 			break;
+		case "telegram_sponsor":
+				$fp = "https://t.me/AirdropDetective";
+			break;
 		// case "twitter":
 		// 		$task = 3;
 		// 		if (file_exists($fp = $fp."/twitter.txt")) {
