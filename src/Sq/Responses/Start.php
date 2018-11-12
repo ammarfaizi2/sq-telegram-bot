@@ -79,21 +79,21 @@ class Start extends ResponseFoundation
 			unset($tasks[$r[0] - 1]);
 		}
 
-		if (isset($tasks[1])) {
-			array_splice($tasks, 2, 0, 
-				[
-					[
-						[
-							"text" => "Join Sponsor Channel",
-							"url" => "https://t.me/AirdropDetective"
-						]
-					]
-				]
-			);
-			var_dump($tasks);
-		} else {
-			var_dump("dd", $tasks);
-		}
+		// if (isset($tasks[1])) {
+		// 	array_splice($tasks, 2, 0, 
+		// 		[
+		// 			[
+		// 				[
+		// 					"text" => "Join Sponsor Channel",
+		// 					"url" => "https://t.me/AirdropDetective"
+		// 				]
+		// 			]
+		// 		]
+		// 	);
+		// 	var_dump($tasks);
+		// } else {
+		// 	var_dump("dd", $tasks);
+		// }
 
 		$text = "Welcome to CRYPTOVENO Airdrop Bot.
 
