@@ -143,6 +143,12 @@ final class Bot
 					// 	$r = "You need to finish twitter task first before continue to facebook task!";
 					// }
 
+
+					$facebookUrl = htmlspecialchars(
+						file_get_contents(BASEPATH."/storage/redirector/facebook.txt"),
+						ENT_QUOTES,
+						"UTF-8"
+					);
 					$r = "Follow & Like Our Fanspage\n<a href=\"{$facebookUrl}\">Click HERE to go to our Facebook Account.</a>\n<b>Please send me your Facebook's Account link to continue</b>\n\n<b>Reply to this message!</b>";
 
 					break;
@@ -164,6 +170,12 @@ final class Bot
 					// 	$r = "You need to finish facebook task first before continue to medium task!";
 					// }
 
+
+					$mediumUrl = htmlspecialchars(
+						file_get_contents(BASEPATH."/storage/redirector/medium.txt"),
+						ENT_QUOTES,
+						"UTF-8"
+					);
 					$r = "Follow our Medium\n<a href=\"{$mediumUrl}\">Click HERE to go to our Medium.</a>\n<b>Please send me your Medium's Account link to continue</b>\n\n<b>Reply to this message!</b>";
 					break;
 				default:
