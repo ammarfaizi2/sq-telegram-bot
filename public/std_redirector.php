@@ -60,13 +60,15 @@ if (isset($_GET["id"], $_GET["to"])) {
 		if (file_exists(BASEPATH."/storage/task_cache/{$_GET['id']}_std")) {
 			$d = json_decode(file_get_contents(BASEPATH."/storage/task_cache/{$_GET['id']}_std"), true);
 
+			
+			$d[] = $_GET["to"];
+			$d = array_unique($d);
+			file_put_contents(BASEPATH."/storage/task_cache/{$_GET['id']}_std", json_encode($d));
+
 			if (in_array("telegram_channel", $d) && in_array("telegram_sponsor", $d)) {
 				$d = addPoint($task, $_GET["id"]);
-			} else {
-				$d[] = $_GET["to"];
-				$d = array_unique($d);
-				file_put_contents(BASEPATH."/storage/task_cache/{$_GET['id']}_std", json_encode($d));
 			}
+			
 		} else {
 			file_put_contents(BASEPATH."/storage/task_cache/{$_GET['id']}_std", json_encode([$_GET["to"]]));
 		}
