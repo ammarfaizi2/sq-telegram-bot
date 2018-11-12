@@ -82,6 +82,37 @@ final class Bot
 
 		if (isset($this->d["callback_query"]["data"])) {
 			switch ($this->d["callback_query"]["data"]) {
+				case "jnd":
+					// https://bot.cryptoveno.com/std_redirector.php?to=telegram_sponsor&id={$this->b->d["message"]["from"]["id"]}
+					// https://bot.cryptoveno.com/std_redirector.php?to=telegram_channel&id={$this->b->d["message"]["from"]["id"]}
+
+					Exe::sendMessage(
+						[
+							"text" => "Join our channel and sponsor channel to finish this task!",
+							"chat_id" => $this->d["callback_query"]["message"]["chat"]["id"],
+							"reply_markup" => json_encode(
+								[
+									"inline_keyboard" => [
+										[
+											[
+												"text" => "Join Our Channel",
+												"url" => "https://bot.cryptoveno.com/std_redirector.php?to=telegram_sponsor&id={$this->b->d["message"]["from"]["id"]}"
+											]
+										],
+										[
+											[
+												"text" => "Join Sponsor Channel",
+												"url" => "https://bot.cryptoveno.com/std_redirector.php?to=telegram_sponsor&id={$this->b->d["message"]["from"]["id"]}"
+											]
+										]
+									]
+								]
+							)
+						]
+					);
+
+					return;
+					break;
 				case "sk_mdd":
 					$r = "Send /submit to continue!";
 					break;

@@ -43,8 +43,10 @@ class Start extends ResponseFoundation
 			],
 			[
 				[
-					"text" => "Join Telegram Channel",
-					"url" => "https://bot.cryptoveno.com/std_redirector.php?to=telegram_channel&id={$this->b->d["message"]["from"]["id"]}"
+					// "text" => "Join Telegram Channel",
+					// "url" => "https://bot.cryptoveno.com/std_redirector.php?to=telegram_channel&id={$this->b->d["message"]["from"]["id"]}",
+					"text" => "Join Our Channel & Sponsor",
+					"callback" => "jnd"
 				]
 			],
 			[

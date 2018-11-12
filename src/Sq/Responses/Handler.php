@@ -46,7 +46,6 @@ class Handler extends ResponseFoundation
 			if (substr($rdt, 0, 6) === "Follow") {
 				$rdt = explode("\n", $rdt, 2);
 				$rdt = $rdt[0];
-				var_dump($rdt);
 			}
 
 			switch ($rdt) {
