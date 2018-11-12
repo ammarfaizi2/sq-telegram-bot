@@ -109,6 +109,13 @@ unset($st, $pdo);
 			<p><b>Auto stop when the amount of members reached: </b><?php print $stop; ?> (<a href="edit_stop.php">Edit</a>)</p>
 			<a href="edit_stop_message.php"><button>Edit Auto Stop Message</button></a>
 		</div>
+		<div style="margin-top: 20px;">
+			<h2>Broadcast Mesasge to All Users</h2>
+			<form action="broadcast.php" method="post">
+				<textarea name="msgd"></textarea><br/>
+				<input type="submit" name="submit" value="Send"/>
+			</form>
+		</div>
 	</center>
 </body>
 </html>
