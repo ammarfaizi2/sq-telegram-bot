@@ -52,7 +52,7 @@ if (isset($_POST["login"], $_POST["username"], $_POST["password"])) {
 	<div class="cg">
 		<h1>Login Bot Panel</h1>
 		<div class="sgc">
-			<form method="post" action="?std_login=1&amp;token=<?php print htmlspecialchars(urlencode($_SESSION["token"])); ?>">
+			<form method="post" action="?std_login=1">
 				<div class="iq">Username:</div>
 				<div class="ii"><input type="text" name="username"/></div>
 				<div class="iq">Password:</div>
