@@ -443,6 +443,8 @@ https://tokensale.cryptoveno.com",
 				]
 			);
 
+			(new Start($this))->start();
+
 			return;
 		}
 
